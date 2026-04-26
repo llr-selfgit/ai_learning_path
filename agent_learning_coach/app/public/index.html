@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent Learning Coach</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">AI</div>
+          <div>
+            <h1>Learning Coach</h1>
+            <p>Agent 工程督导台</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <button class="nav-button active" data-view="today">今日</button>
+          <button class="nav-button" data-view="lessons">课程</button>
+          <button class="nav-button" data-view="mastery">掌握度</button>
+          <button class="nav-button" data-view="sources">案例雷达</button>
+          <button class="nav-button" data-view="project">项目</button>
+        </nav>
+        <div class="sync-card" id="syncCard">检查 Git 状态中...</div>
+      </aside>
+
+      <main class="main">
+        <section class="topbar">
+          <div>
+            <p class="eyebrow">8 周主线 · 本地优先 · GitHub 同步</p>
+            <h2 id="pageTitle">今日学习</h2>
+          </div>
+          <button class="secondary-button" id="refreshButton">刷新</button>
+        </section>
+
+        <section id="content" class="content"></section>
+      </main>
+    </div>
+    <script src="/main.js" type="module"></script>
+  </body>
+</html>

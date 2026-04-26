@@ -1,0 +1,83 @@
+{
+  "version": "0.1.0",
+  "learner": {
+    "name": "lingrui",
+    "weekdayHours": "1-2",
+    "weekendHours": "2-4",
+    "privacyMode": "desensitized",
+    "preferredStack": "Python first",
+    "finalProject": "Marketing Evaluation Agent"
+  },
+  "currentLessonId": "lesson-001-llm-mental-model",
+  "lessonStatuses": {
+    "lesson-001-llm-mental-model": "available",
+    "lesson-002-system-prompt": "available",
+    "lesson-003-structured-output": "locked",
+    "lesson-010-causal-tooling-position": "locked",
+    "lesson-011-psm-tool-wrapper": "locked",
+    "lesson-024-final-defense": "locked"
+  },
+  "knowledgeMastery": {
+    "system_prompt": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "context_engineering": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "tool_calling": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "rag": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "agent_loop": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "evals": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "harness_engineering": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "causal_tooling": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "model_optimization": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    },
+    "marketing_eval_product": {
+      "score": 0,
+      "state": "未学",
+      "recentMistakes": [],
+      "reviewDue": null
+    }
+  },
+  "events": []
+}

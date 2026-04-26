@@ -1,0 +1,35 @@
+{
+  "version": "0.1.0",
+  "total": 100,
+  "dimensions": [
+    {
+      "id": "conceptual_understanding",
+      "name": "概念理解",
+      "points": 30,
+      "description": "能否准确解释概念、边界、关键术语和常见误区。"
+    },
+    {
+      "id": "engineering_execution",
+      "name": "工程实现",
+      "points": 30,
+      "description": "能否把概念落实成 prompt、schema、代码、工具、测试或 trace。"
+    },
+    {
+      "id": "business_transfer",
+      "name": "业务迁移",
+      "points": 25,
+      "description": "能否迁移到营销评估、BI、投放、数据分析等真实业务场景。"
+    },
+    {
+      "id": "boundary_awareness",
+      "name": "边界意识与表达",
+      "points": 15,
+      "description": "能否说明适用条件、失败模式、安全风险和降级策略。"
+    }
+  ],
+  "policies": {
+    "pass": "80 分以上进入下一节。",
+    "review": "70-79 分进入下一节，但安排复习题。",
+    "repeat": "70 分以下重学核心内容，并补一个变体练习。"
+  }
+}

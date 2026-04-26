@@ -1,0 +1,14 @@
+{
+  "name": "agent-learning-coach",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node app/server.mjs",
+    "test:causal": "python3 -m unittest discover -s projects/marketing_eval_agent/tests -p 'test_*.py'",
+    "test:causal:bundle": "/Users/lingruiluo/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m unittest discover -s projects/marketing_eval_agent/tests -p 'test_*.py'"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

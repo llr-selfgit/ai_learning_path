@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "tiers": [
+    {
+      "tier": "A",
+      "name": "官方文档、公司工程博客、论文、技术报告",
+      "usage": "作为关键结论的主要依据。"
+    },
+    {
+      "tier": "B",
+      "name": "高质量开源项目、Hugging Face、GitHub、课程",
+      "usage": "用于工程实践和可运行参考。"
+    },
+    {
+      "tier": "C",
+      "name": "高校、研究机构课程与论文",
+      "usage": "用于理论框架和系统学习。"
+    },
+    {
+      "tier": "D",
+      "name": "知乎、CSDN、X、B 站、个人博客",
+      "usage": "用于发现趋势，关键结论必须回到 A/B/C 类来源验证。"
+    }
+  ],
+  "items": [
+    {
+      "id": "openai-harness-engineering",
+      "title": "OpenAI Harness Engineering",
+      "tier": "A",
+      "url": "https://openai.com/index/harness-engineering/",
+      "knowledgeTags": ["harness_engineering", "evals", "agent_loop"],
+      "whyRepresentative": "强调人设计环境，Agent 在可执行和可验证的 harness 中工作。",
+      "transferToProject": "把营销评估 Agent 的工具、trace、权限和评测放进统一运行环境。"
+    },
+    {
+      "id": "anthropic-effective-agents",
+      "title": "Anthropic Building Effective Agents",
+      "tier": "A",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "knowledgeTags": ["agent_loop", "harness_engineering"],
+      "whyRepresentative": "提出优先使用简单 workflow，必要时再增加 Agent 自主性。",
+      "transferToProject": "营销评估流程里，方法选择和诊断可先 workflow 化，开放报告推理给 Agent。"
+    },
+    {
+      "id": "huggingface-agents-course",
+      "title": "Hugging Face Agents Course",
+      "tier": "B",
+      "url": "https://huggingface.co/learn/agents-course/",
+      "knowledgeTags": ["tool_calling", "agent_loop"],
+      "whyRepresentative": "适合从可运行例子理解工具调用与 Agent 基础。",
+      "transferToProject": "用轻量工具先理解 Agent loop，再迁移到营销评估工具。"
+    },
+    {
+      "id": "mcp-spec",
+      "title": "Model Context Protocol Specification",
+      "tier": "A",
+      "url": "https://modelcontextprotocol.io/specification/draft",
+      "knowledgeTags": ["tool_calling", "context_engineering", "harness_engineering"],
+      "whyRepresentative": "代表 Agent 连接外部工具和数据源的协议化方向。",
+      "transferToProject": "未来可把营销数据、指标口径、因果工具暴露为 MCP 工具。"
+    }
+  ]
+}

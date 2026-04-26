@@ -1,0 +1,38 @@
+{
+  "lessonId": "lesson-010-causal-tooling-position",
+  "title": "因果工具化测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "multiple_choice",
+      "knowledgeTags": ["causal_tooling", "tool_calling"],
+      "prompt": "一个给 Agent 调用的 PSM 工具，除了 effect 数值，还应该返回什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "common support 诊断",
+          "correct": true,
+          "explanation": "正确。没有 overlap 时不应该给强因果结论。"
+        },
+        {
+          "id": "B",
+          "text": "协变量平衡性指标，如 SMD",
+          "correct": true,
+          "explanation": "正确。匹配后平衡性决定结果是否可信。"
+        },
+        {
+          "id": "C",
+          "text": "是否允许给因果结论的布尔标记",
+          "correct": true,
+          "explanation": "正确。Agent 需要机器可读的降级信号。"
+        },
+        {
+          "id": "D",
+          "text": "只返回一段营销口径文案",
+          "correct": false,
+          "explanation": "错误。文案不能替代诊断、估计和风险控制。"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "version": "0.1.0",
+  "title": "AI Agent / LLM Application Engineer Learning Path",
+  "timezone": "Asia/Shanghai",
+  "pace": {
+    "weekdayHours": "1-2",
+    "weekendHours": "2-4",
+    "defaultDurationWeeks": 8,
+    "fastTrackWeeks": 6,
+    "extensionWeeks": "10-12"
+  },
+  "unlockPolicy": {
+    "model": "目录可见 + 逐步解锁",
+    "passScore": 80,
+    "reviewScore": 70,
+    "lowScoreAction": "重学核心内容，并补一个变体练习",
+    "reviewScoreAction": "进入下一节，但安排复习题",
+    "highScoreAction": "解锁下一课"
+  },
+  "knowledgeAreas": [
+    {
+      "id": "system_prompt",
+      "name": "System Prompt",
+      "description": "定义模型角色、边界、工具规则、输出格式和安全策略。"
+    },
+    {
+      "id": "context_engineering",
+      "name": "Context Engineering",
+      "description": "为模型组织正确上下文，包括 instructions、messages、tools、memory、runtime state 和 schema。"
+    },
+    {
+      "id": "tool_calling",
+      "name": "Tool Calling",
+      "description": "让模型通过明确 schema 安全调用外部函数、数据和执行环境。"
+    },
+    {
+      "id": "rag",
+      "name": "RAG / Long Context",
+      "description": "在检索、长上下文和引用之间做取舍，降低幻觉和遗漏。"
+    },
+    {
+      "id": "agent_loop",
+      "name": "Agent Loop",
+      "description": "实现 plan、act、observe、reflect、final 的可控循环。"
+    },
+    {
+      "id": "evals",
+      "name": "Evals / Traces",
+      "description": "用结果评测和轨迹评测判断 Agent 是否真的可靠。"
+    },
+    {
+      "id": "harness_engineering",
+      "name": "Harness Engineering",
+      "description": "设计 Agent 的运行环境、权限、沙箱、工具、评测和反馈闭环。"
+    },
+    {
+      "id": "causal_tooling",
+      "name": "Causal Tooling",
+      "description": "把 PSM/DML/ITE/LTV 等算法能力封装成 Agent 可安全调用的业务工具。"
+    },
+    {
+      "id": "model_optimization",
+      "name": "Model Optimization",
+      "description": "在 prompting、RAG、fine-tuning、distillation、routing、cost/latency 中做工程取舍。"
+    },
+    {
+      "id": "marketing_eval_product",
+      "name": "Marketing Evaluation Product",
+      "description": "把算法、Agent、评测和报告转化成内部业务可用产品。"
+    }
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "theme": "LLM 基础、System Prompt 与可控输出",
+      "goal": "能解释 LLM 应用的基本运行单位，并写出可压测的营销评估 Agent system prompt。",
+      "lessons": [
+        "lesson-001-llm-mental-model",
+        "lesson-002-system-prompt",
+        "lesson-003-structured-output"
+      ]
+    },
+    {
+      "week": 2,
+      "theme": "Context Engineering、RAG 与 Tool Schema",
+      "goal": "能把业务知识、用户意图、工具描述和输出 schema 组织进模型上下文。",
+      "lessons": [
+        "lesson-004-context-engineering",
+        "lesson-005-rag-vs-long-context",
+        "lesson-006-tool-schema-design"
+      ]
+    },
+    {
+      "week": 3,
+      "theme": "Agent Loop From Scratch",
+      "goal": "能手写一个最小 Agent loop，并知道什么时候用 workflow，什么时候用 Agent。",
+      "lessons": [
+        "lesson-007-agent-loop",
+        "lesson-008-workflow-vs-agent",
+        "lesson-009-marketing-agent-v0"
+      ]
+    },
+    {
+      "week": 4,
+      "theme": "因果算法工具化与营销评估 Agent MVP",
+      "goal": "把已有因果推断能力封装成 Agent 可调用、可诊断、可解释的工具。",
+      "lessons": [
+        "lesson-010-causal-tooling-position",
+        "lesson-011-psm-tool-wrapper",
+        "lesson-012-marketing-eval-agent-mvp"
+      ]
+    },
+    {
+      "week": 5,
+      "theme": "Evals、Traces 与可靠性",
+      "goal": "建立 Agent 结果评测、轨迹评测、bad case 分析和错题回放。",
+      "lessons": [
+        "lesson-013-agent-evals",
+        "lesson-014-trace-debugging",
+        "lesson-015-bad-case-library"
+      ]
+    },
+    {
+      "week": 6,
+      "theme": "Harness Engineering、MCP、A2A 与安全",
+      "goal": "理解 Agent 运行环境设计，加入权限、人类确认、工具失败恢复和协议意识。",
+      "lessons": [
+        "lesson-016-harness-engineering",
+        "lesson-017-mcp-a2a-skills",
+        "lesson-018-tool-security"
+      ]
+    },
+    {
+      "week": 7,
+      "theme": "模型优化与小型优化实验",
+      "goal": "能判断该改 prompt、RAG、工具、模型路由还是微调，并完成一个方法选择优化实验。",
+      "lessons": [
+        "lesson-019-model-optimization-map",
+        "lesson-020-finetuning-vs-rag",
+        "lesson-021-method-selection-eval"
+      ]
+    },
+    {
+      "week": 8,
+      "theme": "产品化、工业案例迁移与最终答辩",
+      "goal": "完成 Marketing Evaluation Agent v1、评测报告和后续优化路线。",
+      "lessons": [
+        "lesson-022-industrial-patterns",
+        "lesson-023-productization",
+        "lesson-024-final-defense"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-001-llm-mental-model",
+      "title": "LLM 应用工程心智模型",
+      "week": 1,
+      "durationMinutes": 75,
+      "status": "available",
+      "knowledgeTags": ["context_engineering", "tool_calling"],
+      "lessonFile": "lessons/lesson-001-llm-mental-model.md",
+      "questionFile": "questions/lesson-001-llm-mental-model.json"
+    },
+    {
+      "id": "lesson-002-system-prompt",
+      "title": "System Prompt 与指令层级",
+      "week": 1,
+      "durationMinutes": 90,
+      "status": "available",
+      "knowledgeTags": ["system_prompt", "context_engineering"],
+      "lessonFile": "lessons/lesson-002-system-prompt.md",
+      "questionFile": "questions/lesson-002-system-prompt.json"
+    },
+    {
+      "id": "lesson-003-structured-output",
+      "title": "Structured Output 与工具契约",
+      "week": 1,
+      "durationMinutes": 75,
+      "status": "locked",
+      "knowledgeTags": ["tool_calling", "context_engineering"],
+      "lessonFile": "lessons/lesson-003-structured-output.md",
+      "questionFile": "questions/lesson-003-structured-output.json"
+    },
+    {
+      "id": "lesson-004-context-engineering",
+      "title": "Context Engineering：把正确上下文交给模型",
+      "week": 2,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["context_engineering", "system_prompt"],
+      "lessonFile": "lessons/lesson-004-context-engineering.md"
+    },
+    {
+      "id": "lesson-005-rag-vs-long-context",
+      "title": "RAG vs Long Context：检索、引用与遗漏控制",
+      "week": 2,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["rag", "context_engineering"],
+      "lessonFile": "lessons/lesson-005-rag-vs-long-context.md"
+    },
+    {
+      "id": "lesson-006-tool-schema-design",
+      "title": "Tool Schema Design：让模型稳定调用工具",
+      "week": 2,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["tool_calling", "context_engineering"],
+      "lessonFile": "lessons/lesson-006-tool-schema-design.md"
+    },
+    {
+      "id": "lesson-007-agent-loop",
+      "title": "Agent Loop From Scratch",
+      "week": 3,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["agent_loop", "tool_calling"],
+      "lessonFile": "lessons/lesson-007-agent-loop.md"
+    },
+    {
+      "id": "lesson-008-workflow-vs-agent",
+      "title": "Workflow vs Agent：什么时候要自主性",
+      "week": 3,
+      "durationMinutes": 75,
+      "status": "locked",
+      "knowledgeTags": ["agent_loop", "harness_engineering"],
+      "lessonFile": "lessons/lesson-008-workflow-vs-agent.md"
+    },
+    {
+      "id": "lesson-009-marketing-agent-v0",
+      "title": "Marketing Evaluation Agent v0",
+      "week": 3,
+      "durationMinutes": 150,
+      "status": "locked",
+      "knowledgeTags": ["marketing_eval_product", "agent_loop"],
+      "lessonFile": "lessons/lesson-009-marketing-agent-v0.md"
+    },
+    {
+      "id": "lesson-010-causal-tooling-position",
+      "title": "因果算法的 Agent 工具化定位",
+      "week": 4,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["causal_tooling", "marketing_eval_product", "tool_calling"],
+      "lessonFile": "lessons/lesson-010-causal-tooling-position.md",
+      "questionFile": "questions/lesson-010-causal-tooling-position.json"
+    },
+    {
+      "id": "lesson-011-psm-tool-wrapper",
+      "title": "PSM 工具封装、诊断与降级",
+      "week": 4,
+      "durationMinutes": 120,
+      "status": "locked",
+      "knowledgeTags": ["causal_tooling", "evals"],
+      "lessonFile": "lessons/lesson-011-psm-tool-wrapper.md",
+      "questionFile": "questions/lesson-011-psm-tool-wrapper.json"
+    },
+    {
+      "id": "lesson-012-marketing-eval-agent-mvp",
+      "title": "营销评估 Agent MVP 集成",
+      "week": 4,
+      "durationMinutes": 180,
+      "status": "locked",
+      "knowledgeTags": ["marketing_eval_product", "causal_tooling", "agent_loop"],
+      "lessonFile": "lessons/lesson-012-marketing-eval-agent-mvp.md"
+    },
+    {
+      "id": "lesson-013-agent-evals",
+      "title": "Agent Evals：结果、轨迹与工具调用评测",
+      "week": 5,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["evals", "tool_calling"],
+      "lessonFile": "lessons/lesson-013-agent-evals.md"
+    },
+    {
+      "id": "lesson-014-trace-debugging",
+      "title": "Trace Debugging：从轨迹定位 Agent 错因",
+      "week": 5,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["evals", "harness_engineering"],
+      "lessonFile": "lessons/lesson-014-trace-debugging.md"
+    },
+    {
+      "id": "lesson-015-bad-case-library",
+      "title": "Bad Case Library：把失败变成学习资产",
+      "week": 5,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["evals", "marketing_eval_product"],
+      "lessonFile": "lessons/lesson-015-bad-case-library.md"
+    },
+    {
+      "id": "lesson-016-harness-engineering",
+      "title": "Harness Engineering：设计 Agent 运行环境",
+      "week": 6,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["harness_engineering", "agent_loop"],
+      "lessonFile": "lessons/lesson-016-harness-engineering.md"
+    },
+    {
+      "id": "lesson-017-mcp-a2a-skills",
+      "title": "MCP、A2A 与 Agent Skills",
+      "week": 6,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["harness_engineering", "tool_calling"],
+      "lessonFile": "lessons/lesson-017-mcp-a2a-skills.md"
+    },
+    {
+      "id": "lesson-018-tool-security",
+      "title": "Tool Security：Prompt Injection、权限与沙箱",
+      "week": 6,
+      "durationMinutes": 90,
+      "status": "locked",
+      "knowledgeTags": ["harness_engineering", "system_prompt"],
+      "lessonFile": "lessons/lesson-018-tool-security.md"
+    },
+    {
+      "id": "lesson-019-model-optimization-map",
+      "title": "模型优化地图：Prompt、RAG、工具、微调与路由",
+      "week": 7,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["model_optimization", "evals"],
+      "lessonFile": "lessons/lesson-019-model-optimization-map.md"
+    },
+    {
+      "id": "lesson-020-finetuning-vs-rag",
+      "title": "Fine-tuning vs RAG vs Prompting",
+      "week": 7,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["model_optimization", "rag"],
+      "lessonFile": "lessons/lesson-020-finetuning-vs-rag.md"
+    },
+    {
+      "id": "lesson-021-method-selection-eval",
+      "title": "方法选择优化实验",
+      "week": 7,
+      "durationMinutes": 150,
+      "status": "locked",
+      "knowledgeTags": ["model_optimization", "causal_tooling", "evals"],
+      "lessonFile": "lessons/lesson-021-method-selection-eval.md"
+    },
+    {
+      "id": "lesson-022-industrial-patterns",
+      "title": "工业案例模式库：从公司、论文和开源项目学设计",
+      "week": 8,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["harness_engineering", "model_optimization"],
+      "lessonFile": "lessons/lesson-022-industrial-patterns.md"
+    },
+    {
+      "id": "lesson-023-productization",
+      "title": "Agent 产品化：体验、权限、监控与迭代",
+      "week": 8,
+      "durationMinutes": 100,
+      "status": "locked",
+      "knowledgeTags": ["marketing_eval_product", "harness_engineering"],
+      "lessonFile": "lessons/lesson-023-productization.md"
+    },
+    {
+      "id": "lesson-024-final-defense",
+      "title": "最终答辩：Marketing Evaluation Agent v1",
+      "week": 8,
+      "durationMinutes": 180,
+      "status": "locked",
+      "knowledgeTags": ["marketing_eval_product", "evals", "harness_engineering", "model_optimization"],
+      "lessonFile": "lessons/lesson-024-final-defense.md"
+    }
+  ]
+}
