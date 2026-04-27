@@ -1,0 +1,75 @@
+{
+  "lessonId": "lesson-013-agent-evals-result-and-trajectory",
+  "title": "Agent Evals: Result and Trajectory 测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": [
+        "evals",
+        "agent_loop"
+      ],
+      "prompt": "关于「Agent Evals: Result and Trajectory」，哪种理解最符合本节主线？",
+      "options": [
+        {
+          "id": "A",
+          "text": "LLM judge 可作为一层，但关键工具轨迹、参数和政策边界应有结构化断言。",
+          "correct": true,
+          "explanation": "正确。本节强调的是可操作、可验证的工程边界：自然语言评分看表面质量；轨迹断言看行为可靠性。"
+        },
+        {
+          "id": "B",
+          "text": "让另一个 LLM 给报告打分就等于 Agent eval。",
+          "correct": false,
+          "explanation": "错误。这正是本节指出的常见误区。它忽略了：自然语言评分看表面质量；轨迹断言看行为可靠性。"
+        },
+        {
+          "id": "C",
+          "text": "只要换成更强模型，就可以跳过本节讨论的工程设计。",
+          "correct": false,
+          "explanation": "错误。更强模型可能改善局部表现，但不能替代接口、状态、权限、诊断、trace 和 eval。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": [
+        "evals",
+        "agent_loop"
+      ],
+      "prompt": "把「Agent Evals: Result and Trajectory」迁移到 Marketing Evaluation Agent 时，哪些做法是合理的？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把本节机制写成可检查的接口、状态、规则或评测项。",
+          "correct": true,
+          "explanation": "正确。课程目标是工程化和可复核，不是只记概念。"
+        },
+        {
+          "id": "B",
+          "text": "保留诊断、warning、拒绝或降级路径，避免把不确定性包装成确定结论。",
+          "correct": true,
+          "explanation": "正确。营销评估 Agent 的核心风险就是过度归因和错误自动化。"
+        },
+        {
+          "id": "C",
+          "text": "只在最终报告里写自然语言解释，不需要保存中间状态或 trace。",
+          "correct": false,
+          "explanation": "错误。没有中间证据，后续无法调试、评测、复盘或建立业务信任。"
+        },
+        {
+          "id": "D",
+          "text": "遇到数据缺陷或工具失败时，允许 Agent 编一个合理解释保持体验顺滑。",
+          "correct": false,
+          "explanation": "错误。好的体验不是掩盖失败，而是给出可行动的诊断、补数建议或降级结论。"
+        }
+      ]
+    }
+  ],
+  "practice": {
+    "title": "Agent Evals: Result and Trajectory 实操",
+    "prompt": "写 10 个 eval cases：3 个 happy path、4 个 bad data、2 个 prompt injection、1 个工具失败。每个 case 写 expected_trace 和 expected_report_policy。",
+    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+  }
+}

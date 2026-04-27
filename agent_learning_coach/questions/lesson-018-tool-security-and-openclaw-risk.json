@@ -1,0 +1,76 @@
+{
+  "lessonId": "lesson-018-tool-security-and-openclaw-risk",
+  "title": "Tool Security and OpenClaw Risk 测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": [
+        "harness_engineering",
+        "tool_calling"
+      ],
+      "prompt": "关于「Tool Security and OpenClaw Risk」，哪种理解最符合本节主线？",
+      "options": [
+        {
+          "id": "A",
+          "text": "安全不能建立在模型每次都识别恶意文本上。要靠权限、隔离、认证、审计和人类确认降低爆炸半径。",
+          "correct": true,
+          "explanation": "正确。本节强调的是可操作、可验证的工程边界：模型判断是软边界；权限和沙箱是硬边界。"
+        },
+        {
+          "id": "B",
+          "text": "只要模型足够聪明，就能识别所有恶意指令。",
+          "correct": false,
+          "explanation": "错误。这正是本节指出的常见误区。它忽略了：模型判断是软边界；权限和沙箱是硬边界。"
+        },
+        {
+          "id": "C",
+          "text": "只要换成更强模型，就可以跳过本节讨论的工程设计。",
+          "correct": false,
+          "explanation": "错误。更强模型可能改善局部表现，但不能替代接口、状态、权限、诊断、trace 和 eval。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": [
+        "harness_engineering",
+        "tool_calling",
+        "evals"
+      ],
+      "prompt": "把「Tool Security and OpenClaw Risk」迁移到 Marketing Evaluation Agent 时，哪些做法是合理的？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把本节机制写成可检查的接口、状态、规则或评测项。",
+          "correct": true,
+          "explanation": "正确。课程目标是工程化和可复核，不是只记概念。"
+        },
+        {
+          "id": "B",
+          "text": "保留诊断、warning、拒绝或降级路径，避免把不确定性包装成确定结论。",
+          "correct": true,
+          "explanation": "正确。营销评估 Agent 的核心风险就是过度归因和错误自动化。"
+        },
+        {
+          "id": "C",
+          "text": "只在最终报告里写自然语言解释，不需要保存中间状态或 trace。",
+          "correct": false,
+          "explanation": "错误。没有中间证据，后续无法调试、评测、复盘或建立业务信任。"
+        },
+        {
+          "id": "D",
+          "text": "遇到数据缺陷或工具失败时，允许 Agent 编一个合理解释保持体验顺滑。",
+          "correct": false,
+          "explanation": "错误。好的体验不是掩盖失败，而是给出可行动的诊断、补数建议或降级结论。"
+        }
+      ]
+    }
+  ],
+  "practice": {
+    "title": "Tool Security and OpenClaw Risk 实操",
+    "prompt": "写一份 `agent_security_checklist.md`：输入认证、工具最小权限、secret 不进上下文、插件审计、沙箱、网络暴露、human approval、日志脱敏、更新策略。",
+    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+  }
+}

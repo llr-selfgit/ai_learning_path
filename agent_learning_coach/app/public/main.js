@@ -650,12 +650,13 @@ function renderProject() {
     <div class="grid two">
       <section class="panel">
         <h3>当前已生成</h3>
+        <p><code>projects/mini_agent/</code>：第 1 周使用的手搓 Agent loop，覆盖工具调用、trace、错误和 max step。</p>
         <p><code>projects/marketing_eval_agent/causal_tools/</code>：轻量 PSM / DML / ITE 工具骨架。</p>
         <p><code>projects/marketing_eval_agent/tests/</code>：基础测试。</p>
       </section>
       <section class="panel">
         <h3>下一步</h3>
-        <p>完成第 4 周课程后，把这些工具接入 Agent loop：先 inspect，再 select method，再 estimate，最后 write report。</p>
+        <p>先完成第 1 周 mini-agent，再在第 3-4 周把因果工具接入业务 Agent：inspect、select method、estimate、diagnose、report。</p>
       </section>
     </div>
   `;

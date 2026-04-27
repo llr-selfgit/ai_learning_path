@@ -1,231 +1,322 @@
 {
-  "version": "0.1.0",
-  "lastUpdated": "2026-04-27",
+  "version": "0.2.0",
+  "lastUpdated": "2026-04-28",
   "claims": [
     {
-      "id": "claim-agent-product-needs-context-tools-evals",
-      "statement": "A production-grade Agent product is more than an LLM call; it needs context design, tools, runtime control, observability, and evaluation loops.",
+      "id": "claim-agent-needs-loop-state-tools-evals",
+      "statement": "A useful agent is not merely a chat model; it combines an LLM with instructions, state, tools, a control loop, runtime guardrails, and evaluation evidence.",
       "sourceIds": [
-        "openai-agents-sdk-tracing",
-        "openai-agent-evals",
+        "openai-practical-guide-agents",
         "anthropic-building-effective-agents",
         "google-adk-overview"
       ],
       "confidence": "high",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "stability": "stable",
       "scope": "best_practice",
-      "notes": "This is a synthesis across official documentation and engineering guidance, not a single vendor quote."
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
     },
     {
-      "id": "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
-      "statement": "OpenAI Agents SDK tracing records agent runs with spans for model generations, function tool calls, guardrails, handoffs, and related workflow events.",
+      "id": "claim-swarm-core-loop",
+      "statement": "OpenAI Swarm documents a client-side loop that gets a completion, executes tool calls and appends results, switches agents or updates context if needed, and returns when no function calls remain.",
       "sourceIds": [
-        "openai-agents-sdk-tracing"
+        "openai-swarm"
       ],
       "confidence": "high",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "stability": "changing",
       "scope": "fact",
-      "notes": "SDK behavior can change; refresh against official docs before teaching SDK-specific APIs."
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
     },
     {
-      "id": "claim-openai-guardrails-input-output-tool",
-      "statement": "OpenAI Agents SDK documents input guardrails, output guardrails, and tool guardrails as validation or blocking mechanisms around agent workflows and function-tool calls.",
+      "id": "claim-claude-code-loop",
+      "statement": "Claude Code documentation describes an agentic loop of gathering context, taking action with tools, verifying results, and repeating until the task is complete.",
       "sourceIds": [
-        "openai-agents-sdk-guardrails"
+        "claude-code-how-works",
+        "claude-code-agent-loop"
       ],
       "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
-      "scope": "fact",
-      "notes": "Hosted and built-in tools may have different guardrail behavior; avoid overgeneralizing."
-    },
-    {
-      "id": "claim-openai-tools-extend-model-capabilities",
-      "statement": "OpenAI's tools guide describes built-in tools, function calling, tool search, and remote MCP servers as ways to extend model capabilities beyond text generation.",
-      "sourceIds": [
-        "openai-tools-guide"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "stability": "fast-changing",
       "scope": "fact",
-      "notes": "Model availability and specific tool support are fast-changing and must be refreshed."
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
     },
     {
-      "id": "claim-anthropic-workflows-vs-agents",
-      "statement": "Anthropic distinguishes workflows, where LLMs and tools follow predefined code paths, from agents, where LLMs dynamically direct their process and tool use.",
-      "sourceIds": [
-        "anthropic-building-effective-agents"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "stable",
-      "scope": "fact",
-      "notes": "Useful as an architectural lens, not a universal industry definition."
-    },
-    {
-      "id": "claim-anthropic-recommends-simplest-solution-first",
-      "statement": "Anthropic recommends starting with the simplest solution that works and increasing agentic complexity only when the performance tradeoff justifies it.",
-      "sourceIds": [
-        "anthropic-building-effective-agents"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "stable",
-      "scope": "best_practice",
-      "notes": "This is a practical recommendation, not a law; high-uncertainty tasks may justify more autonomy."
-    },
-    {
-      "id": "claim-anthropic-prompting-clear-context-role-examples",
-      "statement": "Anthropic's prompting guidance emphasizes clear direct instructions, adding context, using examples, structuring prompts, and giving Claude a role.",
-      "sourceIds": [
-        "anthropic-prompting-best-practices"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
-      "scope": "best_practice",
-      "notes": "Prompting advice is model-sensitive; refresh for model-family-specific guidance."
-    },
-    {
-      "id": "claim-google-adk-core-primitives",
-      "statement": "Google ADK presents agents, tools, callbacks, sessions/state, memory, artifacts, events, runner, planning, evaluation, and deployment as part of its agent development environment.",
-      "sourceIds": [
-        "google-adk-overview"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
-      "scope": "fact",
-      "notes": "ADK has active releases; refresh API and feature claims regularly."
-    },
-    {
-      "id": "claim-mcp-standardizes-context-tools",
-      "statement": "MCP is an open protocol that standardizes how LLM applications connect to external context, resources, prompts, and tools using client-server architecture and JSON-RPC messages.",
-      "sourceIds": [
-        "mcp-specification"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "fast-changing",
-      "scope": "fact",
-      "notes": "The specification is draft; mark implementation details as fast-changing."
-    },
-    {
-      "id": "claim-mcp-security-consent-tool-safety",
-      "statement": "The MCP specification highlights user consent, data privacy, and tool safety as key security and trust principles because tools can expose data access or code execution paths.",
-      "sourceIds": [
-        "mcp-specification"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "fast-changing",
-      "scope": "fact",
-      "notes": "Security principles are durable, but protocol details may evolve."
-    },
-    {
-      "id": "claim-a2a-agent-interoperability",
-      "statement": "A2A is an open protocol intended to enable communication and interoperability between independent agent systems through concepts such as agent cards, tasks, messages, artifacts, JSON-RPC, and streaming.",
-      "sourceIds": [
-        "a2a-specification"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "fast-changing",
-      "scope": "fact",
-      "notes": "Protocol version and field details may change."
-    },
-    {
-      "id": "claim-system-prompt-as-policy-is-analogy",
-      "statement": "Calling a system prompt a product's 'operating constitution' is a teaching analogy: it helps explain priority and behavioral boundaries, but it is not a formal guarantee of model behavior.",
-      "sourceIds": [
-        "anthropic-prompting-best-practices",
-        "openai-agents-sdk-guardrails"
-      ],
-      "confidence": "medium",
-      "verifiedAt": "2026-04-27",
-      "stability": "stable",
-      "scope": "teaching_analogy",
-      "notes": "Always pair this analogy with concrete guardrails, evals, and tool policies."
-    },
-    {
-      "id": "claim-marketing-causal-agent-must-not-overclaim",
-      "statement": "A marketing evaluation Agent should not make strong causal claims when identification assumptions, required fields, sample quality, or diagnostics are insufficient.",
-      "sourceIds": [
-        "anthropic-building-effective-agents",
-        "openai-agent-evals"
-      ],
-      "confidence": "medium",
-      "verifiedAt": "2026-04-27",
-      "stability": "stable",
-      "scope": "inference",
-      "notes": "This is an application-specific engineering inference grounded in agent reliability principles and causal inference practice."
-    },
-    {
-      "id": "claim-structured-tool-contracts-enable-execution-eval",
-      "statement": "Structured tool contracts make agent intentions machine-readable, executable, and easier to validate or evaluate than unconstrained natural-language tool descriptions.",
+      "id": "claim-tool-schema-shape-not-semantics",
+      "statement": "A tool schema can constrain argument shape and improve validation, but it does not by itself guarantee that the chosen tool, fields, or causal interpretation are semantically correct.",
       "sourceIds": [
         "openai-tools-guide",
-        "mcp-specification"
-      ],
-      "confidence": "medium",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
-      "scope": "inference",
-      "notes": "This is an engineering inference from official tool/function-calling and protocol documentation, not a single quoted standard."
-    },
-    {
-      "id": "claim-context-engineering-requires-structured-context",
-      "statement": "Effective context design for LLM applications requires more than adding tokens; the application should provide task-relevant context, clear structure, source boundaries, and priority rules.",
-      "sourceIds": [
-        "anthropic-prompting-best-practices",
-        "anthropic-long-context-tips",
-        "google-adk-overview",
-        "mcp-specification"
-      ],
-      "confidence": "medium",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
-      "scope": "inference",
-      "notes": "This is a synthesis across official prompting, ADK, and MCP guidance; exact platform features may change."
-    },
-    {
-      "id": "claim-openai-file-search-retrieves-from-vector-stores",
-      "statement": "OpenAI file search lets models retrieve information from uploaded-file knowledge bases backed by vector stores, using semantic and keyword search before generating responses.",
-      "sourceIds": [
-        "openai-file-search"
+        "deepseek-function-calling",
+        "xai-function-calling"
       ],
       "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "fast-changing",
-      "scope": "fact",
-      "notes": "Hosted tool behavior, limits, pricing, and API details are fast-changing."
-    },
-    {
-      "id": "claim-long-context-still-needs-structure-and-grounding",
-      "statement": "Anthropic long-context guidance recommends structuring long documents with metadata and grounding answers in relevant quoted material, so long context does not remove the need for context design.",
-      "sourceIds": [
-        "anthropic-long-context-tips"
-      ],
-      "confidence": "high",
-      "verifiedAt": "2026-04-27",
-      "stability": "changing",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
       "scope": "best_practice",
-      "notes": "Model-specific prompt behavior may change; refresh before teaching exact performance claims."
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
     },
     {
-      "id": "claim-structured-outputs-constrain-json-schema",
-      "statement": "OpenAI Structured Outputs are designed to make model responses adhere to a supplied JSON Schema, whereas schema adherence does not by itself guarantee business semantic correctness.",
+      "id": "claim-structured-output-json-not-business-truth",
+      "statement": "Structured outputs are designed to make model responses fit a supplied schema, but schema validity is different from business correctness, causal validity, or policy compliance.",
       "sourceIds": [
         "openai-structured-outputs"
       ],
       "confidence": "high",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-context-engineering-not-token-stuffing",
+      "statement": "Long context does not remove the need for context engineering because the model still needs relevance, source boundaries, priority rules, metadata, and grounding.",
+      "sourceIds": [
+        "anthropic-long-context-tips",
+        "anthropic-prompting-best-practices"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-workflow-agent-distinction",
+      "statement": "Anthropic distinguishes workflows with predefined code paths from agents where the LLM dynamically directs tool use and process control.",
+      "sourceIds": [
+        "anthropic-building-effective-agents"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-simplest-agentic-design-first",
+      "statement": "Anthropic recommends starting with the simplest solution that works and adding agentic complexity only when the tradeoff is justified.",
+      "sourceIds": [
+        "anthropic-building-effective-agents"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-guardrails-layered",
+      "statement": "OpenAI's guide frames guardrails as layered defenses around relevance, safety, PII, moderation, tool safeguards, deterministic protections, and output validation.",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agents-sdk-guardrails"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-agent-evals-need-trajectory",
+      "statement": "Agent evaluation should include more than final-answer grading; traces, tool calls, guardrail events, and trajectory-level behavior are needed to diagnose reliability.",
+      "sourceIds": [
+        "openai-agent-evals",
+        "openai-agents-sdk-tracing"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-adk-state-memory-runner",
+      "statement": "Google ADK documents sessions/state, memory, events, and runners as runtime primitives for agent applications.",
+      "sourceIds": [
+        "google-adk-overview",
+        "google-adk-state",
+        "google-adk-memory"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-langgraph-durable-execution",
+      "statement": "LangGraph durable execution uses persistence/checkpointing so workflows can pause, resume, and support human-in-the-loop or long-running tasks.",
+      "sourceIds": [
+        "langgraph-durable-execution"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-mcp-security-permission",
+      "statement": "MCP standardizes tool/resource/prompt access through a client-server protocol and highlights consent, data privacy, and tool safety as key trust concerns.",
+      "sourceIds": [
+        "mcp-specification"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
       "stability": "fast-changing",
       "scope": "fact",
-      "notes": "The second clause is an engineering boundary inference: syntactic schema validity is not the same as correct field selection or causal validity."
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-causal-agent-must-refuse-overclaim",
+      "statement": "A marketing evaluation agent should refuse or downgrade causal conclusions when assumptions, required fields, sample size, common support, or diagnostics are insufficient.",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "anthropic-building-effective-agents"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
+      "scope": "inference",
+      "notes": "This is an engineering inference from the cited sources and the learner's marketing evaluation context, not a direct vendor claim."
+    },
+    {
+      "id": "claim-causal-tools-agent-contract",
+      "statement": "PSM, DML, and uplift tools are most useful to an agent when their outputs include effect estimates, uncertainty, diagnostics, warnings, and an explicit causal-claim flag.",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agent-evals"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-28",
+      "stability": "stable",
+      "scope": "inference",
+      "notes": "This is an engineering inference from the cited sources and the learner's marketing evaluation context, not a direct vendor claim."
+    },
+    {
+      "id": "claim-deerflow-superagent-2",
+      "statement": "ByteDance DeerFlow 2.0 presents itself as a long-horizon SuperAgent harness using sub-agents, memory, sandboxes, tools, skills, and a message gateway.",
+      "sourceIds": [
+        "bytedance-deerflow-github"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-trae-agent-software-engineering",
+      "statement": "ByteDance Trae Agent is described as an LLM-based agent for general-purpose software engineering tasks with rich tools, trajectory recording, and multi-LLM support.",
+      "sourceIds": [
+        "bytedance-trae-agent"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-openhands-software-agent",
+      "statement": "OpenHands positions itself as an AI-driven development platform whose agents can modify code, run commands, browse the web, and call APIs.",
+      "sourceIds": [
+        "openhands-github"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-hermes-memory-skills-cron",
+      "statement": "Hermes Agent describes persistent memory, auto-generated skills, cron scheduling, gateway channels, subagents, and multiple terminal backends as core capabilities.",
+      "sourceIds": [
+        "hermes-agent-github"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-openclaw-gateway-personal-agent",
+      "statement": "OpenClaw positions itself as a personal AI assistant and gateway across messaging platforms, local devices, skills, and workspace templates.",
+      "sourceIds": [
+        "openclaw-github",
+        "minimax-openclaw-docs"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-openclaw-security-risk",
+      "statement": "OpenClaw-style personal agents deserve extra security scrutiny because gateway exposure, plugins, credentials, and local command/file access can create high-impact attack paths.",
+      "sourceIds": [
+        "openclaw-github",
+        "opencve-openclaw-rce",
+        "techradar-openclaw-security-risk"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "inference",
+      "notes": "This is an engineering inference from the cited sources and the learner's marketing evaluation context, not a direct vendor claim."
+    },
+    {
+      "id": "claim-qwen-agent-ecosystem",
+      "statement": "Qwen-Agent is an official framework for developing Qwen-based LLM applications with function calling, MCP, code interpreter, RAG, and agent examples.",
+      "sourceIds": [
+        "qwen-agent-github"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-kimi-k2-agentic",
+      "statement": "Moonshot AI's Kimi K2 README describes a 1T total-parameter MoE model with 32B activated parameters, 128K context, and optimization for tool use and agentic capabilities.",
+      "sourceIds": [
+        "kimi-k2-github"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-glm-agent-function-calling",
+      "statement": "Z.AI documentation positions GLM-4.5 for agent-oriented applications and documents function calling through tool definitions and tool_call responses.",
+      "sourceIds": [
+        "glm-45-overview",
+        "glm-function-calling"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
+    },
+    {
+      "id": "claim-model-selection-eval-first",
+      "statement": "A practical model-selection process should establish an eval baseline with a capable model, then optimize cost and latency by substituting smaller or cheaper models where quality holds.",
+      "sourceIds": [
+        "openai-practical-guide-agents"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-28",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Refresh source details before teaching API-specific or product-specific behavior."
     }
   ]
 }

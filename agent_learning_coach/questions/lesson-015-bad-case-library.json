@@ -1,0 +1,76 @@
+{
+  "lessonId": "lesson-015-bad-case-library",
+  "title": "Bad Case Library 测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": [
+        "evals",
+        "causal_tooling"
+      ],
+      "prompt": "关于「Bad Case Library」，哪种理解最符合本节主线？",
+      "options": [
+        {
+          "id": "A",
+          "text": "对 Agent 产品，bad case 就是产品需求的一部分，因为它定义了什么行为绝不能发生。",
+          "correct": true,
+          "explanation": "正确。本节强调的是可操作、可验证的工程边界：功能需求描述要做什么；bad case 描述不能做什么。"
+        },
+        {
+          "id": "B",
+          "text": "bad case 是测试同学的事情，课程项目先做功能就行。",
+          "correct": false,
+          "explanation": "错误。这正是本节指出的常见误区。它忽略了：功能需求描述要做什么；bad case 描述不能做什么。"
+        },
+        {
+          "id": "C",
+          "text": "只要换成更强模型，就可以跳过本节讨论的工程设计。",
+          "correct": false,
+          "explanation": "错误。更强模型可能改善局部表现，但不能替代接口、状态、权限、诊断、trace 和 eval。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": [
+        "evals",
+        "causal_tooling",
+        "harness_engineering"
+      ],
+      "prompt": "把「Bad Case Library」迁移到 Marketing Evaluation Agent 时，哪些做法是合理的？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把本节机制写成可检查的接口、状态、规则或评测项。",
+          "correct": true,
+          "explanation": "正确。课程目标是工程化和可复核，不是只记概念。"
+        },
+        {
+          "id": "B",
+          "text": "保留诊断、warning、拒绝或降级路径，避免把不确定性包装成确定结论。",
+          "correct": true,
+          "explanation": "正确。营销评估 Agent 的核心风险就是过度归因和错误自动化。"
+        },
+        {
+          "id": "C",
+          "text": "只在最终报告里写自然语言解释，不需要保存中间状态或 trace。",
+          "correct": false,
+          "explanation": "错误。没有中间证据，后续无法调试、评测、复盘或建立业务信任。"
+        },
+        {
+          "id": "D",
+          "text": "遇到数据缺陷或工具失败时，允许 Agent 编一个合理解释保持体验顺滑。",
+          "correct": false,
+          "explanation": "错误。好的体验不是掩盖失败，而是给出可行动的诊断、补数建议或降级结论。"
+        }
+      ]
+    }
+  ],
+  "practice": {
+    "title": "Bad Case Library 实操",
+    "prompt": "建立 `bad_cases.yaml` 初版 15 条。每条都写 expected_method、expected_refusal_or_downgrade 和 forbidden_claim。",
+    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+  }
+}

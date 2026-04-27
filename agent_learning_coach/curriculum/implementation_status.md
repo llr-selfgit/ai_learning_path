@@ -1,46 +1,37 @@
 # Implementation Status
 
+Updated: 2026-04-28
+
 ## Implemented
 
-- Local dynamic web dashboard with no external JS dependencies.
-- Course tree with visible route and locked/available states.
-- Lesson detail view with markdown content.
-- Objective quiz grading with per-option explanations.
-- Knowledge mastery scoring and recent mistake tracking.
-- Subjective submission save flow.
-- Git status panel.
-- Source radar.
-- Source registry, claim registry, fact-check policy, and staleness report.
-- Lesson accuracy metadata with verified/draft status, source IDs, claim IDs, stability, and refresh dates.
-- Accuracy panel on lesson pages.
-- Accuracy validation script.
-- Mastery-oriented teaching policy: total-part-total lessons, task-first explanation, engineering landing, transfer practice, and mastery evidence.
-- Lesson phase flow: preview -> learning -> quiz -> assignment -> review, so quizzes and practice appear only after learning starts.
-- Per-lesson progress state with started/completed timestamps, quiz unlock, quiz score, practice status, assignment score, mastery status, evidence paths, and weak points.
-- Practice submission flow that saves operational evidence separately from deeper subjective submissions.
-- All 24 lessons now have lesson-specific mastery outcomes, practice tasks, transfer tasks, and common pitfalls in `curriculum/plan.json`.
-- Lessons 001-006 rewritten into deeper task-led content with examples, diagrams, industrial context, operation guidance, pitfalls, transfer exercises, and mastery checks.
-- Lesson 003-006 objective quizzes added or expanded.
-- Marketing Evaluation Agent project skeleton.
-- Transparent PSM / DML / uplift tool layer without `econml` or `doubleml`.
-- Unit tests for causal tools.
+- Dynamic local web dashboard with course tree, lesson workbench, phase flow, quiz grading, practice submission, mastery tracking, Git status, source radar, and lesson accuracy panel.
+- v2 curriculum reset: 24 lessons, 8 weeks, new lesson IDs, new filenames, new question files, and reset progress state.
+- Agent loop moved into Week 1 as `lesson-003-agent-loop-from-scratch`.
+- All 24 lessons now have verified metadata, source IDs, claim IDs, refresh dates, mastery outcomes, practice tasks, transfer tasks, and common pitfalls.
+- All 24 lesson markdown files were rebuilt with total-part-total explanation, mechanism, business example, operation guidance, misconception gap, industrial case, and staleness note.
+- All 24 question files now include at least 2 objective questions with per-option explanations plus a practice task reference.
+- Source registry rebuilt with 31 sources, including OpenAI, Anthropic, Claude Code, Google ADK, LangGraph, MCP, Qwen-Agent, DeepSeek, xAI, Kimi K2, GLM-4.5, DeerFlow, Trae Agent, OpenHands, Hermes, OpenClaw, MiniMax docs, and OpenCVE/TechRadar risk references.
+- Claim registry rebuilt with 25 source-backed claims and explicit confidence/stability/scope.
+- Accuracy validation now checks lesson files, question files, practice tasks, question count, option explanations, sources, claims, and verified metadata.
+- `projects/mini_agent/` added for Week 1 hand-rolled Agent loop practice.
+- Mini-agent tests cover happy path, unknown tool, bad args, tool failure, max iteration, and diagnostic downgrade.
+- Marketing Evaluation Agent causal tools remain in place, with bundled-runtime tests passing.
+- `npm run rebuild:v2`, `npm run test:mini-agent`, and `npm run test:all` scripts added.
 
-## Not Yet Implemented
+## Still Not Implemented
 
-- Full deep prose rewrite of all 24 lesson markdown files. Lessons 001-006 are upgraded; remaining lessons now have concrete metadata but still need the same content-depth pass.
-- Automatic lesson unlocking based on reviewed mastery, beyond the current static subset.
+- Automatic mastery-based lesson unlocking after Codex review scores.
 - In-browser code runner.
-- GitHub push automation.
-- Vercel `GitHubRepoStorage` implementation.
+- GitHub/Vercel storage adapter for multi-device hosted progress.
 - Codex review import flow for subjective/code grading.
+- Deeper visual lesson diagrams beyond current text diagrams and sketch-style UI elements.
 
 ## Next Build Slice
 
-1. Deep rewrite lessons 007-009 with the same teaching design and source-backed claims.
-2. Add a review import page so Codex feedback can be pasted back into `grades/`.
-3. Add mastery-based unlocking once review scores exist.
-4. Add Git sync commands once GitHub access is available.
-5. Convert the local server API to a Next.js/Vercel adapter when deployment is ready.
+1. Add mastery-based unlock logic once review scores exist.
+2. Add review import so Codex feedback can update `grades/` and `progress/state.json`.
+3. Add a richer diagram component for lesson mechanism views.
+4. Design Vercel storage adapter for GitHub-backed or database-backed progress sync.
 
 ## Accuracy Gate
 

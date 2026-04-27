@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "learner": {
     "name": "lingrui",
     "weekdayHours": "1-2",
@@ -8,13 +8,31 @@
     "preferredStack": "Python first",
     "finalProject": "Marketing Evaluation Agent"
   },
-  "currentLessonId": "lesson-001-llm-mental-model",
+  "currentLessonId": "lesson-001-llm-runtime-mental-model",
   "lessonStatuses": {
-    "lesson-001-llm-mental-model": "available",
-    "lesson-002-system-prompt": "available",
-    "lesson-003-structured-output": "locked",
-    "lesson-010-causal-tooling-position": "locked",
-    "lesson-011-psm-tool-wrapper": "locked",
+    "lesson-001-llm-runtime-mental-model": "available",
+    "lesson-002-tool-calling-and-structured-output": "locked",
+    "lesson-003-agent-loop-from-scratch": "locked",
+    "lesson-004-system-prompt-and-policy-boundary": "locked",
+    "lesson-005-tool-registry-and-guardrails": "locked",
+    "lesson-006-context-packet-engineering": "locked",
+    "lesson-007-rag-long-context-memory": "locked",
+    "lesson-008-workflow-vs-agent": "locked",
+    "lesson-009-marketing-eval-agent-v0": "locked",
+    "lesson-010-causal-method-router": "locked",
+    "lesson-011-causal-tools-as-agent-tools": "locked",
+    "lesson-012-marketing-eval-agent-mvp": "locked",
+    "lesson-013-agent-evals-result-and-trajectory": "locked",
+    "lesson-014-trace-debugging": "locked",
+    "lesson-015-bad-case-library": "locked",
+    "lesson-016-harness-engineering": "locked",
+    "lesson-017-sandbox-mcp-and-permissions": "locked",
+    "lesson-018-tool-security-and-openclaw-risk": "locked",
+    "lesson-019-claude-code-and-coding-agents": "locked",
+    "lesson-020-deerflow-superagent-architecture": "locked",
+    "lesson-021-hermes-skills-memory-cron": "locked",
+    "lesson-022-model-and-framework-selection": "locked",
+    "lesson-023-agent-productization": "locked",
     "lesson-024-final-defense": "locked"
   },
   "knowledgeMastery": {
@@ -79,33 +97,9 @@
       "reviewDue": null
     }
   },
-  "events": [
-    {
-      "type": "lesson_phase_changed",
-      "lessonId": "lesson-001-llm-mental-model",
-      "phase": "learning",
-      "at": "2026-04-27T15:31:27.502Z"
-    }
-  ],
+  "events": [],
   "lessonProgress": {
-    "lesson-001-llm-mental-model": {
-      "phase": "learning",
-      "startedAt": "2026-04-27T15:31:27.502Z",
-      "completedReadingAt": null,
-      "quizUnlocked": false,
-      "quizScore": null,
-      "practiceStatus": "not_started",
-      "assignmentScore": null,
-      "masteryStatus": "not_started",
-      "evidence": {
-        "explanation": null,
-        "practicePath": null,
-        "transfer": null,
-        "mistakeRepair": null
-      },
-      "weakPoints": []
-    },
-    "lesson-002-system-prompt": {
+    "lesson-001-llm-runtime-mental-model": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -122,7 +116,7 @@
       },
       "weakPoints": []
     },
-    "lesson-003-structured-output": {
+    "lesson-002-tool-calling-and-structured-output": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -139,7 +133,7 @@
       },
       "weakPoints": []
     },
-    "lesson-004-context-engineering": {
+    "lesson-003-agent-loop-from-scratch": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -156,7 +150,7 @@
       },
       "weakPoints": []
     },
-    "lesson-005-rag-vs-long-context": {
+    "lesson-004-system-prompt-and-policy-boundary": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -173,7 +167,7 @@
       },
       "weakPoints": []
     },
-    "lesson-006-tool-schema-design": {
+    "lesson-005-tool-registry-and-guardrails": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -190,7 +184,24 @@
       },
       "weakPoints": []
     },
-    "lesson-007-agent-loop": {
+    "lesson-006-context-packet-engineering": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-007-rag-long-context-memory": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -224,7 +235,7 @@
       },
       "weakPoints": []
     },
-    "lesson-009-marketing-agent-v0": {
+    "lesson-009-marketing-eval-agent-v0": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -241,7 +252,7 @@
       },
       "weakPoints": []
     },
-    "lesson-010-causal-tooling-position": {
+    "lesson-010-causal-method-router": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -258,7 +269,7 @@
       },
       "weakPoints": []
     },
-    "lesson-011-psm-tool-wrapper": {
+    "lesson-011-causal-tools-as-agent-tools": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -292,7 +303,7 @@
       },
       "weakPoints": []
     },
-    "lesson-013-agent-evals": {
+    "lesson-013-agent-evals-result-and-trajectory": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -360,7 +371,7 @@
       },
       "weakPoints": []
     },
-    "lesson-017-mcp-a2a-skills": {
+    "lesson-017-sandbox-mcp-and-permissions": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -377,7 +388,7 @@
       },
       "weakPoints": []
     },
-    "lesson-018-tool-security": {
+    "lesson-018-tool-security-and-openclaw-risk": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -394,7 +405,7 @@
       },
       "weakPoints": []
     },
-    "lesson-019-model-optimization-map": {
+    "lesson-019-claude-code-and-coding-agents": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -411,7 +422,7 @@
       },
       "weakPoints": []
     },
-    "lesson-020-finetuning-vs-rag": {
+    "lesson-020-deerflow-superagent-architecture": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -428,7 +439,7 @@
       },
       "weakPoints": []
     },
-    "lesson-021-method-selection-eval": {
+    "lesson-021-hermes-skills-memory-cron": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -445,7 +456,7 @@
       },
       "weakPoints": []
     },
-    "lesson-022-industrial-patterns": {
+    "lesson-022-model-and-framework-selection": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,
@@ -462,7 +473,7 @@
       },
       "weakPoints": []
     },
-    "lesson-023-productization": {
+    "lesson-023-agent-productization": {
       "phase": "preview",
       "startedAt": null,
       "completedReadingAt": null,

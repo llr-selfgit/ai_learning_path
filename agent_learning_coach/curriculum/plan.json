@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "title": "AI Agent / LLM Application Engineer Learning Path",
+  "version": "0.2.0",
+  "title": "AI Agent / LLM Application Engineer Learning Path v2",
   "timezone": "Asia/Shanghai",
   "pace": {
     "weekdayHours": "1-2",
@@ -26,1102 +26,1201 @@
     {
       "id": "context_engineering",
       "name": "Context Engineering",
-      "description": "为模型组织正确上下文，包括 instructions、messages、tools、memory、runtime state 和 schema。"
+      "description": "为模型组织任务、业务、数据、工具、记忆、trace 和输出契约。"
     },
     {
       "id": "tool_calling",
       "name": "Tool Calling",
-      "description": "让模型通过明确 schema 安全调用外部函数、数据和执行环境。"
+      "description": "把外部函数、数据和执行环境暴露成可校验、可回放的工具接口。"
     },
     {
       "id": "rag",
-      "name": "RAG / Long Context",
-      "description": "在检索、长上下文和引用之间做取舍，降低幻觉和遗漏。"
+      "name": "RAG / Long Context / Memory",
+      "description": "在检索、长上下文、直接上下文和长期记忆之间做知识路由。"
     },
     {
       "id": "agent_loop",
       "name": "Agent Loop",
-      "description": "实现 plan、act、observe、reflect、final 的可控循环。"
+      "description": "实现 observe、plan、act、observe、final 的可控循环。"
     },
     {
       "id": "evals",
       "name": "Evals / Traces",
-      "description": "用结果评测和轨迹评测判断 Agent 是否真的可靠。"
+      "description": "用结果评测、轨迹评测和 bad case 回放判断 Agent 是否可靠。"
     },
     {
       "id": "harness_engineering",
       "name": "Harness Engineering",
-      "description": "设计 Agent 的运行环境、权限、沙箱、工具、评测和反馈闭环。"
+      "description": "设计 Agent 的运行时、状态、事件、权限、沙箱、重试和人类介入。"
     },
     {
       "id": "causal_tooling",
       "name": "Causal Tooling",
-      "description": "把 PSM/DML/ITE/LTV 等算法能力封装成 Agent 可安全调用的业务工具。"
+      "description": "把 PSM、DML、ITE、LTV 等算法能力产品化为 Agent 可安全调用的工具。"
     },
     {
       "id": "model_optimization",
-      "name": "Model Optimization",
-      "description": "在 prompting、RAG、fine-tuning、distillation、routing、cost/latency 中做工程取舍。"
+      "name": "Model / Framework Selection",
+      "description": "在模型、框架、prompt、RAG、工具、微调、成本和延迟之间做工程取舍。"
     },
     {
       "id": "marketing_eval_product",
       "name": "Marketing Evaluation Product",
-      "description": "把算法、Agent、评测和报告转化成内部业务可用产品。"
+      "description": "把 Agent、因果工具、评测和报告做成内部业务能信任的产品。"
     }
   ],
   "weeks": [
     {
       "week": 1,
-      "theme": "LLM 基础、System Prompt 与可控输出",
-      "goal": "能解释 LLM 应用的基本运行单位，并写出可压测的营销评估 Agent system prompt。",
+      "theme": "从 LLM 调用到最小 Agent",
+      "goal": "先把 Agent 的骨架写出来：messages、tool schema、structured output、trace、max step 和最小 loop。",
       "lessons": [
-        "lesson-001-llm-mental-model",
-        "lesson-002-system-prompt",
-        "lesson-003-structured-output"
+        "lesson-001-llm-runtime-mental-model",
+        "lesson-002-tool-calling-and-structured-output",
+        "lesson-003-agent-loop-from-scratch"
       ]
     },
     {
       "week": 2,
-      "theme": "Context Engineering、RAG 与 Tool Schema",
-      "goal": "能把业务知识、用户意图、工具描述和输出 schema 组织进模型上下文。",
+      "theme": "让 Agent 稳定调用工具",
+      "goal": "把能跑的 mini-agent 升级成有指令边界、工具注册、权限和 context packet 的可控 Agent。",
       "lessons": [
-        "lesson-004-context-engineering",
-        "lesson-005-rag-vs-long-context",
-        "lesson-006-tool-schema-design"
+        "lesson-004-system-prompt-and-policy-boundary",
+        "lesson-005-tool-registry-and-guardrails",
+        "lesson-006-context-packet-engineering"
       ]
     },
     {
       "week": 3,
-      "theme": "Agent Loop From Scratch",
-      "goal": "能手写一个最小 Agent loop，并知道什么时候用 workflow，什么时候用 Agent。",
+      "theme": "RAG、Workflow 与 Agent v0",
+      "goal": "学会知识路由和 workflow/agent 取舍，并做出 Marketing Evaluation Agent v0。",
       "lessons": [
-        "lesson-007-agent-loop",
+        "lesson-007-rag-long-context-memory",
         "lesson-008-workflow-vs-agent",
-        "lesson-009-marketing-agent-v0"
+        "lesson-009-marketing-eval-agent-v0"
       ]
     },
     {
       "week": 4,
-      "theme": "因果算法工具化与营销评估 Agent MVP",
-      "goal": "把已有因果推断能力封装成 Agent 可调用、可诊断、可解释的工具。",
+      "theme": "因果工具化与业务 Agent MVP",
+      "goal": "把你的因果推断优势封装成 Agent 能正确选择、调用、诊断和解释的业务工具层。",
       "lessons": [
-        "lesson-010-causal-tooling-position",
-        "lesson-011-psm-tool-wrapper",
+        "lesson-010-causal-method-router",
+        "lesson-011-causal-tools-as-agent-tools",
         "lesson-012-marketing-eval-agent-mvp"
       ]
     },
     {
       "week": 5,
-      "theme": "Evals、Traces 与可靠性",
-      "goal": "建立 Agent 结果评测、轨迹评测、bad case 分析和错题回放。",
+      "theme": "Evals、Trace 与 Bad Case",
+      "goal": "建立结果评测、轨迹评测、工具调用评测、trace debug 和 regression bad case 集。",
       "lessons": [
-        "lesson-013-agent-evals",
+        "lesson-013-agent-evals-result-and-trajectory",
         "lesson-014-trace-debugging",
         "lesson-015-bad-case-library"
       ]
     },
     {
       "week": 6,
-      "theme": "Harness Engineering、MCP、A2A 与安全",
-      "goal": "理解 Agent 运行环境设计，加入权限、人类确认、工具失败恢复和协议意识。",
+      "theme": "Harness、Sandbox、安全与人类介入",
+      "goal": "理解 Agent runtime、MCP、沙箱、权限、credential 风险和 human handoff。",
       "lessons": [
         "lesson-016-harness-engineering",
-        "lesson-017-mcp-a2a-skills",
-        "lesson-018-tool-security"
+        "lesson-017-sandbox-mcp-and-permissions",
+        "lesson-018-tool-security-and-openclaw-risk"
       ]
     },
     {
       "week": 7,
-      "theme": "模型优化与小型优化实验",
-      "goal": "能判断该改 prompt、RAG、工具、模型路由还是微调，并完成一个方法选择优化实验。",
+      "theme": "工业 Agent 架构对照",
+      "goal": "对照 Claude Code、OpenHands、Trae Agent、DeerFlow 和 Hermes，抽取可迁移架构模式。",
       "lessons": [
-        "lesson-019-model-optimization-map",
-        "lesson-020-finetuning-vs-rag",
-        "lesson-021-method-selection-eval"
+        "lesson-019-claude-code-and-coding-agents",
+        "lesson-020-deerflow-superagent-architecture",
+        "lesson-021-hermes-skills-memory-cron"
       ]
     },
     {
       "week": 8,
-      "theme": "产品化、工业案例迁移与最终答辩",
-      "goal": "完成 Marketing Evaluation Agent v1、评测报告和后续优化路线。",
+      "theme": "优化、产品化与最终答辩",
+      "goal": "完成模型/框架选择、产品方案、风险边界和最终可演示的 Marketing Evaluation Agent。",
       "lessons": [
-        "lesson-022-industrial-patterns",
-        "lesson-023-productization",
+        "lesson-022-model-and-framework-selection",
+        "lesson-023-agent-productization",
         "lesson-024-final-defense"
       ]
     }
   ],
   "lessons": [
     {
-      "id": "lesson-001-llm-mental-model",
-      "title": "LLM 应用工程心智模型",
+      "id": "lesson-001-llm-runtime-mental-model",
+      "title": "LLM Runtime Mental Model",
       "week": 1,
-      "durationMinutes": 75,
+      "durationMinutes": 80,
       "status": "available",
       "knowledgeTags": [
         "context_engineering",
-        "tool_calling"
+        "tool_calling",
+        "agent_loop"
       ],
-      "lessonFile": "lessons/lesson-001-llm-mental-model.md",
-      "questionFile": "questions/lesson-001-llm-mental-model.json",
+      "lessonFile": "lessons/lesson-001-llm-runtime-mental-model.md",
+      "questionFile": "questions/lesson-001-llm-runtime-mental-model.json",
       "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
-        "openai-agents-sdk-tracing",
-        "openai-agents-sdk-guardrails",
-        "openai-agent-evals",
-        "anthropic-building-effective-agents",
+        "openai-practical-guide-agents",
+        "openai-swarm",
         "google-adk-overview"
       ],
       "claimIds": [
-        "claim-agent-product-needs-context-tools-evals",
-        "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
-        "claim-openai-guardrails-input-output-tool",
-        "claim-anthropic-workflows-vs-agents",
-        "claim-anthropic-recommends-simplest-solution-first",
-        "claim-google-adk-core-primitives"
+        "claim-agent-needs-loop-state-tools-evals",
+        "claim-swarm-core-loop",
+        "claim-adk-state-memory-runner"
       ],
       "stability": "changing",
-      "needsRefreshAfter": "2026-07-27",
+      "needsRefreshAfter": "2026-07-28",
       "unverifiedNotes": [],
       "masteryOutcomes": [
-        "用自己的话解释 LLM 应用的五层结构：model、context、tools、harness、evals",
-        "能把一个营销评估需求拆成五层，并指出每层缺失会造成什么风险",
-        "能读一个 bad case，判断错误主要发生在哪一层"
+        "能把一个 LLM 应用拆成 model、instructions、messages、state、tools、runner、evals 七个部件。",
+        "能解释为什么 Agent 不是一个更会聊天的模型，而是模型在运行时里反复决策和执行。",
+        "能把营销活动评估需求映射到 Agent 的状态、工具和评测证据。"
       ],
       "practiceTask": {
-        "title": "把营销评估需求拆成五层",
-        "prompt": "选择一个脱敏的营销活动评估需求，按 model/context/tools/harness/evals 五层拆解。每层写 2-3 句：它负责什么、缺失会出什么错、你会如何验证。",
-        "expectedEvidence": "一份五层拆解表，能直接作为后续 Marketing Evaluation Agent 的架构草图。"
+        "title": "LLM Runtime Mental Model 实操",
+        "prompt": "今天的操作是画出一个最小运行时：输入 user request；模型只允许输出两类结构：final 或 tool_call；tool_call 进入工具注册表；工具结果写入 trace；超过 max_steps 必须停止。你不需要接真实模型，先用 mock model，因为你要学的是控制流，不是 API 调用语法。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
+      "transferTask": "把「LLM Runtime Mental Model」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只会复述概念，但不知道在工程里放在哪一层。",
-        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
-        "忽略失败模式、边界条件和评测证据。"
+        "误区：会调 Chat Completions 或 Responses API 就等于会做 Agent。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-002-system-prompt",
-      "title": "System Prompt 与指令层级",
+      "id": "lesson-002-tool-calling-and-structured-output",
+      "title": "Tool Calling and Structured Output",
       "week": 1,
-      "durationMinutes": 90,
-      "status": "available",
-      "knowledgeTags": [
-        "system_prompt",
-        "context_engineering"
-      ],
-      "lessonFile": "lessons/lesson-002-system-prompt.md",
-      "questionFile": "questions/lesson-002-system-prompt.json",
-      "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
-      "sourceIds": [
-        "anthropic-prompting-best-practices",
-        "openai-agents-sdk-guardrails",
-        "openai-tools-guide"
-      ],
-      "claimIds": [
-        "claim-anthropic-prompting-clear-context-role-examples",
-        "claim-system-prompt-as-policy-is-analogy",
-        "claim-openai-guardrails-input-output-tool",
-        "claim-openai-tools-extend-model-capabilities",
-        "claim-marketing-causal-agent-must-not-overclaim"
-      ],
-      "stability": "changing",
-      "needsRefreshAfter": "2026-07-27",
-      "unverifiedNotes": [],
-      "masteryOutcomes": [
-        "能写一版营销评估 Agent system prompt，并说明每条规则解决的风险",
-        "能区分 system/developer/user/tool output 的优先级和边界",
-        "能识别工具输出中的 prompt injection，并设计防护策略"
-      ],
-      "practiceTask": {
-        "title": "写一版可压测 system prompt",
-        "prompt": "为营销评估 Agent 写一版中文 system prompt。必须包含角色、边界、工具规则、因果结论限制、输出格式、prompt injection 防护，并解释每段为什么存在。",
-        "expectedEvidence": "system prompt + 每段规则对应风险说明。"
-      },
-      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
-      "commonPitfalls": [
-        "只会复述概念，但不知道在工程里放在哪一层。",
-        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
-        "忽略失败模式、边界条件和评测证据。"
-      ]
-    },
-    {
-      "id": "lesson-003-structured-output",
-      "title": "Structured Output 与工具契约",
-      "week": 1,
-      "durationMinutes": 75,
+      "durationMinutes": 85,
       "status": "locked",
       "knowledgeTags": [
         "tool_calling",
         "context_engineering"
       ],
-      "lessonFile": "lessons/lesson-003-structured-output.md",
-      "questionFile": "questions/lesson-003-structured-output.json",
+      "lessonFile": "lessons/lesson-002-tool-calling-and-structured-output.md",
+      "questionFile": "questions/lesson-002-tool-calling-and-structured-output.json",
       "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
         "openai-tools-guide",
-        "mcp-specification"
+        "openai-structured-outputs",
+        "deepseek-function-calling",
+        "xai-function-calling",
+        "glm-function-calling"
       ],
       "claimIds": [
-        "claim-openai-tools-extend-model-capabilities",
-        "claim-mcp-standardizes-context-tools",
-        "claim-structured-tool-contracts-enable-execution-eval"
+        "claim-tool-schema-shape-not-semantics",
+        "claim-structured-output-json-not-business-truth",
+        "claim-glm-agent-function-calling"
       ],
       "stability": "fast-changing",
-      "needsRefreshAfter": "2026-06-27",
+      "needsRefreshAfter": "2026-06-28",
       "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能把自然语言业务需求转换成工具调用 JSON",
-        "能设计 required fields、enum、诊断字段和降级字段",
-        "能说明自然语言解释和结构化输出各自适合什么环节"
+        "能写一个工具 schema，并区分 shape validity、semantic validity 和 policy validity。",
+        "能解释 structured output 与 tool calling 的差异：一个约束回答形状，一个请求外部执行。",
+        "能为营销评估工具设计参数、返回值、错误和诊断字段。"
       ],
       "practiceTask": {
-        "title": "设计 estimate_effect 工具输入输出",
-        "prompt": "把“评估会员活动对 60 日 GTV 的影响”转成工具调用 JSON，并设计工具返回 JSON。必须包含阻塞/降级字段。",
-        "expectedEvidence": "一份 request schema 和 response schema 草案。"
+        "title": "Tool Calling and Structured Output 实操",
+        "prompt": "把工具当产品接口设计：先写“什么时候不允许调用”，再写参数 schema，最后写返回 schema。返回值必须包括成功态和失败态。失败态不要只返回 exception，要返回可行动诊断，例如 `missing_columns:['pre_30d_gtv']` 或 `common_support:'poor'`。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
+      "transferTask": "把「Tool Calling and Structured Output」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只会复述概念，但不知道在工程里放在哪一层。",
-        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
-        "忽略失败模式、边界条件和评测证据。"
+        "误区：只要开启 strict JSON schema，模型输出就是可靠结论。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-004-context-engineering",
-      "title": "Context Engineering：把正确上下文交给模型",
+      "id": "lesson-003-agent-loop-from-scratch",
+      "title": "Agent Loop From Scratch",
+      "week": 1,
+      "durationMinutes": 120,
+      "status": "locked",
+      "knowledgeTags": [
+        "agent_loop",
+        "harness_engineering",
+        "tool_calling"
+      ],
+      "lessonFile": "lessons/lesson-003-agent-loop-from-scratch.md",
+      "questionFile": "questions/lesson-003-agent-loop-from-scratch.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-swarm",
+        "claude-code-agent-loop",
+        "claude-code-how-works"
+      ],
+      "claimIds": [
+        "claim-swarm-core-loop",
+        "claim-claude-code-loop",
+        "claim-agent-needs-loop-state-tools-evals"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能手写 observe -> plan -> act -> observe -> final/continue 的 mini-agent loop。",
+        "能处理 unknown tool、bad args、tool failure、max step 和 trace log。",
+        "能解释为什么先用 mock model 更适合理解 loop。"
+      ],
+      "practiceTask": {
+        "title": "Agent Loop From Scratch 实操",
+        "prompt": "本仓库会生成 `projects/mini_agent/mini_agent.py`。你要读懂 `MiniAgent.run()`：它如何验证工具、如何把工具错误作为 observation、如何在 max_steps 后停止。然后你要加一个 `mock_dataset_inspector` 工具，让它能返回字段缺失、样本不足和 common support 风险。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+      },
+      "transferTask": "把「Agent Loop From Scratch」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
+      "commonPitfalls": [
+        "误区：Agent loop 就是 ReAct prompt 里写几行 Thought/Action/Observation。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
+      ]
+    },
+    {
+      "id": "lesson-004-system-prompt-and-policy-boundary",
+      "title": "System Prompt and Policy Boundary",
       "week": 2,
       "durationMinutes": 90,
       "status": "locked",
       "knowledgeTags": [
+        "system_prompt",
         "context_engineering",
-        "system_prompt"
+        "harness_engineering"
       ],
-      "lessonFile": "lessons/lesson-004-context-engineering.md",
-      "questionFile": "questions/lesson-004-context-engineering.json",
+      "lessonFile": "lessons/lesson-004-system-prompt-and-policy-boundary.md",
+      "questionFile": "questions/lesson-004-system-prompt-and-policy-boundary.json",
       "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
         "anthropic-prompting-best-practices",
-        "anthropic-long-context-tips",
-        "google-adk-overview",
-        "mcp-specification"
+        "openai-practical-guide-agents",
+        "openai-agents-sdk-guardrails"
       ],
       "claimIds": [
-        "claim-context-engineering-requires-structured-context",
-        "claim-anthropic-prompting-clear-context-role-examples",
-        "claim-long-context-still-needs-structure-and-grounding",
-        "claim-google-adk-core-primitives",
-        "claim-mcp-standardizes-context-tools"
+        "claim-guardrails-layered",
+        "claim-agent-needs-loop-state-tools-evals"
       ],
       "stability": "changing",
-      "needsRefreshAfter": "2026-07-27",
+      "needsRefreshAfter": "2026-07-28",
       "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能区分 prompt、上下文、记忆、检索材料、工具结果各自的作用和优先级",
-        "能为营销评估 Agent 设计一份上下文打包策略，避免把无关材料塞给模型",
-        "能识别上下文缺失、上下文污染和上下文过载导致的 Agent 错误"
+        "能写 Marketing Evaluation Agent 的 system/developer prompt。",
+        "能区分角色、边界、工具政策、输出契约和拒绝条件。",
+        "能解释 prompt injection 为什么不能只靠一句“不要被注入”。"
       ],
       "practiceTask": {
-        "title": "设计营销评估上下文包",
-        "prompt": "选择一个脱敏活动评估需求，写出 Agent 在进入方法选择前必须收到的 context packet：业务目标、指标口径、样本窗口、可用字段、权限边界、历史结论、工具状态。标注哪些信息必须来自用户，哪些可以检索，哪些必须由工具生成。",
-        "expectedEvidence": "提交一份 context packet schema，并解释每个字段防止什么错误。"
+        "title": "System Prompt and Policy Boundary 实操",
+        "prompt": "写一版 prompt 时不要先追求文采，先写拒绝条件：缺 treatment/outcome、样本不足、活动同时叠加、common support 差、协变量严重不平衡、用户要求证明有效。每个拒绝条件都要对应一个降级输出模板。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把同一套 context packet 思路迁移到 BI 问答 Agent，说明哪些字段会变化。",
+      "transferTask": "把「System Prompt and Policy Boundary」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把所有材料无差别塞进上下文",
-        "把工具结果当作高优先级指令",
-        "只优化 prompt，不设计上下文来源和刷新策略"
+        "误区：system prompt 越长越安全。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-005-rag-vs-long-context",
-      "title": "RAG vs Long Context：检索、引用与遗漏控制",
+      "id": "lesson-005-tool-registry-and-guardrails",
+      "title": "Tool Registry and Guardrails",
       "week": 2,
-      "durationMinutes": 90,
+      "durationMinutes": 95,
+      "status": "locked",
+      "knowledgeTags": [
+        "tool_calling",
+        "harness_engineering"
+      ],
+      "lessonFile": "lessons/lesson-005-tool-registry-and-guardrails.md",
+      "questionFile": "questions/lesson-005-tool-registry-and-guardrails.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agents-sdk-guardrails",
+        "mcp-specification"
+      ],
+      "claimIds": [
+        "claim-tool-schema-shape-not-semantics",
+        "claim-guardrails-layered",
+        "claim-mcp-security-permission"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能实现工具注册表，集中管理工具名、schema、权限、风险等级和 handler。",
+        "能为工具失败设计可恢复错误，而不是让 Agent 崩溃。",
+        "能判断哪些工具需要 human confirmation。"
+      ],
+      "practiceTask": {
+        "title": "Tool Registry and Guardrails 实操",
+        "prompt": "在 mini-agent 里增加 `ToolSpec(risk, required, handler)`。先写单测再改代码：未知工具应返回 `tool_error:unknown_tool`；缺参数应返回 `bad_args`；handler 抛异常应记录失败但允许模型下一轮降级。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+      },
+      "transferTask": "把「Tool Registry and Guardrails」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
+      "commonPitfalls": [
+        "误区：工具越多，Agent 越强。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
+      ]
+    },
+    {
+      "id": "lesson-006-context-packet-engineering",
+      "title": "Context Packet Engineering",
+      "week": 2,
+      "durationMinutes": 95,
+      "status": "locked",
+      "knowledgeTags": [
+        "context_engineering",
+        "system_prompt",
+        "agent_loop"
+      ],
+      "lessonFile": "lessons/lesson-006-context-packet-engineering.md",
+      "questionFile": "questions/lesson-006-context-packet-engineering.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "anthropic-long-context-tips",
+        "anthropic-prompting-best-practices",
+        "google-adk-state",
+        "mcp-specification"
+      ],
+      "claimIds": [
+        "claim-context-engineering-not-token-stuffing",
+        "claim-adk-state-memory-runner",
+        "claim-mcp-security-permission"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能写一个 context packet，包含 task、policy、business context、data state、tool state、trace state、output contract。",
+        "能解释为什么长上下文不能替代上下文工程。",
+        "能识别上下文噪声、优先级冲突和过期状态。"
+      ],
+      "practiceTask": {
+        "title": "Context Packet Engineering 实操",
+        "prompt": "为 mini-agent 写 `build_context_packet(task, policy, data_state, tool_state, trace)`，输出固定 JSON。然后拿同一个用户问题做对比：一个版本塞长历史，一个版本用 packet，观察模型或 mock model 的决策是否更稳定。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+      },
+      "transferTask": "把「Context Packet Engineering」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
+      "commonPitfalls": [
+        "误区：模型上下文窗口变长后，RAG 和上下文工程就不重要了。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
+      ]
+    },
+    {
+      "id": "lesson-007-rag-long-context-memory",
+      "title": "RAG, Long Context, and Memory",
+      "week": 3,
+      "durationMinutes": 100,
       "status": "locked",
       "knowledgeTags": [
         "rag",
         "context_engineering"
       ],
-      "lessonFile": "lessons/lesson-005-rag-vs-long-context.md",
-      "questionFile": "questions/lesson-005-rag-vs-long-context.json",
+      "lessonFile": "lessons/lesson-007-rag-long-context-memory.md",
+      "questionFile": "questions/lesson-007-rag-long-context-memory.json",
       "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
-        "openai-file-search",
         "anthropic-long-context-tips",
-        "mcp-specification"
+        "openai-practical-guide-agents",
+        "google-adk-memory",
+        "qwen-agent-github"
       ],
       "claimIds": [
-        "claim-openai-file-search-retrieves-from-vector-stores",
-        "claim-long-context-still-needs-structure-and-grounding",
-        "claim-mcp-standardizes-context-tools"
+        "claim-context-engineering-not-token-stuffing",
+        "claim-adk-state-memory-runner",
+        "claim-qwen-agent-ecosystem"
       ],
-      "stability": "fast-changing",
-      "needsRefreshAfter": "2026-06-27",
-      "unverifiedNotes": [],
-      "masteryOutcomes": [
-        "能判断一个知识需求适合 RAG、长上下文、缓存上下文还是人工固定规则",
-        "能设计引用、遗漏检测和冲突处理，避免 Agent 把检索片段当完整事实",
-        "能解释 RAG 评测不只看答案，还要看检索召回、引用和忠实性"
-      ],
-      "practiceTask": {
-        "title": "设计营销口径 RAG 决策表",
-        "prompt": "列出营销评估 Agent 需要查询的 8 类知识，例如指标口径、活动规则、历史实验、数据字典、合规规则。为每类知识判断用 RAG、长上下文、硬编码规则还是人工确认，并写出原因和风险。",
-        "expectedEvidence": "提交一张知识类型到上下文策略的决策表。"
-      },
-      "transferTask": "把决策表迁移到客服 Agent，比较高频政策文档和用户历史记录的处理差异。",
-      "commonPitfalls": [
-        "认为 RAG 自动等于准确",
-        "只评估最终答案，不评估检索命中文档",
-        "没有处理检索结果之间的冲突"
-      ]
-    },
-    {
-      "id": "lesson-006-tool-schema-design",
-      "title": "Tool Schema Design：让模型稳定调用工具",
-      "week": 2,
-      "durationMinutes": 90,
-      "status": "locked",
-      "knowledgeTags": [
-        "tool_calling",
-        "context_engineering"
-      ],
-      "lessonFile": "lessons/lesson-006-tool-schema-design.md",
-      "questionFile": "questions/lesson-006-tool-schema-design.json",
-      "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
-      "sourceIds": [
-        "openai-tools-guide",
-        "openai-structured-outputs",
-        "mcp-specification"
-      ],
-      "claimIds": [
-        "claim-openai-tools-extend-model-capabilities",
-        "claim-structured-tool-contracts-enable-execution-eval",
-        "claim-structured-outputs-constrain-json-schema",
-        "claim-mcp-standardizes-context-tools"
-      ],
-      "stability": "fast-changing",
-      "needsRefreshAfter": "2026-06-27",
-      "unverifiedNotes": [],
-      "masteryOutcomes": [
-        "能把一个自然语言能力拆成工具名、输入 schema、输出 schema、错误 schema 和权限范围",
-        "能为工具设计 enum、required fields、diagnostics 和 fallback policy",
-        "能用 bad case 检查 schema 是否会诱导模型误调用工具"
-      ],
-      "practiceTask": {
-        "title": "压测 estimate_effect schema",
-        "prompt": "在 lesson-003 的 estimate_effect 基础上，补充错误返回 schema、权限字段、字段缺失策略、诊断阈值和 report_policy。然后写 3 个 bad case，说明 schema 如何阻止 Agent 输出强因果结论。",
-        "expectedEvidence": "提交 request/response/error 三段 JSON schema 和 bad case 表。"
-      },
-      "transferTask": "把 schema 设计迁移到一个 run_sql 工具，说明 SQL 工具更需要哪些权限和安全字段。",
-      "commonPitfalls": [
-        "只设计成功返回，不设计错误返回",
-        "schema 字段过宽导致模型随意填",
-        "没有把诊断结果转成机器可读的报告策略"
-      ]
-    },
-    {
-      "id": "lesson-007-agent-loop",
-      "title": "Agent Loop From Scratch",
-      "week": 3,
-      "durationMinutes": 100,
-      "status": "locked",
-      "knowledgeTags": [
-        "agent_loop",
-        "tool_calling"
-      ],
-      "lessonFile": "lessons/lesson-007-agent-loop.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
       "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
-      ],
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能从零写出 observe-plan-act-check 的最小 Agent loop",
-        "能解释 loop 中状态、工具调用、停止条件和错误恢复的关系",
-        "能判断什么时候需要 loop，什么时候普通 workflow 更可靠"
+        "能区分 direct context、RAG、long context、short-term state 和 long-term memory。",
+        "能为不同知识类型选择路由策略。",
+        "能解释 memory 为什么必须可审计和可遗忘。"
       ],
       "practiceTask": {
-        "title": "手写最小营销评估 Agent loop",
-        "prompt": "用 Python 写一个最小 loop：读取用户任务，判断是否缺字段，选择 inspect_dataset 或 estimate_effect 伪工具，检查返回 warning，最后输出阻塞、降级或报告草稿。不要求接真实 LLM，可以用规则或 mock model。",
-        "expectedEvidence": "提交一个可运行脚本路径，以及 2 个输入样例和输出 trace。"
+        "title": "RAG, Long Context, and Memory 实操",
+        "prompt": "为 Marketing Evaluation Agent 写一张知识路由表：信息类型、来源、生命周期、进入方式、更新机制、误用风险。把“活动规则”“数据字典”“上次评估结论”“用户偏好”“bad case”分别放进去。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 loop 迁移到代码审查 Agent，说明工具和停止条件怎么变化。",
+      "transferTask": "把「RAG, Long Context, and Memory」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "没有停止条件导致循环发散",
-        "工具失败后继续编造答案",
-        "把所有步骤都交给模型动态决定"
+        "误区：RAG 只是给模型加资料，越多越好。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-008-workflow-vs-agent",
-      "title": "Workflow vs Agent：什么时候要自主性",
+      "title": "Workflow vs Agent",
       "week": 3,
-      "durationMinutes": 75,
+      "durationMinutes": 90,
       "status": "locked",
       "knowledgeTags": [
         "agent_loop",
         "harness_engineering"
       ],
       "lessonFile": "lessons/lesson-008-workflow-vs-agent.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-008-workflow-vs-agent.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "anthropic-building-effective-agents",
+        "openai-practical-guide-agents"
       ],
+      "claimIds": [
+        "claim-workflow-agent-distinction",
+        "claim-simplest-agentic-design-first"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能区分确定性 workflow、半开放 workflow 和自主 Agent",
-        "能按风险、可变性、可评测性决定自动化形态",
-        "能为营销评估场景画出哪些步骤应固定、哪些步骤可由模型决策"
+        "能判断哪些步骤应该固定 workflow，哪些步骤适合 Agent 决策。",
+        "能解释 prompt chaining、routing、parallelization、orchestrator-workers、evaluator-optimizer。",
+        "能为营销评估任务画出混合 workflow/agent 架构。"
       ],
       "practiceTask": {
-        "title": "划分营销评估自动化边界",
-        "prompt": "把 Marketing Evaluation Agent 拆成 10 个步骤，并给每一步标注 workflow、model decision 或 human review。解释为什么诊断阈值、权限校验、报告措辞分别适合哪种控制方式。",
-        "expectedEvidence": "提交一张步骤控制矩阵。"
+        "title": "Workflow vs Agent 实操",
+        "prompt": "画一张两列图：左列是 deterministic workflow，右列是 model decision。把每一步标注为什么固定或为什么交给模型，并写一条失败时的 fallback。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把矩阵迁移到投放素材生成 Agent，比较创意生成与预算建议的自动化边界。",
+      "transferTask": "把「Workflow vs Agent」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把所有 AI 产品都叫 Agent",
-        "高风险步骤完全交给模型自由发挥",
-        "为了炫技使用自主性而牺牲可控性"
+        "误区：越 autonomous 越高级。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-009-marketing-agent-v0",
+      "id": "lesson-009-marketing-eval-agent-v0",
       "title": "Marketing Evaluation Agent v0",
       "week": 3,
-      "durationMinutes": 150,
+      "durationMinutes": 120,
       "status": "locked",
       "knowledgeTags": [
         "marketing_eval_product",
+        "causal_tooling",
         "agent_loop"
       ],
-      "lessonFile": "lessons/lesson-009-marketing-agent-v0.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-009-marketing-eval-agent-v0.md",
+      "questionFile": "questions/lesson-009-marketing-eval-agent-v0.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "anthropic-building-effective-agents"
       ],
+      "claimIds": [
+        "claim-causal-agent-must-refuse-overclaim",
+        "claim-agent-needs-loop-state-tools-evals"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能搭出 Marketing Evaluation Agent 的 v0 流程和文件结构",
-        "能连接需求澄清、方法选择、工具调用、报告生成四个核心模块",
-        "能为 v0 定义最小可验收标准，而不是追求一次做完全部功能"
+        "能实现 v0：澄清需求、检查字段、选择候选方法、输出结构化分析计划。",
+        "能让 Agent 在信息不足时问问题或降级，而不是硬做结论。",
+        "能把业务语言转成数据和因果工具需求。"
       ],
       "practiceTask": {
-        "title": "实现 Agent v0 骨架",
-        "prompt": "创建一个本地 v0：输入脱敏需求 JSON，输出 method_selection、tool_request、tool_result_summary、business_report 四段结果。工具可以先用 mock，但字段必须和前面 schema 对齐。",
-        "expectedEvidence": "提交代码路径、一个成功 case、一个阻塞 case、一个降级 case。"
+        "title": "Marketing Evaluation Agent v0 实操",
+        "prompt": "把 mini-agent 接一个 mock dataset inspector。输入自然语言需求，输出 JSON：`task_goal, required_fields, missing_fields, candidate_methods, refusal_or_next_step, report_outline`。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 v0 骨架迁移到 LTV 预测解释 Agent，说明工具层会换成什么。",
+      "transferTask": "把「Marketing Evaluation Agent v0」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "第一版就追求复杂 UI",
-        "没有保存中间产物",
-        "只测 happy path"
+        "误区：v0 必须能跑出估计值才有价值。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-010-causal-tooling-position",
-      "title": "因果算法的 Agent 工具化定位",
+      "id": "lesson-010-causal-method-router",
+      "title": "Causal Method Router",
       "week": 4,
-      "durationMinutes": 90,
+      "durationMinutes": 100,
       "status": "locked",
       "knowledgeTags": [
         "causal_tooling",
-        "marketing_eval_product",
         "tool_calling"
       ],
-      "lessonFile": "lessons/lesson-010-causal-tooling-position.md",
-      "questionFile": "questions/lesson-010-causal-tooling-position.json",
+      "lessonFile": "lessons/lesson-010-causal-method-router.md",
+      "questionFile": "questions/lesson-010-causal-method-router.json",
       "contentStatus": "verified",
-      "verifiedAt": "2026-04-27",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
-        "anthropic-building-effective-agents",
-        "openai-agent-evals"
+        "openai-practical-guide-agents",
+        "anthropic-building-effective-agents"
       ],
       "claimIds": [
-        "claim-agent-product-needs-context-tools-evals",
-        "claim-marketing-causal-agent-must-not-overclaim"
+        "claim-causal-agent-must-refuse-overclaim",
+        "claim-causal-tools-agent-contract"
       ],
       "stability": "stable",
-      "needsRefreshAfter": "2026-10-27",
+      "needsRefreshAfter": "2026-10-28",
       "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能说明因果算法在项目中是 Agent 的业务工具层，而不是课程主线负担",
-        "能设计方法选择规则，让 Agent 知道何时 PSM、DML、ITE 或拒绝因果结论",
-        "能把因果假设和诊断转成 Agent 可执行的降级策略"
+        "能设计 PSM/DML/ITE/相关性/预测/拒绝 的方法路由规则。",
+        "能把因果假设写成 Agent 可检查的前置条件。",
+        "能构造诱导 Agent 过度归因的 bad case。"
       ],
       "practiceTask": {
-        "title": "写方法选择路由表",
-        "prompt": "为 PSM、DML、ITE/uplift、相关性分析、预测分析写一张路由表：适用输入、关键假设、最低诊断、失败时降级、禁止输出的话术。",
-        "expectedEvidence": "提交方法选择路由表和 5 个 bad case。"
+        "title": "Causal Method Router 实操",
+        "prompt": "写 `select_method(task_goal, data_diagnostics)` 的路由表。返回 `method, reason, required_checks, causal_claim_allowed, downgrade_path`。至少覆盖五个拒绝条件。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把路由表迁移到风控策略评估，说明 treatment 和 outcome 的定义风险。",
+      "transferTask": "把「Causal Method Router」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把模型预测提升当因果提升",
-        "忽略 common support 和协变量平衡",
-        "诊断失败后仍给强行动建议"
+        "误区：Agent 只要知道 PSM/DML/ITE 的定义，就能自动选对方法。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-011-psm-tool-wrapper",
-      "title": "PSM 工具封装、诊断与降级",
+      "id": "lesson-011-causal-tools-as-agent-tools",
+      "title": "Causal Tools as Agent Tools",
       "week": 4,
       "durationMinutes": 120,
       "status": "locked",
       "knowledgeTags": [
         "causal_tooling",
-        "evals"
+        "tool_calling"
       ],
-      "lessonFile": "lessons/lesson-011-psm-tool-wrapper.md",
-      "questionFile": "questions/lesson-011-psm-tool-wrapper.json",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-011-causal-tools-as-agent-tools.md",
+      "questionFile": "questions/lesson-011-causal-tools-as-agent-tools.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agent-evals"
       ],
+      "claimIds": [
+        "claim-causal-tools-agent-contract",
+        "claim-tool-schema-shape-not-semantics"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能把轻量 PSM 实现封装成 Agent 可调用工具",
-        "能返回 propensity score、matching/weighting、SMD、common support、ATT/ATE 和 warning",
-        "能让 Agent 根据诊断判断是否允许强因果表达"
+        "能把轻量 PSM/DML/uplift 封装成 Agent 工具接口。",
+        "能返回 effect、uncertainty、diagnostics、warnings、causal_claim_allowed。",
+        "能解释工具输出如何限制最终报告措辞。"
       ],
       "practiceTask": {
-        "title": "封装并压测 PSM 工具",
-        "prompt": "基于项目里的 PSM 工具，构造一个好 overlap case 和一个坏 overlap case。检查返回的 diagnostics、warnings、causal_claim_allowed 是否符合预期。",
-        "expectedEvidence": "提交测试数据构造代码、工具返回样例和报告话术对比。"
+        "title": "Causal Tools as Agent Tools 实操",
+        "prompt": "阅读现有 `projects/marketing_eval_agent/causal_tools`。补一层统一 wrapper：所有工具都返回同一个外层 schema。注意这不是工业级完整库，而是 Agent 工具契约练习。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把同样的工具封装思想迁移到 DML 工具，列出输出字段差异。",
+      "transferTask": "把「Causal Tools as Agent Tools」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只返回 effect 不返回诊断",
-        "不区分 ATT 和 ATE",
-        "把低 overlap 样本也强行匹配出结论"
+        "误区：工具输出越简洁，Agent 越容易用。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-012-marketing-eval-agent-mvp",
-      "title": "营销评估 Agent MVP 集成",
+      "title": "Marketing Evaluation Agent MVP",
       "week": 4,
-      "durationMinutes": 180,
+      "durationMinutes": 130,
       "status": "locked",
       "knowledgeTags": [
         "marketing_eval_product",
         "causal_tooling",
-        "agent_loop"
+        "evals"
       ],
       "lessonFile": "lessons/lesson-012-marketing-eval-agent-mvp.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-012-marketing-eval-agent-mvp.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agent-evals"
       ],
+      "claimIds": [
+        "claim-causal-agent-must-refuse-overclaim",
+        "claim-causal-tools-agent-contract",
+        "claim-agent-evals-need-trajectory"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能把需求解析、因果工具、诊断解释和报告生成串成 MVP",
-        "能处理缺字段、样本不足和诊断失败三类降级",
-        "能输出业务可读但不过度归因的报告"
+        "能跑通 inspect -> select method -> estimate -> diagnose -> report。",
+        "能输出业务可读报告，同时保留工具诊断和 trace。",
+        "能在工具警告时自动降级结论。"
       ],
       "practiceTask": {
-        "title": "跑通营销评估 MVP",
-        "prompt": "用脱敏 mock 数据跑通一次端到端流程：需求 JSON -> 方法选择 -> 工具调用 -> 诊断读取 -> 业务报告。至少包含一个正常 case 和一个 blocked case。",
-        "expectedEvidence": "提交端到端 trace、报告样例和 blocked case 的返回。"
+        "title": "Marketing Evaluation Agent MVP 实操",
+        "prompt": "用 mock 数据跑一条完整链路。提交时给三样东西：最终报告、trace JSON、工具输出 JSON。没有 trace 的报告不算完成。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 MVP 改造成会员体系评估 Agent，说明输入字段和报告结构会怎么变。",
+      "transferTask": "把「Marketing Evaluation Agent MVP」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "报告只写结论不写限制",
-        "工具 warning 没传给最终回答",
-        "没有保存 trace 供复盘"
+        "误区：MVP 只要能回答一个 happy path 就够。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-013-agent-evals",
-      "title": "Agent Evals：结果、轨迹与工具调用评测",
+      "id": "lesson-013-agent-evals-result-and-trajectory",
+      "title": "Agent Evals: Result and Trajectory",
       "week": 5,
       "durationMinutes": 100,
       "status": "locked",
       "knowledgeTags": [
         "evals",
-        "tool_calling"
+        "agent_loop"
       ],
-      "lessonFile": "lessons/lesson-013-agent-evals.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
+      "lessonFile": "lessons/lesson-013-agent-evals-result-and-trajectory.md",
+      "questionFile": "questions/lesson-013-agent-evals-result-and-trajectory.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-agent-evals",
+        "openai-agents-sdk-tracing",
+        "anthropic-building-effective-agents"
+      ],
+      "claimIds": [
+        "claim-agent-evals-need-trajectory",
+        "claim-workflow-agent-distinction"
+      ],
       "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
-      ],
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能设计覆盖结果、过程、工具调用和安全边界的 Agent eval",
-        "能写出营销评估 Agent 的 bad case 测试集",
-        "能区分人工评分、规则评分、LLM-as-judge 和回放评测的适用范围"
+        "能区分 final-result eval、tool-call eval、trajectory eval 和 policy eval。",
+        "能为 Marketing Evaluation Agent 写最小 eval set。",
+        "能解释为什么只评最终答案会漏掉关键错误。"
       ],
       "practiceTask": {
-        "title": "建立 Agent eval 表",
-        "prompt": "为 Marketing Evaluation Agent 写 12 条 eval case：4 条正常、4 条诊断失败、2 条 prompt injection、2 条用户诱导过度归因。每条写输入、期望工具调用、期望输出边界、评分规则。",
-        "expectedEvidence": "提交 eval cases JSON 或表格。"
+        "title": "Agent Evals: Result and Trajectory 实操",
+        "prompt": "写 10 个 eval cases：3 个 happy path、4 个 bad data、2 个 prompt injection、1 个工具失败。每个 case 写 expected_trace 和 expected_report_policy。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 eval 表迁移到 RAG 问答 Agent，替换成检索命中和引用忠实性指标。",
+      "transferTask": "把「Agent Evals: Result and Trajectory」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只看最终答案好不好看",
-        "eval case 没有覆盖失败路径",
-        "LLM-as-judge 没有标注判断依据"
+        "误区：让另一个 LLM 给报告打分就等于 Agent eval。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-014-trace-debugging",
-      "title": "Trace Debugging：从轨迹定位 Agent 错因",
+      "title": "Trace Debugging",
       "week": 5,
-      "durationMinutes": 90,
+      "durationMinutes": 95,
       "status": "locked",
       "knowledgeTags": [
         "evals",
         "harness_engineering"
       ],
       "lessonFile": "lessons/lesson-014-trace-debugging.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-014-trace-debugging.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-agents-sdk-tracing",
+        "claude-code-agent-loop",
+        "bytedance-trae-agent"
       ],
+      "claimIds": [
+        "claim-agent-evals-need-trajectory",
+        "claim-claude-code-loop",
+        "claim-trae-agent-software-engineering"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能读 Agent trace，定位错误发生在上下文、规划、工具、诊断还是报告层",
-        "能设计最小 trace 字段，支持复盘和回归测试",
-        "能把一次失败转成可复现 bad case"
+        "能从 trace 定位错误发生在 context、tool args、method selection、diagnostics 还是 report。",
+        "能写一份 trace debugger checklist。",
+        "能把一次失败转化成 regression case。"
       ],
       "practiceTask": {
-        "title": "调试一次错误 trace",
-        "prompt": "构造一个 Agent 错误：缺少协变量仍选择 DML 或 common support 差仍输出强因果结论。记录 trace 并写出根因、修复点和新增 eval。",
-        "expectedEvidence": "提交 trace JSON、root cause 分析和新增 eval case。"
+        "title": "Trace Debugging 实操",
+        "prompt": "拿一个故意失败的 case，写五行复盘：symptom、first_bad_step、root_cause、fix、new_regression_case。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 trace 字段迁移到 SQL Agent，说明 SQL 生成、执行和解释各要记录什么。",
+      "transferTask": "把「Trace Debugging」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只记录最终答案",
-        "没有记录工具入参",
-        "修复后不加入回归集"
+        "误区：trace 只是调试日志，等上线稳定后可以关掉。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-015-bad-case-library",
-      "title": "Bad Case Library：把失败变成学习资产",
+      "title": "Bad Case Library",
       "week": 5,
-      "durationMinutes": 90,
+      "durationMinutes": 95,
       "status": "locked",
       "knowledgeTags": [
         "evals",
-        "marketing_eval_product"
+        "causal_tooling",
+        "harness_engineering"
       ],
       "lessonFile": "lessons/lesson-015-bad-case-library.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-015-bad-case-library.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-agent-evals",
+        "openai-practical-guide-agents"
       ],
+      "claimIds": [
+        "claim-agent-evals-need-trajectory",
+        "claim-causal-agent-must-refuse-overclaim"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能把失败样例分类为需求、数据、方法、工具、报告、安全等类型",
-        "能从 bad case 提炼可复用测试和产品防线",
-        "能用 bad case 驱动后续课程和 Agent 迭代"
+        "能系统构造缺字段、样本不足、common support 差、prompt injection、用户诱导证明有效等 bad cases。",
+        "能把 bad case 写成可回归测试。",
+        "能从 bad case 反推工具 schema、prompt 和 guardrail 的改动。"
       ],
       "practiceTask": {
-        "title": "建立营销评估 bad case 库",
-        "prompt": "写 10 个脱敏 bad case，每个包含用户输入、风险类型、错误 Agent 行为、期望行为、检测规则、修复建议。至少覆盖过度归因、缺字段、样本不足、prompt injection。",
-        "expectedEvidence": "提交 bad case library JSON 或 Markdown 表。"
+        "title": "Bad Case Library 实操",
+        "prompt": "建立 `bad_cases.yaml` 初版 15 条。每条都写 expected_method、expected_refusal_or_downgrade 和 forbidden_claim。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 bad case 分类迁移到投放预算建议 Agent。",
+      "transferTask": "把「Bad Case Library」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只收集模型答错的例子",
-        "bad case 没有期望行为",
-        "问题修了但测试集不更新"
+        "误区：bad case 是测试同学的事情，课程项目先做功能就行。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-016-harness-engineering",
-      "title": "Harness Engineering：设计 Agent 运行环境",
+      "title": "Harness Engineering",
       "week": 6,
-      "durationMinutes": 100,
+      "durationMinutes": 105,
       "status": "locked",
       "knowledgeTags": [
         "harness_engineering",
         "agent_loop"
       ],
       "lessonFile": "lessons/lesson-016-harness-engineering.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
+      "questionFile": "questions/lesson-016-harness-engineering.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
-        "openai-agents-sdk-tracing",
-        "openai-agent-evals",
-        "google-adk-overview"
+        "google-adk-overview",
+        "google-adk-state",
+        "langgraph-durable-execution",
+        "openai-agents-sdk-tracing"
       ],
       "claimIds": [
-        "claim-agent-product-needs-context-tools-evals",
-        "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
-        "claim-google-adk-core-primitives"
+        "claim-adk-state-memory-runner",
+        "claim-langgraph-durable-execution",
+        "claim-agent-evals-need-trajectory"
       ],
       "stability": "changing",
-      "needsRefreshAfter": "2026-07-27",
-      "unverifiedNotes": [
-        "Scaffold only; exact framework capabilities require refresh before publishing."
-      ],
+      "needsRefreshAfter": "2026-07-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能解释 harness 如何管理状态、工具权限、重试、超时、trace 和 guardrails",
-        "能为 Marketing Evaluation Agent 设计运行时边界和失败恢复机制",
-        "能判断哪些能力属于模型，哪些必须由 harness 承担"
+        "能解释 runner、state、event、tool execution、retry、timeout、human handoff 的职责。",
+        "能把 mini-agent 升级为事件驱动 runtime 草图。",
+        "能判断什么时候需要 durable execution。"
       ],
       "practiceTask": {
-        "title": "设计 Agent harness 蓝图",
-        "prompt": "画出 Marketing Evaluation Agent 的 harness：输入校验、状态存储、工具 registry、权限检查、trace、错误恢复、评测 hook。说明每个模块不做会有什么风险。",
-        "expectedEvidence": "提交架构图和模块职责表。"
+        "title": "Harness Engineering 实操",
+        "prompt": "为 Marketing Evaluation Agent 画 runtime 草图：Runner、StateStore、ToolExecutor、TraceStore、HumanApproval、EvalRunner。每个模块写输入输出。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把 harness 蓝图迁移到一个代码执行 Agent，说明沙箱和权限会如何加强。",
+      "transferTask": "把「Harness Engineering」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把 harness 当成框架名词",
-        "错误恢复全靠 prompt",
-        "没有把权限和工具执行分离"
+        "误区：harness engineering 是框架作者才需要懂的底层细节。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-017-mcp-a2a-skills",
-      "title": "MCP、A2A 与 Agent Skills",
+      "id": "lesson-017-sandbox-mcp-and-permissions",
+      "title": "Sandbox, MCP, and Permissions",
       "week": 6,
-      "durationMinutes": 100,
+      "durationMinutes": 105,
       "status": "locked",
       "knowledgeTags": [
         "harness_engineering",
         "tool_calling"
       ],
-      "lessonFile": "lessons/lesson-017-mcp-a2a-skills.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
+      "lessonFile": "lessons/lesson-017-sandbox-mcp-and-permissions.md",
+      "questionFile": "questions/lesson-017-sandbox-mcp-and-permissions.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
         "mcp-specification",
-        "a2a-specification"
+        "claude-code-how-works",
+        "openhands-github",
+        "bytedance-deerflow-github",
+        "hermes-agent-github"
       ],
       "claimIds": [
-        "claim-mcp-standardizes-context-tools",
-        "claim-mcp-security-consent-tool-safety",
-        "claim-a2a-agent-interoperability"
+        "claim-mcp-security-permission",
+        "claim-claude-code-loop",
+        "claim-openhands-software-agent",
+        "claim-deerflow-superagent-2",
+        "claim-hermes-memory-skills-cron"
       ],
       "stability": "fast-changing",
-      "needsRefreshAfter": "2026-06-27",
-      "unverifiedNotes": [
-        "Protocol details are fast-changing. Refresh before marking verified."
-      ],
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能解释 MCP、A2A、skills 解决的连接和复用问题，而不是把它们当热词",
-        "能判断一个外部能力适合做 tool、resource、prompt、skill 还是 agent-to-agent 协作",
-        "能为营销评估 Agent 设计一个可复用 skill 或 MCP tool 边界"
+        "能解释 MCP、sandbox、filesystem/bash/browser 权限分别解决什么问题。",
+        "能为本地 Agent 设计 read/write/execute/network 的权限矩阵。",
+        "能判断哪些工具必须隔离运行。"
       ],
       "practiceTask": {
-        "title": "设计一个因果诊断 skill",
-        "prompt": "把“读取因果工具输出并生成诊断解释”设计成 skill：触发条件、输入、输出、禁止行为、示例、评测点。说明它和普通 prompt、工具函数的区别。",
-        "expectedEvidence": "提交 skill 规格说明和 2 个调用样例。"
+        "title": "Sandbox, MCP, and Permissions 实操",
+        "prompt": "为本项目写一个权限表：dataset inspector、psm estimator、dml estimator、uplift estimator、report writer、publish dashboard、bash、filesystem、browser。标注是否允许自动执行。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把同一 skill 思路迁移到财务报表解释 Agent。",
+      "transferTask": "把「Sandbox, MCP, and Permissions」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "追新协议但不清楚能力边界",
-        "把所有东西都做成 tool",
-        "忽视跨 Agent 协作时的权限和审计"
+        "误区：本地运行就安全。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-018-tool-security",
-      "title": "Tool Security：Prompt Injection、权限与沙箱",
+      "id": "lesson-018-tool-security-and-openclaw-risk",
+      "title": "Tool Security and OpenClaw Risk",
       "week": 6,
-      "durationMinutes": 90,
+      "durationMinutes": 100,
       "status": "locked",
       "knowledgeTags": [
         "harness_engineering",
-        "system_prompt"
+        "tool_calling",
+        "evals"
       ],
-      "lessonFile": "lessons/lesson-018-tool-security.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
+      "lessonFile": "lessons/lesson-018-tool-security-and-openclaw-risk.md",
+      "questionFile": "questions/lesson-018-tool-security-and-openclaw-risk.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
       "sourceIds": [
-        "mcp-specification",
-        "openai-agents-sdk-guardrails"
+        "openclaw-github",
+        "minimax-openclaw-docs",
+        "opencve-openclaw-rce",
+        "techradar-openclaw-security-risk",
+        "mcp-specification"
       ],
       "claimIds": [
-        "claim-mcp-security-consent-tool-safety",
-        "claim-openai-guardrails-input-output-tool"
+        "claim-openclaw-gateway-personal-agent",
+        "claim-openclaw-security-risk",
+        "claim-mcp-security-permission"
       ],
       "stability": "fast-changing",
-      "needsRefreshAfter": "2026-06-27",
-      "unverifiedNotes": [
-        "Scaffold only; security guidance must be verified against current docs before publishing."
-      ],
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能识别 prompt injection、tool injection、越权调用和数据泄露风险",
-        "能设计工具权限、输入净化、输出隔离和人工确认策略",
-        "能写出安全 eval 检查 Agent 是否把外部文本当指令"
+        "能解释 prompt injection、tool injection、credential leakage、remote command risk。",
+        "能说明 OpenClaw 为什么只作为 gateway/personal agent 与安全案例，而不是课程核心仿写框架。",
+        "能为自己的 Agent 写最小安全 checklist。"
       ],
       "practiceTask": {
-        "title": "压测工具安全边界",
-        "prompt": "构造 5 个攻击样例：数据表文本注入、文档注入、用户诱导越权、工具返回恶意指令、敏感字段请求。写出 Agent 应答、工具调用限制和 eval 判定。",
-        "expectedEvidence": "提交安全 bad cases 和防护策略表。"
+        "title": "Tool Security and OpenClaw Risk 实操",
+        "prompt": "写一份 `agent_security_checklist.md`：输入认证、工具最小权限、secret 不进上下文、插件审计、沙箱、网络暴露、human approval、日志脱敏、更新策略。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把安全策略迁移到拥有发邮件权限的 Agent，说明审批和确认机制怎么设计。",
+      "transferTask": "把「Tool Security and OpenClaw Risk」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只靠一句“不要被注入”",
-        "工具输出和用户指令混在一起",
-        "高权限动作没有二次确认"
+        "误区：只要模型足够聪明，就能识别所有恶意指令。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-019-model-optimization-map",
-      "title": "模型优化地图：Prompt、RAG、工具、微调与路由",
+      "id": "lesson-019-claude-code-and-coding-agents",
+      "title": "Claude Code and Coding Agents",
       "week": 7,
-      "durationMinutes": 100,
+      "durationMinutes": 105,
       "status": "locked",
       "knowledgeTags": [
-        "model_optimization",
-        "evals"
+        "agent_loop",
+        "harness_engineering"
       ],
-      "lessonFile": "lessons/lesson-019-model-optimization-map.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-019-claude-code-and-coding-agents.md",
+      "questionFile": "questions/lesson-019-claude-code-and-coding-agents.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "claude-code-how-works",
+        "claude-code-agent-loop",
+        "openhands-github",
+        "bytedance-trae-agent"
       ],
+      "claimIds": [
+        "claim-claude-code-loop",
+        "claim-openhands-software-agent",
+        "claim-trae-agent-software-engineering"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能画出 Prompt、RAG、工具、workflow、fine-tuning、路由和模型选择的优化地图",
-        "能基于错误类型选择优化手段，而不是默认微调",
-        "能为营销评估 Agent 建立错误到优化动作的决策表"
+        "能解释 coding agent 的 gather context -> edit/run/test -> verify loop。",
+        "能对比 Claude Code、OpenHands、Trae Agent 的可迁移设计。",
+        "能把 coding-agent 思路迁移到算法工具和报告生成。"
       ],
       "practiceTask": {
-        "title": "建立错误-优化映射表",
-        "prompt": "列出 12 类 Agent 错误，例如字段漏填、方法误选、报告过度归因、引用缺失、工具超时。为每类错误选择 prompt/schema/tool/eval/RAG/fine-tune/route/harness 中的优化手段，并说明原因。",
-        "expectedEvidence": "提交错误-优化映射表。"
+        "title": "Claude Code and Coding Agents 实操",
+        "prompt": "写一张迁移表：coding agent 的 file search、edit、bash、test、diff、PR review 分别对应 Marketing Agent 的 dataset inspect、method route、estimate、diagnostics、report diff、human review。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把映射表迁移到客服 Agent，比较知识错误和动作错误的优化差异。",
+      "transferTask": "把「Claude Code and Coding Agents」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把微调当万能解",
-        "模型换大后不做 eval 对比",
-        "没有按错误类型定位优化手段"
+        "误区：coding agent 的经验只适用于写代码。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-020-finetuning-vs-rag",
-      "title": "Fine-tuning vs RAG vs Prompting",
+      "id": "lesson-020-deerflow-superagent-architecture",
+      "title": "DeerFlow SuperAgent Architecture",
       "week": 7,
-      "durationMinutes": 100,
+      "durationMinutes": 105,
       "status": "locked",
       "knowledgeTags": [
-        "model_optimization",
-        "rag"
+        "harness_engineering",
+        "agent_loop",
+        "context_engineering"
       ],
-      "lessonFile": "lessons/lesson-020-finetuning-vs-rag.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-020-deerflow-superagent-architecture.md",
+      "questionFile": "questions/lesson-020-deerflow-superagent-architecture.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "bytedance-deerflow-github",
+        "langgraph-durable-execution"
       ],
+      "claimIds": [
+        "claim-deerflow-superagent-2",
+        "claim-langgraph-durable-execution"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能判断 fine-tuning、RAG、prompting、tool use 分别适合解决什么问题",
-        "能说明微调不能可靠注入快速变化事实，也不能替代权限和工具执行",
-        "能设计一个小规模微调是否值得做的评估方案"
+        "能解释 DeerFlow 2.0 为什么适合作为长任务 SuperAgent 案例。",
+        "能理解 lead agent、sub-agents、memory、skills、sandbox、message gateway 的作用。",
+        "能判断哪些设计可迁移到自己的项目，哪些暂时不需要。"
       ],
       "practiceTask": {
-        "title": "做优化方案评审",
-        "prompt": "针对“Agent 报告风格不稳定、方法选择偶尔错、指标口径经常更新”三个问题，分别判断该用 prompt、RAG、工具约束、eval、微调还是组合方案。",
-        "expectedEvidence": "提交三类问题的技术选型说明和评估指标。"
+        "title": "DeerFlow SuperAgent Architecture 实操",
+        "prompt": "画一张 DeerFlow 与你的项目的对照图：哪些部件现在已有，哪些是未来增强，哪些不适合引入。写出“不引入 sub-agent 的理由”和“未来引入的触发条件”。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把选型框架迁移到代码生成 Agent，区分风格微调和仓库检索。",
+      "transferTask": "把「DeerFlow SuperAgent Architecture」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "用微调记业务事实",
-        "用 RAG 解决工具参数稳定性问题",
-        "没有先做基线评测"
+        "误区：工业级开源框架越复杂，越应该直接作为起点。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-021-method-selection-eval",
-      "title": "方法选择优化实验",
+      "id": "lesson-021-hermes-skills-memory-cron",
+      "title": "Hermes Skills, Memory, and Cron",
       "week": 7,
-      "durationMinutes": 150,
-      "status": "locked",
-      "knowledgeTags": [
-        "model_optimization",
-        "causal_tooling",
-        "evals"
-      ],
-      "lessonFile": "lessons/lesson-021-method-selection-eval.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
-      ],
-      "masteryOutcomes": [
-        "能构造专门评估方法选择能力的数据集",
-        "能检查 Agent 是否在 PSM、DML、ITE、相关性、预测之间正确路由",
-        "能用错误分析调整 schema、prompt、工具诊断和 eval 权重"
-      ],
-      "practiceTask": {
-        "title": "评测方法选择路由器",
-        "prompt": "写 20 条脱敏任务描述，标注 gold method、必要字段、拒绝条件和期望说明。跑你的方法选择逻辑或 mock Agent，统计错误类型并提出修复。",
-        "expectedEvidence": "提交 eval set、评分结果和错误分析。"
-      },
-      "transferTask": "把方法选择 eval 迁移到模型路由器，标注何时用快模型、强模型或人工。",
-      "commonPitfalls": [
-        "只看最终报告不看方法路由",
-        "gold label 没写拒绝条件",
-        "把业务偏好当方法适用性"
-      ]
-    },
-    {
-      "id": "lesson-022-industrial-patterns",
-      "title": "工业案例模式库：从公司、论文和开源项目学设计",
-      "week": 8,
       "durationMinutes": 100,
       "status": "locked",
       "knowledgeTags": [
         "harness_engineering",
-        "model_optimization"
+        "context_engineering",
+        "agent_loop"
       ],
-      "lessonFile": "lessons/lesson-022-industrial-patterns.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-021-hermes-skills-memory-cron.md",
+      "questionFile": "questions/lesson-021-hermes-skills-memory-cron.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "hermes-agent-github",
+        "google-adk-memory"
       ],
+      "claimIds": [
+        "claim-hermes-memory-skills-cron",
+        "claim-adk-state-memory-runner"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能从公司博客、论文、官方文档和开源项目中抽取可迁移设计模式",
-        "能区分事实、观点、营销表述和自己的工程推论",
-        "能把工业案例转成自己的 Agent 产品设计原则"
+        "能解释 persistent memory、skills、cron、gateway、subagents 的收益和风险。",
+        "能判断哪些“自改进”能力适合学习督导台，哪些需要严格审批。",
+        "能为自己的学习系统设计记忆和复习机制。"
       ],
       "practiceTask": {
-        "title": "做一个案例拆解卡片",
-        "prompt": "选择一个来源已注册的工业案例，按“它解决什么问题、设计了什么机制、为什么有效、边界是什么、如何迁移到营销评估 Agent”拆解。必须标注哪些是事实，哪些是你的工程推论。",
-        "expectedEvidence": "提交一张案例拆解卡片，并绑定 sourceId/claimId。"
+        "title": "Hermes Skills, Memory, and Cron 实操",
+        "prompt": "为学习督导台写 memory policy：可记忆什么、不可记忆什么、何时过期、如何查看和删除、哪些技能可自动创建、哪些必须人工确认。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把案例拆解方法迁移到一个失败案例，说明哪些设计选择没有奏效。",
+      "transferTask": "把「Hermes Skills, Memory, and Cron」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "把公司营销说法当事实",
-        "只收集名词不提炼模式",
-        "照搬案例而不看场景约束"
+        "误区：Agent 自己学会新技能一定是好事。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
-      "id": "lesson-023-productization",
-      "title": "Agent 产品化：体验、权限、监控与迭代",
+      "id": "lesson-022-model-and-framework-selection",
+      "title": "Model and Framework Selection",
       "week": 8,
-      "durationMinutes": 100,
+      "durationMinutes": 110,
+      "status": "locked",
+      "knowledgeTags": [
+        "model_optimization",
+        "tool_calling",
+        "harness_engineering"
+      ],
+      "lessonFile": "lessons/lesson-022-model-and-framework-selection.md",
+      "questionFile": "questions/lesson-022-model-and-framework-selection.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "qwen-agent-github",
+        "kimi-k2-github",
+        "glm-45-overview",
+        "glm-function-calling",
+        "deepseek-function-calling",
+        "xai-function-calling"
+      ],
+      "claimIds": [
+        "claim-model-selection-eval-first",
+        "claim-qwen-agent-ecosystem",
+        "claim-kimi-k2-agentic",
+        "claim-glm-agent-function-calling",
+        "claim-tool-schema-shape-not-semantics"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-28",
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能用 eval baseline 选择模型，而不是只看排行榜。",
+        "能比较手搓、OpenAI Agents SDK、LangGraph、Qwen-Agent、Dify/Coze、DeerFlow、Hermes 的适用场景。",
+        "能说明国产模型生态中 tool calling 和 agentic 能力的迁移注意点。"
+      ],
+      "practiceTask": {
+        "title": "Model and Framework Selection 实操",
+        "prompt": "写一张选择矩阵：候选模型/框架、工具调用支持、上下文、部署、成本、可观测性、安全、生态、适合本项目程度、验证计划。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+      },
+      "transferTask": "把「Model and Framework Selection」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
+      "commonPitfalls": [
+        "误区：排行榜第一的模型就是 Agent 最佳模型。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
+      ]
+    },
+    {
+      "id": "lesson-023-agent-productization",
+      "title": "Agent Productization",
+      "week": 8,
+      "durationMinutes": 110,
       "status": "locked",
       "knowledgeTags": [
         "marketing_eval_product",
+        "evals",
         "harness_engineering"
       ],
-      "lessonFile": "lessons/lesson-023-productization.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "lessonFile": "lessons/lesson-023-agent-productization.md",
+      "questionFile": "questions/lesson-023-agent-productization.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "anthropic-building-effective-agents",
+        "openai-agent-evals"
       ],
+      "claimIds": [
+        "claim-agent-needs-loop-state-tools-evals",
+        "claim-guardrails-layered",
+        "claim-agent-evals-need-trajectory"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能把 Agent 从 demo 推向产品：权限、体验、监控、反馈、成本、上线节奏",
-        "能设计用户操作流，让业务用户理解结论边界并能继续追问",
-        "能定义上线后的质量指标和迭代闭环"
+        "能把技术 Agent 转成业务产品方案。",
+        "能设计交互、权限、监控、成本、用户信任和报告解释机制。",
+        "能定义上线前验收指标和灰度策略。"
       ],
       "practiceTask": {
-        "title": "设计 Agent 产品化方案",
-        "prompt": "为 Marketing Evaluation Agent 写一页产品化方案：目标用户、核心流程、权限模型、交互状态、失败提示、监控指标、成本控制、反馈入口。",
-        "expectedEvidence": "提交产品方案和一个关键页面交互草图。"
+        "title": "Agent Productization 实操",
+        "prompt": "写一份 Marketing Evaluation Agent PRD v1：目标、非目标、核心路径、权限矩阵、评测指标、bad case、上线计划、风险清单。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把产品化方案迁移到“会员运营 Copilot”，说明用户角色和权限如何变化。",
+      "transferTask": "把「Agent Productization」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只有模型能力没有用户工作流",
-        "失败提示不可操作",
-        "上线后没有质量监控和反馈闭环"
+        "误区：技术效果好，产品自然好用。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     },
     {
       "id": "lesson-024-final-defense",
-      "title": "最终答辩：Marketing Evaluation Agent v1",
+      "title": "Final Defense",
       "week": 8,
-      "durationMinutes": 180,
+      "durationMinutes": 120,
       "status": "locked",
       "knowledgeTags": [
         "marketing_eval_product",
         "evals",
         "harness_engineering",
-        "model_optimization"
+        "causal_tooling"
       ],
       "lessonFile": "lessons/lesson-024-final-defense.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-024-final-defense.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-28",
+      "sourceIds": [
+        "openai-practical-guide-agents",
+        "openai-agent-evals",
+        "anthropic-building-effective-agents"
       ],
+      "claimIds": [
+        "claim-agent-needs-loop-state-tools-evals",
+        "claim-agent-evals-need-trajectory",
+        "claim-causal-agent-must-refuse-overclaim"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-28",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
-        "能完整演示 Marketing Evaluation Agent v1 的能力、边界和失败处理",
-        "能用 eval、trace、case 和源码证明系统可靠性",
-        "能回答为什么这样设计，以及下一步该如何优化"
+        "能完整演示 Marketing Evaluation Agent 的源码、trace、eval、bad case 和产品边界。",
+        "能回答为什么这么设计、哪里可靠、哪里不可靠、下一步怎么优化。",
+        "能把课程知识迁移到另一个 Agent 场景。"
       ],
       "practiceTask": {
-        "title": "完成最终答辩包",
-        "prompt": "准备最终答辩：系统架构、核心 prompt/schema、工具实现、eval set、trace 样例、bad cases、产品界面、风险边界、后续路线。用 10 分钟讲清楚，并准备被追问。",
-        "expectedEvidence": "提交最终答辩目录、演示脚本和验收清单。"
+        "title": "Final Defense 实操",
+        "prompt": "准备一次 15 分钟答辩：5 分钟 demo，5 分钟架构和 trace，3 分钟 eval/bad case，2 分钟风险和路线。提交源码路径和答辩稿。",
+        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
       },
-      "transferTask": "把最终答辩框架迁移到一个你真实工作中的 AI 产品提案。",
+      "transferTask": "把「Final Defense」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
-        "只展示 happy path",
-        "无法解释设计取舍",
-        "没有证据证明 Agent 不会乱归因"
+        "误区：最终项目只要能跑通一次就算完成。",
+        "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
+        "忽略准确性面板，把快速变化产品能力当作永久事实。"
       ]
     }
   ]

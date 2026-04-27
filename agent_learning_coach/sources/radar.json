@@ -1,63 +1,83 @@
 {
-  "version": "0.1.0",
-  "tiers": [
-    {
-      "tier": "A",
-      "name": "官方文档、公司工程博客、论文、技术报告",
-      "usage": "作为关键结论的主要依据。"
-    },
-    {
-      "tier": "B",
-      "name": "高质量开源项目、Hugging Face、GitHub、课程",
-      "usage": "用于工程实践和可运行参考。"
-    },
-    {
-      "tier": "C",
-      "name": "高校、研究机构课程与论文",
-      "usage": "用于理论框架和系统学习。"
-    },
-    {
-      "tier": "D",
-      "name": "知乎、CSDN、X、B 站、个人博客",
-      "usage": "用于发现趋势，关键结论必须回到 A/B/C 类来源验证。"
-    }
-  ],
+  "version": "0.2.0",
+  "lastUpdated": "2026-04-28",
   "items": [
     {
-      "id": "openai-harness-engineering",
-      "title": "OpenAI Harness Engineering",
+      "title": "OpenAI Swarm README",
+      "url": "https://github.com/openai/swarm",
       "tier": "A",
-      "url": "https://openai.com/index/harness-engineering/",
-      "knowledgeTags": ["harness_engineering", "evals", "agent_loop"],
-      "whyRepresentative": "强调人设计环境，Agent 在可执行和可验证的 harness 中工作。",
-      "transferToProject": "把营销评估 Agent 的工具、trace、权限和评测放进统一运行环境。"
+      "whyRepresentative": "Official educational framework from OpenAI's solution team with an explicit tool-call and handoff loop.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
     },
     {
-      "id": "anthropic-effective-agents",
-      "title": "Anthropic Building Effective Agents",
-      "tier": "A",
+      "title": "Building effective agents",
       "url": "https://www.anthropic.com/engineering/building-effective-agents",
-      "knowledgeTags": ["agent_loop", "harness_engineering"],
-      "whyRepresentative": "提出优先使用简单 workflow，必要时再增加 Agent 自主性。",
-      "transferToProject": "营销评估流程里，方法选择和诊断可先 workflow 化，开放报告推理给 Agent。"
-    },
-    {
-      "id": "huggingface-agents-course",
-      "title": "Hugging Face Agents Course",
-      "tier": "B",
-      "url": "https://huggingface.co/learn/agents-course/",
-      "knowledgeTags": ["tool_calling", "agent_loop"],
-      "whyRepresentative": "适合从可运行例子理解工具调用与 Agent 基础。",
-      "transferToProject": "用轻量工具先理解 Agent loop，再迁移到营销评估工具。"
-    },
-    {
-      "id": "mcp-spec",
-      "title": "Model Context Protocol Specification",
       "tier": "A",
-      "url": "https://modelcontextprotocol.io/specification/draft",
-      "knowledgeTags": ["tool_calling", "context_engineering", "harness_engineering"],
-      "whyRepresentative": "代表 Agent 连接外部工具和数据源的协议化方向。",
-      "transferToProject": "未来可把营销数据、指标口径、因果工具暴露为 MCP 工具。"
+      "whyRepresentative": "Anthropic engineering guidance describing workflows, agents, and patterns such as routing, orchestrator-workers, and evaluator-optimizer.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "How Claude Code works",
+      "url": "https://code.claude.com/docs/en/how-claude-code-works",
+      "tier": "A",
+      "whyRepresentative": "Official Claude Code documentation describing the agentic loop, built-in tools, and project interaction.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "Qwen-Agent README",
+      "url": "https://github.com/QwenLM/Qwen-Agent",
+      "tier": "B",
+      "whyRepresentative": "Official Qwen-Agent repository covering function calling, MCP, code interpreter, RAG, and agent applications.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "MoonshotAI Kimi-K2 README",
+      "url": "https://github.com/MoonshotAI/Kimi-K2",
+      "tier": "B",
+      "whyRepresentative": "Official Kimi K2 repository describing MoE architecture, 128K context, and optimization for agentic capabilities.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "Z.AI Docs - GLM-4.5",
+      "url": "https://docs.z.ai/guides/llm/glm-4.5",
+      "tier": "A",
+      "whyRepresentative": "Official GLM-4.5 overview describing model family, context length, thinking modes, and agent-oriented positioning.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "ByteDance DeerFlow README",
+      "url": "https://github.com/bytedance/deer-flow/blob/main/README.md",
+      "tier": "B",
+      "whyRepresentative": "Official DeerFlow 2.0 repository describing a long-horizon SuperAgent harness with sub-agents, memory, sandboxes, tools, skills, and message gateway.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "ByteDance Trae Agent README",
+      "url": "https://github.com/bytedance/trae-agent",
+      "tier": "B",
+      "whyRepresentative": "Official Trae Agent repository for software engineering agents with tools, trajectory recording, and multi-LLM support.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "OpenHands README",
+      "url": "https://github.com/All-Hands-AI/OpenHands/",
+      "tier": "B",
+      "whyRepresentative": "Official OpenHands repository for AI-driven software development agents that can modify code, run commands, browse, and call APIs.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "Hermes Agent README",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "tier": "B",
+      "whyRepresentative": "Official Hermes Agent repository describing persistent memory, skills, cron, gateways, subagents, terminal backends, and model routing.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
+    },
+    {
+      "title": "OpenClaw README",
+      "url": "https://github.com/openclaw/openclaw",
+      "tier": "B",
+      "whyRepresentative": "Official OpenClaw repository describing a personal assistant across messaging platforms, local devices, skills, gateway, and workspace templates.",
+      "transferToProject": "用于对照学习 Agent loop、工具治理、runtime、评测、沙箱或模型/框架选择，不作为未经核验的永久结论。"
     }
   ]
 }

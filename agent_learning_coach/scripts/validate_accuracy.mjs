@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -49,6 +49,18 @@ for (const lesson of plan.lessons) {
   for (const field of ["contentStatus", "stability"]) {
     requireField(lesson, field, `lesson:${lesson.id}`);
   }
+  for (const field of ["lessonFile", "questionFile", "practiceTask"]) {
+    requireField(lesson, field, `lesson:${lesson.id}`);
+  }
+  if (lesson.lessonFile && !existsSync(lesson.lessonFile)) {
+    errors.push(`lesson:${lesson.id} lessonFile not found: ${lesson.lessonFile}`);
+  }
+  if (lesson.questionFile && !existsSync(lesson.questionFile)) {
+    errors.push(`lesson:${lesson.id} questionFile not found: ${lesson.questionFile}`);
+  }
+  if (!lesson.practiceTask?.title || !lesson.practiceTask?.prompt || !lesson.practiceTask?.expectedEvidence) {
+    errors.push(`lesson:${lesson.id} practiceTask must include title, prompt, expectedEvidence`);
+  }
   if (!Array.isArray(lesson.sourceIds)) errors.push(`lesson:${lesson.id} sourceIds must be an array`);
   if (!Array.isArray(lesson.claimIds)) errors.push(`lesson:${lesson.id} claimIds must be an array`);
 
@@ -65,6 +77,29 @@ for (const lesson of plan.lessons) {
     if (!lesson.sourceIds?.length) errors.push(`verified lesson:${lesson.id} needs sourceIds`);
     if (!lesson.claimIds?.length) errors.push(`verified lesson:${lesson.id} needs claimIds`);
     if (lesson.unverifiedNotes?.length) warnings.push(`verified lesson:${lesson.id} still has unverifiedNotes`);
+  }
+
+  if (lesson.questionFile && existsSync(lesson.questionFile)) {
+    const questionSet = readJson(lesson.questionFile);
+    if (!Array.isArray(questionSet.questions) || questionSet.questions.length < 2) {
+      errors.push(`lesson:${lesson.id} must have at least 2 objective questions`);
+    }
+    for (const question of questionSet.questions || []) {
+      if (!["single_choice", "multiple_choice"].includes(question.type)) {
+        errors.push(`lesson:${lesson.id} question:${question.id} has unsupported type ${question.type}`);
+      }
+      if (!Array.isArray(question.options) || question.options.length < 2) {
+        errors.push(`lesson:${lesson.id} question:${question.id} needs at least 2 options`);
+      }
+      if (!(question.options || []).some((option) => option.correct)) {
+        errors.push(`lesson:${lesson.id} question:${question.id} needs at least one correct option`);
+      }
+      for (const option of question.options || []) {
+        if (!option.explanation) {
+          errors.push(`lesson:${lesson.id} question:${question.id} option:${option.id} missing explanation`);
+        }
+      }
+    }
   }
 }
 

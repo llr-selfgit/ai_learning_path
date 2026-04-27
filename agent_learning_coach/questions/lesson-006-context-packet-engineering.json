@@ -1,0 +1,76 @@
+{
+  "lessonId": "lesson-006-context-packet-engineering",
+  "title": "Context Packet Engineering 测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": [
+        "context_engineering",
+        "system_prompt"
+      ],
+      "prompt": "关于「Context Packet Engineering」，哪种理解最符合本节主线？",
+      "options": [
+        {
+          "id": "A",
+          "text": "长窗口只是容量变大，不等于相关性、优先级、来源边界和状态一致性自动变好。",
+          "correct": true,
+          "explanation": "正确。本节强调的是可操作、可验证的工程边界：容量解决“放不放得下”；上下文工程解决“该放什么、放在哪里、模型应该如何使用”。"
+        },
+        {
+          "id": "B",
+          "text": "模型上下文窗口变长后，RAG 和上下文工程就不重要了。",
+          "correct": false,
+          "explanation": "错误。这正是本节指出的常见误区。它忽略了：容量解决“放不放得下”；上下文工程解决“该放什么、放在哪里、模型应该如何使用”。"
+        },
+        {
+          "id": "C",
+          "text": "只要换成更强模型，就可以跳过本节讨论的工程设计。",
+          "correct": false,
+          "explanation": "错误。更强模型可能改善局部表现，但不能替代接口、状态、权限、诊断、trace 和 eval。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": [
+        "context_engineering",
+        "system_prompt",
+        "agent_loop"
+      ],
+      "prompt": "把「Context Packet Engineering」迁移到 Marketing Evaluation Agent 时，哪些做法是合理的？",
+      "options": [
+        {
+          "id": "A",
+          "text": "把本节机制写成可检查的接口、状态、规则或评测项。",
+          "correct": true,
+          "explanation": "正确。课程目标是工程化和可复核，不是只记概念。"
+        },
+        {
+          "id": "B",
+          "text": "保留诊断、warning、拒绝或降级路径，避免把不确定性包装成确定结论。",
+          "correct": true,
+          "explanation": "正确。营销评估 Agent 的核心风险就是过度归因和错误自动化。"
+        },
+        {
+          "id": "C",
+          "text": "只在最终报告里写自然语言解释，不需要保存中间状态或 trace。",
+          "correct": false,
+          "explanation": "错误。没有中间证据，后续无法调试、评测、复盘或建立业务信任。"
+        },
+        {
+          "id": "D",
+          "text": "遇到数据缺陷或工具失败时，允许 Agent 编一个合理解释保持体验顺滑。",
+          "correct": false,
+          "explanation": "错误。好的体验不是掩盖失败，而是给出可行动的诊断、补数建议或降级结论。"
+        }
+      ]
+    }
+  ],
+  "practice": {
+    "title": "Context Packet Engineering 实操",
+    "prompt": "为 mini-agent 写 `build_context_packet(task, policy, data_state, tool_state, trace)`，输出固定 JSON。然后拿同一个用户问题做对比：一个版本塞长历史，一个版本用 packet，观察模型或 mock model 的决策是否更稳定。",
+    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+  }
+}
