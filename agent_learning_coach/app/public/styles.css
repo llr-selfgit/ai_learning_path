@@ -251,6 +251,146 @@ h2 {
   gap: 18px;
 }
 
+.lesson-shell {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.lesson-index {
+  display: grid;
+  gap: 16px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.lesson-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  align-items: start;
+}
+
+.lesson-stepper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.lesson-stepper span {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lesson-stepper span.active {
+  color: var(--accent);
+  border-color: rgba(23, 107, 135, 0.35);
+}
+
+.lesson-stepper span.current {
+  background: #e9f5f7;
+  color: #134e5e;
+}
+
+.lesson-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.lesson-hero h2 {
+  margin: 8px 0 12px;
+  font-size: 28px;
+}
+
+.sketch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px dashed #9aa8b5;
+  border-radius: 8px;
+  background: #fbfaf7;
+}
+
+.sketch-flow span {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 700;
+}
+
+.sketch-flow i {
+  width: 28px;
+  height: 1px;
+  border-top: 2px solid #7c8792;
+  position: relative;
+}
+
+.sketch-flow i::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -5px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #7c8792;
+  border-right: 2px solid #7c8792;
+  transform: rotate(45deg);
+}
+
+.lesson-reading {
+  margin-bottom: 18px;
+}
+
+.lesson-actions {
+  border-top: 1px solid var(--line);
+  margin-top: 22px;
+  padding-top: 16px;
+}
+
+.checkpoint-panel,
+.practice-panel {
+  margin-top: 18px;
+}
+
+.lesson-side {
+  position: sticky;
+  top: 18px;
+}
+
+.mastery-evidence {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.mastery-evidence p {
+  margin: 0;
+}
+
+.mastery-evidence p.done {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.mastery-evidence p span {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  margin-right: 4px;
+}
+
 .markdown {
   line-height: 1.72;
 }
@@ -416,8 +556,16 @@ textarea {
   }
 
   .lesson-layout,
+  .lesson-shell,
+  .lesson-workbench,
   .grid.two,
   .grid.three {
     grid-template-columns: 1fr;
+  }
+
+  .lesson-index,
+  .lesson-side {
+    max-height: none;
+    position: static;
   }
 }

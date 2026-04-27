@@ -20,7 +20,9 @@
     {
       "id": "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
       "statement": "OpenAI Agents SDK tracing records agent runs with spans for model generations, function tool calls, guardrails, handoffs, and related workflow events.",
-      "sourceIds": ["openai-agents-sdk-tracing"],
+      "sourceIds": [
+        "openai-agents-sdk-tracing"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "changing",
@@ -30,7 +32,9 @@
     {
       "id": "claim-openai-guardrails-input-output-tool",
       "statement": "OpenAI Agents SDK documents input guardrails, output guardrails, and tool guardrails as validation or blocking mechanisms around agent workflows and function-tool calls.",
-      "sourceIds": ["openai-agents-sdk-guardrails"],
+      "sourceIds": [
+        "openai-agents-sdk-guardrails"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "changing",
@@ -40,7 +44,9 @@
     {
       "id": "claim-openai-tools-extend-model-capabilities",
       "statement": "OpenAI's tools guide describes built-in tools, function calling, tool search, and remote MCP servers as ways to extend model capabilities beyond text generation.",
-      "sourceIds": ["openai-tools-guide"],
+      "sourceIds": [
+        "openai-tools-guide"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "fast-changing",
@@ -50,7 +56,9 @@
     {
       "id": "claim-anthropic-workflows-vs-agents",
       "statement": "Anthropic distinguishes workflows, where LLMs and tools follow predefined code paths, from agents, where LLMs dynamically direct their process and tool use.",
-      "sourceIds": ["anthropic-building-effective-agents"],
+      "sourceIds": [
+        "anthropic-building-effective-agents"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "stable",
@@ -60,7 +68,9 @@
     {
       "id": "claim-anthropic-recommends-simplest-solution-first",
       "statement": "Anthropic recommends starting with the simplest solution that works and increasing agentic complexity only when the performance tradeoff justifies it.",
-      "sourceIds": ["anthropic-building-effective-agents"],
+      "sourceIds": [
+        "anthropic-building-effective-agents"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "stable",
@@ -70,7 +80,9 @@
     {
       "id": "claim-anthropic-prompting-clear-context-role-examples",
       "statement": "Anthropic's prompting guidance emphasizes clear direct instructions, adding context, using examples, structuring prompts, and giving Claude a role.",
-      "sourceIds": ["anthropic-prompting-best-practices"],
+      "sourceIds": [
+        "anthropic-prompting-best-practices"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "changing",
@@ -80,7 +92,9 @@
     {
       "id": "claim-google-adk-core-primitives",
       "statement": "Google ADK presents agents, tools, callbacks, sessions/state, memory, artifacts, events, runner, planning, evaluation, and deployment as part of its agent development environment.",
-      "sourceIds": ["google-adk-overview"],
+      "sourceIds": [
+        "google-adk-overview"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "changing",
@@ -90,7 +104,9 @@
     {
       "id": "claim-mcp-standardizes-context-tools",
       "statement": "MCP is an open protocol that standardizes how LLM applications connect to external context, resources, prompts, and tools using client-server architecture and JSON-RPC messages.",
-      "sourceIds": ["mcp-specification"],
+      "sourceIds": [
+        "mcp-specification"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "fast-changing",
@@ -100,7 +116,9 @@
     {
       "id": "claim-mcp-security-consent-tool-safety",
       "statement": "The MCP specification highlights user consent, data privacy, and tool safety as key security and trust principles because tools can expose data access or code execution paths.",
-      "sourceIds": ["mcp-specification"],
+      "sourceIds": [
+        "mcp-specification"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "fast-changing",
@@ -110,7 +128,9 @@
     {
       "id": "claim-a2a-agent-interoperability",
       "statement": "A2A is an open protocol intended to enable communication and interoperability between independent agent systems through concepts such as agent cards, tasks, messages, artifacts, JSON-RPC, and streaming.",
-      "sourceIds": ["a2a-specification"],
+      "sourceIds": [
+        "a2a-specification"
+      ],
       "confidence": "high",
       "verifiedAt": "2026-04-27",
       "stability": "fast-changing",
@@ -120,7 +140,10 @@
     {
       "id": "claim-system-prompt-as-policy-is-analogy",
       "statement": "Calling a system prompt a product's 'operating constitution' is a teaching analogy: it helps explain priority and behavioral boundaries, but it is not a formal guarantee of model behavior.",
-      "sourceIds": ["anthropic-prompting-best-practices", "openai-agents-sdk-guardrails"],
+      "sourceIds": [
+        "anthropic-prompting-best-practices",
+        "openai-agents-sdk-guardrails"
+      ],
       "confidence": "medium",
       "verifiedAt": "2026-04-27",
       "stability": "stable",
@@ -139,6 +162,19 @@
       "stability": "stable",
       "scope": "inference",
       "notes": "This is an application-specific engineering inference grounded in agent reliability principles and causal inference practice."
+    },
+    {
+      "id": "claim-structured-tool-contracts-enable-execution-eval",
+      "statement": "Structured tool contracts make agent intentions machine-readable, executable, and easier to validate or evaluate than unconstrained natural-language tool descriptions.",
+      "sourceIds": [
+        "openai-tools-guide",
+        "mcp-specification"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "inference",
+      "notes": "This is an engineering inference from official tool/function-calling and protocol documentation, not a single quoted standard."
     }
   ]
 }

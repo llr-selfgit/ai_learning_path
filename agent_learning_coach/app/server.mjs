@@ -128,6 +128,43 @@ function buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry) {
   };
 }
 
+function defaultLessonProgress() {
+  return {
+    phase: "preview",
+    startedAt: null,
+    completedReadingAt: null,
+    quizUnlocked: false,
+    quizScore: null,
+    practiceStatus: "not_started",
+    assignmentScore: null,
+    masteryStatus: "not_started",
+    evidence: {
+      explanation: null,
+      practicePath: null,
+      transfer: null,
+      mistakeRepair: null
+    },
+    weakPoints: []
+  };
+}
+
+function ensureLessonProgress(progress, lessonId) {
+  progress.lessonProgress = progress.lessonProgress || {};
+  progress.lessonProgress[lessonId] = {
+    ...defaultLessonProgress(),
+    ...(progress.lessonProgress[lessonId] || {}),
+    evidence: {
+      ...defaultLessonProgress().evidence,
+      ...(progress.lessonProgress[lessonId]?.evidence || {})
+    }
+  };
+  return progress.lessonProgress[lessonId];
+}
+
+function addProgressEvent(progress, event) {
+  progress.events = [event, ...(progress.events || [])].slice(0, 50);
+}
+
 function normalizeAnswer(answer) {
   if (Array.isArray(answer)) return [...answer].sort();
   if (answer == null) return [];
@@ -146,6 +183,7 @@ async function gradeQuiz(payload) {
   const progress = await readJson("progress/state.json");
   const plan = await readJson("curriculum/plan.json");
   const lesson = plan.lessons.find((item) => item.id === lessonId);
+  const lessonProgress = ensureLessonProgress(progress, lessonId);
 
   const questionResults = questionSet.questions.map((question) => {
     const correct = isCorrect(question, answers?.[question.id]);
@@ -198,24 +236,29 @@ async function gradeQuiz(payload) {
   }
 
   if (score >= 80) {
-    progress.lessonStatuses[lessonId] = "passed";
+    progress.lessonStatuses[lessonId] = "review";
+    lessonProgress.phase = "assignment";
+    lessonProgress.masteryStatus = lessonProgress.practiceStatus === "completed" ? "pending_codex_review" : "needs_practice";
   } else if (score >= 70) {
     progress.lessonStatuses[lessonId] = "review";
+    lessonProgress.phase = "quiz";
+    lessonProgress.masteryStatus = "needs_review";
   } else {
     progress.lessonStatuses[lessonId] = "available";
+    lessonProgress.phase = "quiz";
+    lessonProgress.masteryStatus = "needs_relearn";
   }
+  lessonProgress.quizUnlocked = true;
+  lessonProgress.quizScore = score;
 
-  progress.events = [
-    {
-      type: "objective_quiz_graded",
-      lessonId,
-      title: lesson?.title || lessonId,
-      score,
-      at: now,
-      mistakes: mistakes.map((item) => item.id)
-    },
-    ...(progress.events || [])
-  ].slice(0, 50);
+  addProgressEvent(progress, {
+    type: "objective_quiz_graded",
+    lessonId,
+    title: lesson?.title || lessonId,
+    score,
+    at: now,
+    mistakes: mistakes.map((item) => item.id)
+  });
 
   const grade = {
     type: "objective_quiz",
@@ -257,13 +300,44 @@ async function saveSubmission(payload) {
   await writeFile(safePath(relativePath), content, "utf8");
 
   const progress = await readJson("progress/state.json");
-  progress.events = [
-    { type: "submission_saved", lessonId, kind, path: relativePath, at: now },
-    ...(progress.events || [])
-  ].slice(0, 50);
+  const lessonProgress = ensureLessonProgress(progress, lessonId);
+  if (kind === "practice") {
+    lessonProgress.practiceStatus = "completed";
+    lessonProgress.phase = lessonProgress.quizScore >= 80 ? "assignment" : lessonProgress.phase;
+    lessonProgress.evidence.practicePath = relativePath;
+    lessonProgress.masteryStatus = lessonProgress.quizScore >= 80 ? "pending_codex_review" : "practice_done";
+  } else {
+    lessonProgress.evidence.explanation = relativePath;
+  }
+  addProgressEvent(progress, { type: "submission_saved", lessonId, kind, path: relativePath, at: now });
   await writeJson("progress/state.json", progress);
 
   return { ok: true, path: relativePath, createdAt: now };
+}
+
+async function updateLessonPhase(payload, nextPhase) {
+  const lessonId = payload.lessonId;
+  const progress = await readJson("progress/state.json");
+  const lessonProgress = ensureLessonProgress(progress, lessonId);
+  const now = new Date().toISOString();
+
+  if (nextPhase === "learning") {
+    lessonProgress.phase = "learning";
+    lessonProgress.startedAt = lessonProgress.startedAt || now;
+    progress.lessonStatuses[lessonId] = "available";
+  } else if (nextPhase === "quiz") {
+    lessonProgress.phase = "quiz";
+    lessonProgress.completedReadingAt = lessonProgress.completedReadingAt || now;
+    lessonProgress.quizUnlocked = true;
+  } else if (nextPhase === "preview") {
+    progress.lessonProgress[lessonId] = defaultLessonProgress();
+  } else {
+    lessonProgress.phase = nextPhase;
+  }
+
+  addProgressEvent(progress, { type: "lesson_phase_changed", lessonId, phase: nextPhase, at: now });
+  await writeJson("progress/state.json", progress);
+  return { ok: true, lessonId, progress: ensureLessonProgress(progress, lessonId) };
 }
 
 function git(args) {
@@ -321,7 +395,8 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, {
       lesson,
       markdown: await readText(lesson.lessonFile),
-      accuracy: buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry)
+      accuracy: buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry),
+      lessonProgress: ensureLessonProgress(await readJson("progress/state.json"), lessonId)
     });
   }
   if (req.method === "GET" && url.pathname === "/api/accuracy") {
@@ -347,6 +422,15 @@ async function handleApi(req, res, url) {
   }
   if (req.method === "POST" && url.pathname === "/api/quiz/grade") {
     return sendJson(res, 200, await gradeQuiz(await parseBody(req)));
+  }
+  if (req.method === "POST" && url.pathname === "/api/lesson/start") {
+    return sendJson(res, 200, await updateLessonPhase(await parseBody(req), "learning"));
+  }
+  if (req.method === "POST" && url.pathname === "/api/lesson/complete") {
+    return sendJson(res, 200, await updateLessonPhase(await parseBody(req), "quiz"));
+  }
+  if (req.method === "POST" && url.pathname === "/api/lesson/reset-phase") {
+    return sendJson(res, 200, await updateLessonPhase(await parseBody(req), "preview"));
   }
   if (req.method === "POST" && url.pathname === "/api/submissions") {
     return sendJson(res, 200, await saveSubmission(await parseBody(req)));

@@ -183,7 +183,23 @@
       ],
       "stability": "changing",
       "needsRefreshAfter": "2026-07-27",
-      "unverifiedNotes": []
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "用自己的话解释 LLM 应用的五层结构：model、context、tools、harness、evals",
+        "能把一个营销评估需求拆成五层，并指出每层缺失会造成什么风险",
+        "能读一个 bad case，判断错误主要发生在哪一层"
+      ],
+      "practiceTask": {
+        "title": "把营销评估需求拆成五层",
+        "prompt": "选择一个脱敏的营销活动评估需求，按 model/context/tools/harness/evals 五层拆解。每层写 2-3 句：它负责什么、缺失会出什么错、你会如何验证。",
+        "expectedEvidence": "一份五层拆解表，能直接作为后续 Marketing Evaluation Agent 的架构草图。"
+      },
+      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
+      "commonPitfalls": [
+        "只会复述概念，但不知道在工程里放在哪一层。",
+        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
+        "忽略失败模式、边界条件和评测证据。"
+      ]
     },
     {
       "id": "lesson-002-system-prompt",
@@ -213,7 +229,23 @@
       ],
       "stability": "changing",
       "needsRefreshAfter": "2026-07-27",
-      "unverifiedNotes": []
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能写一版营销评估 Agent system prompt，并说明每条规则解决的风险",
+        "能区分 system/developer/user/tool output 的优先级和边界",
+        "能识别工具输出中的 prompt injection，并设计防护策略"
+      ],
+      "practiceTask": {
+        "title": "写一版可压测 system prompt",
+        "prompt": "为营销评估 Agent 写一版中文 system prompt。必须包含角色、边界、工具规则、因果结论限制、输出格式、prompt injection 防护，并解释每段为什么存在。",
+        "expectedEvidence": "system prompt + 每段规则对应风险说明。"
+      },
+      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
+      "commonPitfalls": [
+        "只会复述概念，但不知道在工程里放在哪一层。",
+        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
+        "忽略失败模式、边界条件和评测证据。"
+      ]
     },
     {
       "id": "lesson-003-structured-output",
@@ -227,18 +259,35 @@
       ],
       "lessonFile": "lessons/lesson-003-structured-output.md",
       "questionFile": "questions/lesson-003-structured-output.json",
-      "contentStatus": "draft",
-      "verifiedAt": null,
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
       "sourceIds": [
-        "openai-tools-guide"
+        "openai-tools-guide",
+        "mcp-specification"
       ],
       "claimIds": [
-        "claim-openai-tools-extend-model-capabilities"
+        "claim-openai-tools-extend-model-capabilities",
+        "claim-mcp-standardizes-context-tools",
+        "claim-structured-tool-contracts-enable-execution-eval"
       ],
       "stability": "fast-changing",
       "needsRefreshAfter": "2026-06-27",
-      "unverifiedNotes": [
-        "The lesson text is a scaffold; exact API behavior must be refreshed against official docs before marking verified."
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能把自然语言业务需求转换成工具调用 JSON",
+        "能设计 required fields、enum、诊断字段和降级字段",
+        "能说明自然语言解释和结构化输出各自适合什么环节"
+      ],
+      "practiceTask": {
+        "title": "设计 estimate_effect 工具输入输出",
+        "prompt": "把“评估会员活动对 60 日 GTV 的影响”转成工具调用 JSON，并设计工具返回 JSON。必须包含阻塞/降级字段。",
+        "expectedEvidence": "一份 request schema 和 response schema 草案。"
+      },
+      "transferTask": "把本课方法迁移到 BI Agent、客服 Agent、投放 Agent 或数据分析 Agent 中的一个场景。",
+      "commonPitfalls": [
+        "只会复述概念，但不知道在工程里放在哪一层。",
+        "把某个框架的实现细节误当成所有 Agent 的通用定义。",
+        "忽略失败模式、边界条件和评测证据。"
       ]
     },
     {
@@ -260,6 +309,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能区分 prompt、上下文、记忆、检索材料、工具结果各自的作用和优先级",
+        "能为营销评估 Agent 设计一份上下文打包策略，避免把无关材料塞给模型",
+        "能识别上下文缺失、上下文污染和上下文过载导致的 Agent 错误"
+      ],
+      "practiceTask": {
+        "title": "设计营销评估上下文包",
+        "prompt": "选择一个脱敏活动评估需求，写出 Agent 在进入方法选择前必须收到的 context packet：业务目标、指标口径、样本窗口、可用字段、权限边界、历史结论、工具状态。标注哪些信息必须来自用户，哪些可以检索，哪些必须由工具生成。",
+        "expectedEvidence": "提交一份 context packet schema，并解释每个字段防止什么错误。"
+      },
+      "transferTask": "把同一套 context packet 思路迁移到 BI 问答 Agent，说明哪些字段会变化。",
+      "commonPitfalls": [
+        "把所有材料无差别塞进上下文",
+        "把工具结果当作高优先级指令",
+        "只优化 prompt，不设计上下文来源和刷新策略"
       ]
     },
     {
@@ -281,6 +346,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能判断一个知识需求适合 RAG、长上下文、缓存上下文还是人工固定规则",
+        "能设计引用、遗漏检测和冲突处理，避免 Agent 把检索片段当完整事实",
+        "能解释 RAG 评测不只看答案，还要看检索召回、引用和忠实性"
+      ],
+      "practiceTask": {
+        "title": "设计营销口径 RAG 决策表",
+        "prompt": "列出营销评估 Agent 需要查询的 8 类知识，例如指标口径、活动规则、历史实验、数据字典、合规规则。为每类知识判断用 RAG、长上下文、硬编码规则还是人工确认，并写出原因和风险。",
+        "expectedEvidence": "提交一张知识类型到上下文策略的决策表。"
+      },
+      "transferTask": "把决策表迁移到客服 Agent，比较高频政策文档和用户历史记录的处理差异。",
+      "commonPitfalls": [
+        "认为 RAG 自动等于准确",
+        "只评估最终答案，不评估检索命中文档",
+        "没有处理检索结果之间的冲突"
       ]
     },
     {
@@ -302,6 +383,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能把一个自然语言能力拆成工具名、输入 schema、输出 schema、错误 schema 和权限范围",
+        "能为工具设计 enum、required fields、diagnostics 和 fallback policy",
+        "能用 bad case 检查 schema 是否会诱导模型误调用工具"
+      ],
+      "practiceTask": {
+        "title": "压测 estimate_effect schema",
+        "prompt": "在 lesson-003 的 estimate_effect 基础上，补充错误返回 schema、权限字段、字段缺失策略、诊断阈值和 report_policy。然后写 3 个 bad case，说明 schema 如何阻止 Agent 输出强因果结论。",
+        "expectedEvidence": "提交 request/response/error 三段 JSON schema 和 bad case 表。"
+      },
+      "transferTask": "把 schema 设计迁移到一个 run_sql 工具，说明 SQL 工具更需要哪些权限和安全字段。",
+      "commonPitfalls": [
+        "只设计成功返回，不设计错误返回",
+        "schema 字段过宽导致模型随意填",
+        "没有把诊断结果转成机器可读的报告策略"
       ]
     },
     {
@@ -323,6 +420,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能从零写出 observe-plan-act-check 的最小 Agent loop",
+        "能解释 loop 中状态、工具调用、停止条件和错误恢复的关系",
+        "能判断什么时候需要 loop，什么时候普通 workflow 更可靠"
+      ],
+      "practiceTask": {
+        "title": "手写最小营销评估 Agent loop",
+        "prompt": "用 Python 写一个最小 loop：读取用户任务，判断是否缺字段，选择 inspect_dataset 或 estimate_effect 伪工具，检查返回 warning，最后输出阻塞、降级或报告草稿。不要求接真实 LLM，可以用规则或 mock model。",
+        "expectedEvidence": "提交一个可运行脚本路径，以及 2 个输入样例和输出 trace。"
+      },
+      "transferTask": "把 loop 迁移到代码审查 Agent，说明工具和停止条件怎么变化。",
+      "commonPitfalls": [
+        "没有停止条件导致循环发散",
+        "工具失败后继续编造答案",
+        "把所有步骤都交给模型动态决定"
       ]
     },
     {
@@ -344,6 +457,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能区分确定性 workflow、半开放 workflow 和自主 Agent",
+        "能按风险、可变性、可评测性决定自动化形态",
+        "能为营销评估场景画出哪些步骤应固定、哪些步骤可由模型决策"
+      ],
+      "practiceTask": {
+        "title": "划分营销评估自动化边界",
+        "prompt": "把 Marketing Evaluation Agent 拆成 10 个步骤，并给每一步标注 workflow、model decision 或 human review。解释为什么诊断阈值、权限校验、报告措辞分别适合哪种控制方式。",
+        "expectedEvidence": "提交一张步骤控制矩阵。"
+      },
+      "transferTask": "把矩阵迁移到投放素材生成 Agent，比较创意生成与预算建议的自动化边界。",
+      "commonPitfalls": [
+        "把所有 AI 产品都叫 Agent",
+        "高风险步骤完全交给模型自由发挥",
+        "为了炫技使用自主性而牺牲可控性"
       ]
     },
     {
@@ -365,6 +494,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能搭出 Marketing Evaluation Agent 的 v0 流程和文件结构",
+        "能连接需求澄清、方法选择、工具调用、报告生成四个核心模块",
+        "能为 v0 定义最小可验收标准，而不是追求一次做完全部功能"
+      ],
+      "practiceTask": {
+        "title": "实现 Agent v0 骨架",
+        "prompt": "创建一个本地 v0：输入脱敏需求 JSON，输出 method_selection、tool_request、tool_result_summary、business_report 四段结果。工具可以先用 mock，但字段必须和前面 schema 对齐。",
+        "expectedEvidence": "提交代码路径、一个成功 case、一个阻塞 case、一个降级 case。"
+      },
+      "transferTask": "把 v0 骨架迁移到 LTV 预测解释 Agent，说明工具层会换成什么。",
+      "commonPitfalls": [
+        "第一版就追求复杂 UI",
+        "没有保存中间产物",
+        "只测 happy path"
       ]
     },
     {
@@ -392,7 +537,23 @@
       ],
       "stability": "stable",
       "needsRefreshAfter": "2026-10-27",
-      "unverifiedNotes": []
+      "unverifiedNotes": [],
+      "masteryOutcomes": [
+        "能说明因果算法在项目中是 Agent 的业务工具层，而不是课程主线负担",
+        "能设计方法选择规则，让 Agent 知道何时 PSM、DML、ITE 或拒绝因果结论",
+        "能把因果假设和诊断转成 Agent 可执行的降级策略"
+      ],
+      "practiceTask": {
+        "title": "写方法选择路由表",
+        "prompt": "为 PSM、DML、ITE/uplift、相关性分析、预测分析写一张路由表：适用输入、关键假设、最低诊断、失败时降级、禁止输出的话术。",
+        "expectedEvidence": "提交方法选择路由表和 5 个 bad case。"
+      },
+      "transferTask": "把路由表迁移到风控策略评估，说明 treatment 和 outcome 的定义风险。",
+      "commonPitfalls": [
+        "把模型预测提升当因果提升",
+        "忽略 common support 和协变量平衡",
+        "诊断失败后仍给强行动建议"
+      ]
     },
     {
       "id": "lesson-011-psm-tool-wrapper",
@@ -414,6 +575,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能把轻量 PSM 实现封装成 Agent 可调用工具",
+        "能返回 propensity score、matching/weighting、SMD、common support、ATT/ATE 和 warning",
+        "能让 Agent 根据诊断判断是否允许强因果表达"
+      ],
+      "practiceTask": {
+        "title": "封装并压测 PSM 工具",
+        "prompt": "基于项目里的 PSM 工具，构造一个好 overlap case 和一个坏 overlap case。检查返回的 diagnostics、warnings、causal_claim_allowed 是否符合预期。",
+        "expectedEvidence": "提交测试数据构造代码、工具返回样例和报告话术对比。"
+      },
+      "transferTask": "把同样的工具封装思想迁移到 DML 工具，列出输出字段差异。",
+      "commonPitfalls": [
+        "只返回 effect 不返回诊断",
+        "不区分 ATT 和 ATE",
+        "把低 overlap 样本也强行匹配出结论"
       ]
     },
     {
@@ -436,6 +613,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能把需求解析、因果工具、诊断解释和报告生成串成 MVP",
+        "能处理缺字段、样本不足和诊断失败三类降级",
+        "能输出业务可读但不过度归因的报告"
+      ],
+      "practiceTask": {
+        "title": "跑通营销评估 MVP",
+        "prompt": "用脱敏 mock 数据跑通一次端到端流程：需求 JSON -> 方法选择 -> 工具调用 -> 诊断读取 -> 业务报告。至少包含一个正常 case 和一个 blocked case。",
+        "expectedEvidence": "提交端到端 trace、报告样例和 blocked case 的返回。"
+      },
+      "transferTask": "把 MVP 改造成会员体系评估 Agent，说明输入字段和报告结构会怎么变。",
+      "commonPitfalls": [
+        "报告只写结论不写限制",
+        "工具 warning 没传给最终回答",
+        "没有保存 trace 供复盘"
       ]
     },
     {
@@ -457,6 +650,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能设计覆盖结果、过程、工具调用和安全边界的 Agent eval",
+        "能写出营销评估 Agent 的 bad case 测试集",
+        "能区分人工评分、规则评分、LLM-as-judge 和回放评测的适用范围"
+      ],
+      "practiceTask": {
+        "title": "建立 Agent eval 表",
+        "prompt": "为 Marketing Evaluation Agent 写 12 条 eval case：4 条正常、4 条诊断失败、2 条 prompt injection、2 条用户诱导过度归因。每条写输入、期望工具调用、期望输出边界、评分规则。",
+        "expectedEvidence": "提交 eval cases JSON 或表格。"
+      },
+      "transferTask": "把 eval 表迁移到 RAG 问答 Agent，替换成检索命中和引用忠实性指标。",
+      "commonPitfalls": [
+        "只看最终答案好不好看",
+        "eval case 没有覆盖失败路径",
+        "LLM-as-judge 没有标注判断依据"
       ]
     },
     {
@@ -478,6 +687,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能读 Agent trace，定位错误发生在上下文、规划、工具、诊断还是报告层",
+        "能设计最小 trace 字段，支持复盘和回归测试",
+        "能把一次失败转成可复现 bad case"
+      ],
+      "practiceTask": {
+        "title": "调试一次错误 trace",
+        "prompt": "构造一个 Agent 错误：缺少协变量仍选择 DML 或 common support 差仍输出强因果结论。记录 trace 并写出根因、修复点和新增 eval。",
+        "expectedEvidence": "提交 trace JSON、root cause 分析和新增 eval case。"
+      },
+      "transferTask": "把 trace 字段迁移到 SQL Agent，说明 SQL 生成、执行和解释各要记录什么。",
+      "commonPitfalls": [
+        "只记录最终答案",
+        "没有记录工具入参",
+        "修复后不加入回归集"
       ]
     },
     {
@@ -499,6 +724,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能把失败样例分类为需求、数据、方法、工具、报告、安全等类型",
+        "能从 bad case 提炼可复用测试和产品防线",
+        "能用 bad case 驱动后续课程和 Agent 迭代"
+      ],
+      "practiceTask": {
+        "title": "建立营销评估 bad case 库",
+        "prompt": "写 10 个脱敏 bad case，每个包含用户输入、风险类型、错误 Agent 行为、期望行为、检测规则、修复建议。至少覆盖过度归因、缺字段、样本不足、prompt injection。",
+        "expectedEvidence": "提交 bad case library JSON 或 Markdown 表。"
+      },
+      "transferTask": "把 bad case 分类迁移到投放预算建议 Agent。",
+      "commonPitfalls": [
+        "只收集模型答错的例子",
+        "bad case 没有期望行为",
+        "问题修了但测试集不更新"
       ]
     },
     {
@@ -528,6 +769,22 @@
       "needsRefreshAfter": "2026-07-27",
       "unverifiedNotes": [
         "Scaffold only; exact framework capabilities require refresh before publishing."
+      ],
+      "masteryOutcomes": [
+        "能解释 harness 如何管理状态、工具权限、重试、超时、trace 和 guardrails",
+        "能为 Marketing Evaluation Agent 设计运行时边界和失败恢复机制",
+        "能判断哪些能力属于模型，哪些必须由 harness 承担"
+      ],
+      "practiceTask": {
+        "title": "设计 Agent harness 蓝图",
+        "prompt": "画出 Marketing Evaluation Agent 的 harness：输入校验、状态存储、工具 registry、权限检查、trace、错误恢复、评测 hook。说明每个模块不做会有什么风险。",
+        "expectedEvidence": "提交架构图和模块职责表。"
+      },
+      "transferTask": "把 harness 蓝图迁移到一个代码执行 Agent，说明沙箱和权限会如何加强。",
+      "commonPitfalls": [
+        "把 harness 当成框架名词",
+        "错误恢复全靠 prompt",
+        "没有把权限和工具执行分离"
       ]
     },
     {
@@ -556,6 +813,22 @@
       "needsRefreshAfter": "2026-06-27",
       "unverifiedNotes": [
         "Protocol details are fast-changing. Refresh before marking verified."
+      ],
+      "masteryOutcomes": [
+        "能解释 MCP、A2A、skills 解决的连接和复用问题，而不是把它们当热词",
+        "能判断一个外部能力适合做 tool、resource、prompt、skill 还是 agent-to-agent 协作",
+        "能为营销评估 Agent 设计一个可复用 skill 或 MCP tool 边界"
+      ],
+      "practiceTask": {
+        "title": "设计一个因果诊断 skill",
+        "prompt": "把“读取因果工具输出并生成诊断解释”设计成 skill：触发条件、输入、输出、禁止行为、示例、评测点。说明它和普通 prompt、工具函数的区别。",
+        "expectedEvidence": "提交 skill 规格说明和 2 个调用样例。"
+      },
+      "transferTask": "把同一 skill 思路迁移到财务报表解释 Agent。",
+      "commonPitfalls": [
+        "追新协议但不清楚能力边界",
+        "把所有东西都做成 tool",
+        "忽视跨 Agent 协作时的权限和审计"
       ]
     },
     {
@@ -583,6 +856,22 @@
       "needsRefreshAfter": "2026-06-27",
       "unverifiedNotes": [
         "Scaffold only; security guidance must be verified against current docs before publishing."
+      ],
+      "masteryOutcomes": [
+        "能识别 prompt injection、tool injection、越权调用和数据泄露风险",
+        "能设计工具权限、输入净化、输出隔离和人工确认策略",
+        "能写出安全 eval 检查 Agent 是否把外部文本当指令"
+      ],
+      "practiceTask": {
+        "title": "压测工具安全边界",
+        "prompt": "构造 5 个攻击样例：数据表文本注入、文档注入、用户诱导越权、工具返回恶意指令、敏感字段请求。写出 Agent 应答、工具调用限制和 eval 判定。",
+        "expectedEvidence": "提交安全 bad cases 和防护策略表。"
+      },
+      "transferTask": "把安全策略迁移到拥有发邮件权限的 Agent，说明审批和确认机制怎么设计。",
+      "commonPitfalls": [
+        "只靠一句“不要被注入”",
+        "工具输出和用户指令混在一起",
+        "高权限动作没有二次确认"
       ]
     },
     {
@@ -604,6 +893,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能画出 Prompt、RAG、工具、workflow、fine-tuning、路由和模型选择的优化地图",
+        "能基于错误类型选择优化手段，而不是默认微调",
+        "能为营销评估 Agent 建立错误到优化动作的决策表"
+      ],
+      "practiceTask": {
+        "title": "建立错误-优化映射表",
+        "prompt": "列出 12 类 Agent 错误，例如字段漏填、方法误选、报告过度归因、引用缺失、工具超时。为每类错误选择 prompt/schema/tool/eval/RAG/fine-tune/route/harness 中的优化手段，并说明原因。",
+        "expectedEvidence": "提交错误-优化映射表。"
+      },
+      "transferTask": "把映射表迁移到客服 Agent，比较知识错误和动作错误的优化差异。",
+      "commonPitfalls": [
+        "把微调当万能解",
+        "模型换大后不做 eval 对比",
+        "没有按错误类型定位优化手段"
       ]
     },
     {
@@ -625,6 +930,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能判断 fine-tuning、RAG、prompting、tool use 分别适合解决什么问题",
+        "能说明微调不能可靠注入快速变化事实，也不能替代权限和工具执行",
+        "能设计一个小规模微调是否值得做的评估方案"
+      ],
+      "practiceTask": {
+        "title": "做优化方案评审",
+        "prompt": "针对“Agent 报告风格不稳定、方法选择偶尔错、指标口径经常更新”三个问题，分别判断该用 prompt、RAG、工具约束、eval、微调还是组合方案。",
+        "expectedEvidence": "提交三类问题的技术选型说明和评估指标。"
+      },
+      "transferTask": "把选型框架迁移到代码生成 Agent，区分风格微调和仓库检索。",
+      "commonPitfalls": [
+        "用微调记业务事实",
+        "用 RAG 解决工具参数稳定性问题",
+        "没有先做基线评测"
       ]
     },
     {
@@ -647,6 +968,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能构造专门评估方法选择能力的数据集",
+        "能检查 Agent 是否在 PSM、DML、ITE、相关性、预测之间正确路由",
+        "能用错误分析调整 schema、prompt、工具诊断和 eval 权重"
+      ],
+      "practiceTask": {
+        "title": "评测方法选择路由器",
+        "prompt": "写 20 条脱敏任务描述，标注 gold method、必要字段、拒绝条件和期望说明。跑你的方法选择逻辑或 mock Agent，统计错误类型并提出修复。",
+        "expectedEvidence": "提交 eval set、评分结果和错误分析。"
+      },
+      "transferTask": "把方法选择 eval 迁移到模型路由器，标注何时用快模型、强模型或人工。",
+      "commonPitfalls": [
+        "只看最终报告不看方法路由",
+        "gold label 没写拒绝条件",
+        "把业务偏好当方法适用性"
       ]
     },
     {
@@ -668,6 +1005,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能从公司博客、论文、官方文档和开源项目中抽取可迁移设计模式",
+        "能区分事实、观点、营销表述和自己的工程推论",
+        "能把工业案例转成自己的 Agent 产品设计原则"
+      ],
+      "practiceTask": {
+        "title": "做一个案例拆解卡片",
+        "prompt": "选择一个来源已注册的工业案例，按“它解决什么问题、设计了什么机制、为什么有效、边界是什么、如何迁移到营销评估 Agent”拆解。必须标注哪些是事实，哪些是你的工程推论。",
+        "expectedEvidence": "提交一张案例拆解卡片，并绑定 sourceId/claimId。"
+      },
+      "transferTask": "把案例拆解方法迁移到一个失败案例，说明哪些设计选择没有奏效。",
+      "commonPitfalls": [
+        "把公司营销说法当事实",
+        "只收集名词不提炼模式",
+        "照搬案例而不看场景约束"
       ]
     },
     {
@@ -689,6 +1042,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能把 Agent 从 demo 推向产品：权限、体验、监控、反馈、成本、上线节奏",
+        "能设计用户操作流，让业务用户理解结论边界并能继续追问",
+        "能定义上线后的质量指标和迭代闭环"
+      ],
+      "practiceTask": {
+        "title": "设计 Agent 产品化方案",
+        "prompt": "为 Marketing Evaluation Agent 写一页产品化方案：目标用户、核心流程、权限模型、交互状态、失败提示、监控指标、成本控制、反馈入口。",
+        "expectedEvidence": "提交产品方案和一个关键页面交互草图。"
+      },
+      "transferTask": "把产品化方案迁移到“会员运营 Copilot”，说明用户角色和权限如何变化。",
+      "commonPitfalls": [
+        "只有模型能力没有用户工作流",
+        "失败提示不可操作",
+        "上线后没有质量监控和反馈闭环"
       ]
     },
     {
@@ -712,6 +1081,22 @@
       "needsRefreshAfter": null,
       "unverifiedNotes": [
         "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ],
+      "masteryOutcomes": [
+        "能完整演示 Marketing Evaluation Agent v1 的能力、边界和失败处理",
+        "能用 eval、trace、case 和源码证明系统可靠性",
+        "能回答为什么这样设计，以及下一步该如何优化"
+      ],
+      "practiceTask": {
+        "title": "完成最终答辩包",
+        "prompt": "准备最终答辩：系统架构、核心 prompt/schema、工具实现、eval set、trace 样例、bad cases、产品界面、风险边界、后续路线。用 10 分钟讲清楚，并准备被追问。",
+        "expectedEvidence": "提交最终答辩目录、演示脚本和验收清单。"
+      },
+      "transferTask": "把最终答辩框架迁移到一个你真实工作中的 AI 产品提案。",
+      "commonPitfalls": [
+        "只展示 happy path",
+        "无法解释设计取舍",
+        "没有证据证明 Agent 不会乱归因"
       ]
     }
   ]

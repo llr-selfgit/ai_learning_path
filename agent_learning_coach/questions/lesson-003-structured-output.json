@@ -1,0 +1,64 @@
+{
+  "lessonId": "lesson-003-structured-output",
+  "title": "Structured Output 与工具契约测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": ["tool_calling", "context_engineering"],
+      "prompt": "为什么营销评估 Agent 不能只用自然语言描述“我会用 PSM 评估一下”？",
+      "options": [
+        {
+          "id": "A",
+          "text": "因为工具需要机器可读的参数，例如 treatment、outcome、covariates 和 diagnostic_policy。",
+          "correct": true,
+          "explanation": "正确。自然语言适合沟通，工具执行需要稳定的结构化契约。"
+        },
+        {
+          "id": "B",
+          "text": "因为自然语言一定比 JSON 更容易产生幻觉。",
+          "correct": false,
+          "explanation": "错误。问题不是自然语言天然更差，而是工具调用和评测需要可检查、可执行的结构。"
+        },
+        {
+          "id": "C",
+          "text": "因为 PSM 只能通过 JSON 实现。",
+          "correct": false,
+          "explanation": "错误。PSM 算法不依赖 JSON；JSON 是 Agent 调用工具时的接口表达。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": ["tool_calling", "causal_tooling"],
+      "prompt": "一个给 Agent 使用的因果估计工具返回值，哪些字段能帮助防止过度归因？",
+      "options": [
+        {
+          "id": "A",
+          "text": "diagnostics",
+          "correct": true,
+          "explanation": "正确。诊断告诉 Agent 数据和方法条件是否支持结论。"
+        },
+        {
+          "id": "B",
+          "text": "warnings",
+          "correct": true,
+          "explanation": "正确。warning 能把样本不足、overlap 差、平衡性差等风险传给 Agent。"
+        },
+        {
+          "id": "C",
+          "text": "causal_claim_allowed",
+          "correct": true,
+          "explanation": "正确。这个机器可读字段能直接约束报告是否允许强因果表达。"
+        },
+        {
+          "id": "D",
+          "text": "只返回 report_summary",
+          "correct": false,
+          "explanation": "错误。只有摘要会让 Agent 难以判断诊断和边界，容易把文案当结论。"
+        }
+      ]
+    }
+  ]
+}

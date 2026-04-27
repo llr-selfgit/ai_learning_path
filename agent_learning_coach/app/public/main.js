@@ -54,7 +54,7 @@ function statusLabel(status) {
     available: "可学习",
     submitted: "待复核",
     passed: "已通过",
-    review: "需复习"
+    review: "需练习/复核"
   }[status] || status;
 }
 
@@ -172,6 +172,124 @@ function markdownToHtml(markdown) {
     .replace(/<\/pre><\/p>/g, "</pre>");
 }
 
+function phaseLabel(phase) {
+  return {
+    preview: "预览",
+    learning: "学习中",
+    checkpoint: "自查",
+    quiz: "测验",
+    assignment: "实操提交",
+    review: "复核",
+    mastered: "已掌握"
+  }[phase] || phase || "预览";
+}
+
+function renderLessonStepper(phase) {
+  const steps = [
+    ["preview", "预览"],
+    ["learning", "学习"],
+    ["quiz", "测验"],
+    ["assignment", "实操"],
+    ["review", "复核"]
+  ];
+  const activeIndex = Math.max(0, steps.findIndex(([id]) => id === phase));
+  return `
+    <div class="lesson-stepper">
+      ${steps
+        .map(
+          ([id, label], index) => `
+            <span class="${index <= activeIndex ? "active" : ""} ${id === phase ? "current" : ""}">
+              ${index + 1}. ${label}
+            </span>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderMasteryChecklist(lesson, lessonProgress) {
+  const evidence = lessonProgress?.evidence || {};
+  const items = [
+    ["阅读主线", Boolean(lessonProgress?.completedReadingAt)],
+    ["客观题 >= 80", Number(lessonProgress?.quizScore || 0) >= 80],
+    ["实操作业", lessonProgress?.practiceStatus === "completed"],
+    ["Codex 复核", Number(lessonProgress?.assignmentScore || 0) >= 80]
+  ];
+  return `
+    <div class="mastery-evidence">
+      <h3>掌握证据</h3>
+      <p class="muted">本课不是看完就算过，需要留下会解释、会操作、会迁移的证据。</p>
+      ${items
+        .map(([label, done]) => `<p class="${done ? "done" : ""}"><span>${done ? "✓" : "·"}</span>${label}</p>`)
+        .join("")}
+      <h3>本课能力目标</h3>
+      <ul>
+        ${(lesson.masteryOutcomes || []).map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+      <h3>当前阶段</h3>
+      <p><strong>${phaseLabel(lessonProgress?.phase)}</strong></p>
+      ${evidence.practicePath ? `<p class="muted">实操记录：${evidence.practicePath}</p>` : ""}
+    </div>
+  `;
+}
+
+function renderPreview(lesson, accuracy) {
+  const locked = lesson.status === "locked";
+  return `
+    <section class="panel lesson-hero">
+      <span class="status ${lesson.status}">${statusLabel(lesson.status)}</span>
+      <p class="eyebrow">课程预览</p>
+      <h2>${lesson.title}</h2>
+      <p>这节课的目标不是“看过”，而是让你能解释、识别、操作、迁移。开始学习后，页面会切换到正式内容；读完后才会解锁测验和实操。</p>
+      <div class="sketch-flow">
+        <span>任务</span><i></i><span>例子</span><i></i><span>解释</span><i></i><span>操作</span><i></i><span>迁移</span>
+      </div>
+      <h3>学完你要能做到</h3>
+      <ul>${(lesson.masteryOutcomes || []).map((item) => `<li>${item}</li>`).join("")}</ul>
+      <h3>本课实操</h3>
+      <p><strong>${lesson.practiceTask?.title || "实操任务"}</strong></p>
+      <p>${lesson.practiceTask?.prompt || ""}</p>
+      ${
+        locked
+          ? `<p class="result">这节课还未解锁。你可以先看目标，但建议按当前路径推进。</p>`
+          : `<button class="primary-button" id="startLesson">开始学习</button>`
+      }
+    </section>
+    ${renderAccuracyPanel(accuracy)}
+  `;
+}
+
+function renderLearning(lessonResponse, showComplete = true) {
+  return `
+    ${renderAccuracyPanel(lessonResponse.accuracy)}
+    <section class="panel markdown lesson-reading">
+      ${markdownToHtml(lessonResponse.markdown)}
+      ${
+        showComplete
+          ? `<div class="lesson-actions">
+              <button class="primary-button" id="completeLesson">我已完成学习，进入自查与测验</button>
+            </div>`
+          : ""
+      }
+    </section>
+  `;
+}
+
+function renderAssignmentBox(lesson, lessonProgress) {
+  return `
+    <section class="panel practice-panel">
+      <p class="eyebrow">你来操作</p>
+      <h3>${lesson.practiceTask?.title || "本课实操任务"}</h3>
+      <p>${lesson.practiceTask?.prompt || ""}</p>
+      <p class="muted">验收证据：${lesson.practiceTask?.expectedEvidence || "提交一个可复用产物。"}</p>
+      <textarea id="practiceText" placeholder="在这里写你的实操作业、设计、代码路径、trace 或 schema..."></textarea>
+      <button class="primary-button" id="savePractice">保存实操证据</button>
+      <div id="practiceResult">${lessonProgress?.evidence?.practicePath ? `<p class="result good">已保存：${lessonProgress.evidence.practicePath}</p>` : ""}</div>
+    </section>
+  `;
+}
+
 function renderToday() {
   pageTitle.textContent = "今日学习";
   const current = state.plan.lessons.find((lesson) => lesson.id === state.progress.currentLessonId);
@@ -181,13 +299,13 @@ function renderToday() {
       <section class="panel">
         <p class="eyebrow">当前推荐</p>
         <h3>${current?.title || "未选择课程"}</h3>
-        <p class="muted">建议投入 ${current?.durationMinutes || 60} 分钟。工作日只做一节，优先完成测验和一个短提交。</p>
+        <p class="muted">建议投入 ${current?.durationMinutes || 60} 分钟。工作日只做一节：先学主线，再自查测验，最后留下一个实操证据。</p>
         <button class="primary-button" id="openCurrent">进入当前课程</button>
       </section>
       <section class="panel">
         <p class="eyebrow">监督规则</p>
-        <p>客观题即时评分；主观题和代码题保存为提交记录，再交给 Codex 追问、评分、改计划。</p>
-        <p class="muted">80+ 通过，70-79 加练，70 以下重学核心内容。</p>
+        <p>读完不等于掌握。每节课都要完成解释、测验、实操和 Codex 复核，才能算真正过关。</p>
+        <p class="muted">测验 80+ 只是进入实操；主观题和代码题会继续由 Codex 复核。</p>
       </section>
     </div>
     <section class="panel">
@@ -237,7 +355,7 @@ function renderLessons() {
     })
     .join("");
 
-  content.innerHTML = `<div class="grid two"><div>${grouped}</div><div id="lessonDetail"></div></div>`;
+  content.innerHTML = `<div class="lesson-shell"><div class="lesson-index">${grouped}</div><div id="lessonDetail"></div></div>`;
   content.querySelectorAll("[data-lesson-id]").forEach((button) => {
     button.addEventListener("click", () => openLesson(button.dataset.lessonId));
   });
@@ -249,26 +367,74 @@ async function openLesson(lessonId) {
   const lessonResponse = await api(`/api/lesson/${encodeURIComponent(lessonId)}`);
   const questionSet = await api(`/api/questions/${encodeURIComponent(lessonId)}`);
   const status = effectiveLessonStatus(lessonResponse.lesson);
+  const lessonProgress = lessonResponse.lessonProgress || { phase: "preview", quizUnlocked: false };
+  const phase = status === "locked" ? "preview" : lessonProgress.phase || "preview";
   const detail = document.querySelector("#lessonDetail");
+  const mainContent = status === "locked"
+    ? renderPreview({ ...lessonResponse.lesson, status }, lessonResponse.accuracy)
+    : phase === "preview"
+      ? renderPreview({ ...lessonResponse.lesson, status }, lessonResponse.accuracy)
+      : phase === "learning"
+        ? renderLearning(lessonResponse)
+        : `
+          ${renderLearning(lessonResponse, false)}
+          <section class="panel checkpoint-panel">
+            <p class="eyebrow">阶段自查</p>
+            <h3>现在先别急着点题</h3>
+            <p>请先在脑子里回答：这节课解决什么问题？如果把它迁移到你的营销评估 Agent，它落在哪个模块？它最容易被误用在哪里？</p>
+          </section>
+          <section class="panel">
+            <h3>即时测验</h3>
+            <div id="quiz"></div>
+          </section>
+          ${renderAssignmentBox(lessonResponse.lesson, lessonProgress)}
+        `;
   detail.innerHTML = `
-    <div class="lesson-layout">
-      <section class="panel markdown">
-        <span class="status ${status}">${statusLabel(status)}</span>
-        ${renderAccuracyPanel(lessonResponse.accuracy)}
-        ${status === "locked" ? `<h2>${lessonResponse.lesson.title}</h2><p class="muted">这节课还未解锁。你可以先看目标，但建议按当前路径推进。</p>` : markdownToHtml(lessonResponse.markdown)}
+    <div class="lesson-workbench">
+      <section>
+        ${renderLessonStepper(phase)}
+        ${mainContent}
       </section>
-      <aside class="panel">
-        <h3>即时测验</h3>
-        <div id="quiz"></div>
-        <h3>深度提交</h3>
-        <p class="muted">主观题、设计题、代码题先保存，再贴给 Codex 复核。</p>
-        <textarea id="submissionText" placeholder="写下你的答案、设计、代码路径或问题..."></textarea>
-        <button class="primary-button" id="saveSubmission">保存提交</button>
+      <aside class="panel lesson-side">
+        ${renderMasteryChecklist(lessonResponse.lesson, lessonProgress)}
+        <h3>给 Codex 的深度提交</h3>
+        <p class="muted">如果你想让我追问、评分或讲解卡点，把答案保存在这里，再贴给我。</p>
+        <textarea id="submissionText" placeholder="写下你的解释、疑问、设计、代码路径或复盘..."></textarea>
+        <button class="secondary-button" id="saveSubmission">保存深度提交</button>
         <div id="submissionResult"></div>
       </aside>
     </div>
   `;
-  renderQuiz(questionSet);
+  if (phase !== "preview" && phase !== "learning") {
+    renderQuiz(questionSet);
+  }
+  document.querySelector("#startLesson")?.addEventListener("click", async () => {
+    await api("/api/lesson/start", {
+      method: "POST",
+      body: JSON.stringify({ lessonId })
+    });
+    await loadState();
+    openLesson(lessonId);
+  });
+  document.querySelector("#completeLesson")?.addEventListener("click", async () => {
+    await api("/api/lesson/complete", {
+      method: "POST",
+      body: JSON.stringify({ lessonId })
+    });
+    await loadState();
+    openLesson(lessonId);
+  });
+  document.querySelector("#savePractice")?.addEventListener("click", async () => {
+    const value = document.querySelector("#practiceText").value.trim();
+    if (!value) return;
+    const result = await api("/api/submissions", {
+      method: "POST",
+      body: JSON.stringify({ lessonId, kind: "practice", content: value })
+    });
+    document.querySelector("#practiceResult").innerHTML = `<p class="result good">已保存：${result.path}</p>`;
+    await loadState();
+    openLesson(lessonId);
+  });
   document.querySelector("#saveSubmission")?.addEventListener("click", async () => {
     const value = document.querySelector("#submissionText").value.trim();
     if (!value) return;

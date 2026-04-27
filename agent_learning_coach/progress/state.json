@@ -79,5 +79,415 @@
       "reviewDue": null
     }
   },
-  "events": []
+  "events": [],
+  "lessonProgress": {
+    "lesson-001-llm-mental-model": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-002-system-prompt": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-003-structured-output": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-004-context-engineering": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-005-rag-vs-long-context": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-006-tool-schema-design": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-007-agent-loop": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-008-workflow-vs-agent": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-009-marketing-agent-v0": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-010-causal-tooling-position": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-011-psm-tool-wrapper": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-012-marketing-eval-agent-mvp": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-013-agent-evals": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-014-trace-debugging": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-015-bad-case-library": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-016-harness-engineering": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-017-mcp-a2a-skills": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-018-tool-security": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-019-model-optimization-map": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-020-finetuning-vs-rag": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-021-method-selection-eval": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-022-industrial-patterns": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-023-productization": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    },
+    "lesson-024-final-defense": {
+      "phase": "preview",
+      "startedAt": null,
+      "completedReadingAt": null,
+      "quizUnlocked": false,
+      "quizScore": null,
+      "practiceStatus": "not_started",
+      "assignmentScore": null,
+      "masteryStatus": "not_started",
+      "evidence": {
+        "explanation": null,
+        "practicePath": null,
+        "transfer": null,
+        "mistakeRepair": null
+      },
+      "weakPoints": []
+    }
+  }
 }

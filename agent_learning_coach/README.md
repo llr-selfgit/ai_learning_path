@@ -7,11 +7,12 @@ The app is intentionally dependency-light for the first MVP:
 - `app/` serves a dynamic local web dashboard with Node's built-in HTTP server.
 - `curriculum/`, `lessons/`, `questions/`, `progress/`, `grades/`, and `submissions/` store the learning record as Git-friendly files.
 - `projects/marketing_eval_agent/` contains the business Agent project and the causal inference tool layer.
+- `sources/` stores the fact-check registry, claim registry, and staleness policy.
 
 ## Run Locally
 
 ```bash
-cd /Users/lingruiluo/codex_workspace/ai_learning_path/agent_learning_coach
+cd /Users/lingruiluo/codex_workspace/ai_learning_path_remote/agent_learning_coach
 npm run dev
 ```
 
@@ -20,6 +21,18 @@ Then open:
 ```text
 http://localhost:4173
 ```
+
+## Learning Flow
+
+Lessons are interactive rather than static notes:
+
+```text
+preview -> learning -> quiz -> assignment -> review -> mastered
+```
+
+The quiz is hidden until the lesson has been started and completed. Practice evidence is saved as a Git-friendly submission file, so it can be reviewed by Codex and synced through GitHub.
+
+The teaching standard lives in `curriculum/teaching_design_policy.md`. The short version: every verified lesson should move from a concrete task to conceptual understanding, engineering operation, transfer practice, and reviewable mastery evidence.
 
 ## Current Sync Model
 
