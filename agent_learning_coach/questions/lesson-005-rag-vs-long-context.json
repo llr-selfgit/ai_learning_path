@@ -1,0 +1,64 @@
+{
+  "lessonId": "lesson-005-rag-vs-long-context",
+  "title": "RAG vs Long Context 测验",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single_choice",
+      "knowledgeTags": ["rag", "context_engineering"],
+      "prompt": "为什么“用了 RAG”不等于“答案一定准确”？",
+      "options": [
+        {
+          "id": "A",
+          "text": "因为还要看检索是否召回关键材料、引用是否支持答案、是否处理冲突和缺失。",
+          "correct": true,
+          "explanation": "正确。RAG 只是提供外部知识路径，可靠性还取决于检索、引用、推理和 fallback。"
+        },
+        {
+          "id": "B",
+          "text": "因为 RAG 只能检索图片，不能检索文本。",
+          "correct": false,
+          "explanation": "错误。RAG 通常就包括文本知识检索。"
+        },
+        {
+          "id": "C",
+          "text": "因为 RAG 完全不能用于业务知识库。",
+          "correct": false,
+          "explanation": "错误。业务知识库是 RAG 的常见应用之一，但需要评测和治理。"
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "multiple_choice",
+      "knowledgeTags": ["rag", "context_engineering"],
+      "prompt": "哪些知识更适合直接放入当前上下文，而不是只依赖 RAG 检索？",
+      "options": [
+        {
+          "id": "A",
+          "text": "当前工具返回的因果诊断和 warning",
+          "correct": true,
+          "explanation": "正确。这是当前运行产物，必须完整约束最终报告。"
+        },
+        {
+          "id": "B",
+          "text": "当前活动规则和用户刚补充的约束",
+          "correct": true,
+          "explanation": "正确。这些是当前任务核心事实，不能靠相似历史文档猜。"
+        },
+        {
+          "id": "C",
+          "text": "大量历史活动复盘全文",
+          "correct": false,
+          "explanation": "不一定。历史复盘通常体量大，更适合先检索相似案例，再把关键材料放入上下文。"
+        },
+        {
+          "id": "D",
+          "text": "高优先级安全和因果结论规则",
+          "correct": true,
+          "explanation": "正确。这类规则更应该固定在 system/developer 或 policy layer。"
+        }
+      ]
+    }
+  ]
+}

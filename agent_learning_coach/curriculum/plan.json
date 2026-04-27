@@ -301,15 +301,25 @@
         "system_prompt"
       ],
       "lessonFile": "lessons/lesson-004-context-engineering.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-004-context-engineering.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "anthropic-prompting-best-practices",
+        "anthropic-long-context-tips",
+        "google-adk-overview",
+        "mcp-specification"
       ],
+      "claimIds": [
+        "claim-context-engineering-requires-structured-context",
+        "claim-anthropic-prompting-clear-context-role-examples",
+        "claim-long-context-still-needs-structure-and-grounding",
+        "claim-google-adk-core-primitives",
+        "claim-mcp-standardizes-context-tools"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-27",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
         "能区分 prompt、上下文、记忆、检索材料、工具结果各自的作用和优先级",
         "能为营销评估 Agent 设计一份上下文打包策略，避免把无关材料塞给模型",
@@ -338,15 +348,22 @@
         "context_engineering"
       ],
       "lessonFile": "lessons/lesson-005-rag-vs-long-context.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-005-rag-vs-long-context.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "openai-file-search",
+        "anthropic-long-context-tips",
+        "mcp-specification"
       ],
+      "claimIds": [
+        "claim-openai-file-search-retrieves-from-vector-stores",
+        "claim-long-context-still-needs-structure-and-grounding",
+        "claim-mcp-standardizes-context-tools"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-27",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
         "能判断一个知识需求适合 RAG、长上下文、缓存上下文还是人工固定规则",
         "能设计引用、遗漏检测和冲突处理，避免 Agent 把检索片段当完整事实",
@@ -375,15 +392,23 @@
         "context_engineering"
       ],
       "lessonFile": "lessons/lesson-006-tool-schema-design.md",
-      "contentStatus": "draft",
-      "verifiedAt": null,
-      "sourceIds": [],
-      "claimIds": [],
-      "stability": "changing",
-      "needsRefreshAfter": null,
-      "unverifiedNotes": [
-        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      "questionFile": "questions/lesson-006-tool-schema-design.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "openai-tools-guide",
+        "openai-structured-outputs",
+        "mcp-specification"
       ],
+      "claimIds": [
+        "claim-openai-tools-extend-model-capabilities",
+        "claim-structured-tool-contracts-enable-execution-eval",
+        "claim-structured-outputs-constrain-json-schema",
+        "claim-mcp-standardizes-context-tools"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-27",
+      "unverifiedNotes": [],
       "masteryOutcomes": [
         "能把一个自然语言能力拆成工具名、输入 schema、输出 schema、错误 schema 和权限范围",
         "能为工具设计 enum、required fields、diagnostics 和 fallback policy",

@@ -73,6 +73,30 @@
       "refreshAfter": "2026-07-27"
     },
     {
+      "id": "openai-file-search",
+      "title": "OpenAI API - File search",
+      "url": "https://platform.openai.com/docs/guides/tools-file-search",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "whyTrusted": "Official OpenAI documentation for hosted file search, vector stores, semantic search, keyword search, and retrieval customization.",
+      "refreshAfter": "2026-06-27"
+    },
+    {
+      "id": "openai-structured-outputs",
+      "title": "OpenAI API - Structured model outputs",
+      "url": "https://platform.openai.com/docs/guides/structured-outputs",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "whyTrusted": "Official OpenAI documentation for schema-constrained structured outputs and supported JSON Schema behavior.",
+      "refreshAfter": "2026-06-27"
+    },
+    {
       "id": "anthropic-building-effective-agents",
       "title": "Building effective agents",
       "url": "https://www.anthropic.com/engineering/building-effective-agents",
@@ -94,6 +118,18 @@
       "checkedAt": "2026-04-27",
       "stability": "changing",
       "whyTrusted": "Official Anthropic prompting guidance covering clear instructions, context, examples, roles, and long-context prompting.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "anthropic-long-context-tips",
+      "title": "Claude long context prompting tips",
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "Anthropic",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official Anthropic guidance on long-context prompt structure, document placement, metadata tags, and quote grounding.",
       "refreshAfter": "2026-07-27"
     },
     {

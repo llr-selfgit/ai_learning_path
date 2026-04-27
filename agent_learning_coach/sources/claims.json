@@ -175,6 +175,57 @@
       "stability": "changing",
       "scope": "inference",
       "notes": "This is an engineering inference from official tool/function-calling and protocol documentation, not a single quoted standard."
+    },
+    {
+      "id": "claim-context-engineering-requires-structured-context",
+      "statement": "Effective context design for LLM applications requires more than adding tokens; the application should provide task-relevant context, clear structure, source boundaries, and priority rules.",
+      "sourceIds": [
+        "anthropic-prompting-best-practices",
+        "anthropic-long-context-tips",
+        "google-adk-overview",
+        "mcp-specification"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "inference",
+      "notes": "This is a synthesis across official prompting, ADK, and MCP guidance; exact platform features may change."
+    },
+    {
+      "id": "claim-openai-file-search-retrieves-from-vector-stores",
+      "statement": "OpenAI file search lets models retrieve information from uploaded-file knowledge bases backed by vector stores, using semantic and keyword search before generating responses.",
+      "sourceIds": [
+        "openai-file-search"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Hosted tool behavior, limits, pricing, and API details are fast-changing."
+    },
+    {
+      "id": "claim-long-context-still-needs-structure-and-grounding",
+      "statement": "Anthropic long-context guidance recommends structuring long documents with metadata and grounding answers in relevant quoted material, so long context does not remove the need for context design.",
+      "sourceIds": [
+        "anthropic-long-context-tips"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Model-specific prompt behavior may change; refresh before teaching exact performance claims."
+    },
+    {
+      "id": "claim-structured-outputs-constrain-json-schema",
+      "statement": "OpenAI Structured Outputs are designed to make model responses adhere to a supplied JSON Schema, whereas schema adherence does not by itself guarantee business semantic correctness.",
+      "sourceIds": [
+        "openai-structured-outputs"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "The second clause is an engineering boundary inference: syntactic schema validity is not the same as correct field selection or causal validity."
     }
   ]
 }

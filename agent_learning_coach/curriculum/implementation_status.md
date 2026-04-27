@@ -19,15 +19,15 @@
 - Per-lesson progress state with started/completed timestamps, quiz unlock, quiz score, practice status, assignment score, mastery status, evidence paths, and weak points.
 - Practice submission flow that saves operational evidence separately from deeper subjective submissions.
 - All 24 lessons now have lesson-specific mastery outcomes, practice tasks, transfer tasks, and common pitfalls in `curriculum/plan.json`.
-- Week 1 first three lessons rewritten into deeper task-led content with examples, diagrams, industrial context, operation guidance, pitfalls, transfer exercises, and mastery checks.
-- Lesson 003 structured-output quiz added.
+- Lessons 001-006 rewritten into deeper task-led content with examples, diagrams, industrial context, operation guidance, pitfalls, transfer exercises, and mastery checks.
+- Lesson 003-006 objective quizzes added or expanded.
 - Marketing Evaluation Agent project skeleton.
 - Transparent PSM / DML / uplift tool layer without `econml` or `doubleml`.
 - Unit tests for causal tools.
 
 ## Not Yet Implemented
 
-- Full deep prose rewrite of all 24 lesson markdown files. The framework and first 3 lessons are upgraded; remaining lessons now have concrete metadata but still need the same content-depth pass.
+- Full deep prose rewrite of all 24 lesson markdown files. Lessons 001-006 are upgraded; remaining lessons now have concrete metadata but still need the same content-depth pass.
 - Automatic lesson unlocking based on reviewed mastery, beyond the current static subset.
 - In-browser code runner.
 - GitHub push automation.
@@ -36,7 +36,7 @@
 
 ## Next Build Slice
 
-1. Deep rewrite lessons 004-006 with the same teaching design and source-backed claims.
+1. Deep rewrite lessons 007-009 with the same teaching design and source-backed claims.
 2. Add a review import page so Codex feedback can be pasted back into `grades/`.
 3. Add mastery-based unlocking once review scores exist.
 4. Add Git sync commands once GitHub access is available.
