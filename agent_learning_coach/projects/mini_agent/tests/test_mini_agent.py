@@ -1,5 +1,6 @@
 import unittest
 
+from projects.mini_agent.cli import run_scenario
 from projects.mini_agent.mini_agent import MiniAgent, MockModel, default_tools
 
 
@@ -84,6 +85,21 @@ class MiniAgentTests(unittest.TestCase):
         self.assertFalse(diagnostics["causal_claim_allowed"])
         self.assertIn("missing_required_columns", diagnostics["warnings"])
         self.assertIn("poor_common_support", diagnostics["warnings"])
+
+    def test_cli_calculator_scenario(self):
+        result = run_scenario("calculator")
+        self.assertEqual(result["stopped_reason"], "final")
+        self.assertEqual(result["trace"][0]["tool_result"]["value"], 9.6)
+
+    def test_cli_coupon_good_scenario(self):
+        result = run_scenario("coupon_good")
+        self.assertTrue(result["diagnostics"]["causal_claim_allowed"])
+        self.assertEqual(result["diagnostics"]["warnings"], [])
+
+    def test_cli_coupon_bad_scenario(self):
+        result = run_scenario("coupon_bad")
+        self.assertFalse(result["diagnostics"]["causal_claim_allowed"])
+        self.assertIn("missing_required_columns", result["diagnostics"]["warnings"])
 
 
 if __name__ == "__main__":

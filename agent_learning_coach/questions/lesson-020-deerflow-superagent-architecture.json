@@ -69,8 +69,8 @@
     }
   ],
   "practice": {
-    "title": "DeerFlow SuperAgent Architecture 实操",
-    "prompt": "画一张 DeerFlow 与你的项目的对照图：哪些部件现在已有，哪些是未来增强，哪些不适合引入。写出“不引入 sub-agent 的理由”和“未来引入的触发条件”。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "DeerFlow SuperAgent Architecture 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }

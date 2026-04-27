@@ -68,8 +68,8 @@
     }
   ],
   "practice": {
-    "title": "Agent Evals: Result and Trajectory 实操",
-    "prompt": "写 10 个 eval cases：3 个 happy path、4 个 bad data、2 个 prompt injection、1 个工具失败。每个 case 写 expected_trace 和 expected_report_policy。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "Agent Evals: Result and Trajectory 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }

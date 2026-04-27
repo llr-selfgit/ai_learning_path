@@ -69,8 +69,8 @@
     }
   ],
   "practice": {
-    "title": "Tool Security and OpenClaw Risk 实操",
-    "prompt": "写一份 `agent_security_checklist.md`：输入认证、工具最小权限、secret 不进上下文、插件审计、沙箱、网络暴露、human approval、日志脱敏、更新策略。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "Tool Security and OpenClaw Risk 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }

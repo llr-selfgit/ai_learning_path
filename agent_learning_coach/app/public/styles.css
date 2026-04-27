@@ -473,6 +473,55 @@ h2 {
   margin-bottom: 18px;
 }
 
+.reading-tools {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.lesson-toc,
+.term-quick {
+  min-width: 0;
+}
+
+.lesson-toc a {
+  color: var(--ink);
+  display: block;
+  font-size: 14px;
+  line-height: 1.35;
+  margin: 7px 0;
+  text-decoration: none;
+}
+
+.lesson-toc a:hover {
+  color: var(--accent);
+}
+
+.lesson-toc .toc-level-3 {
+  color: var(--muted);
+  padding-left: 14px;
+}
+
+.term-quick p {
+  border-bottom: 1px dashed var(--line);
+  margin: 0;
+  padding: 8px 0;
+}
+
+.term-quick strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.term-quick span {
+  color: var(--muted);
+  display: block;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .markdown h1 {
   font-size: clamp(30px, 4vw, 48px);
   line-height: 1.12;
@@ -496,6 +545,21 @@ h2 {
 .markdown p,
 .markdown li {
   font-size: 16px;
+}
+
+.markdown pre {
+  overflow-x: auto;
+}
+
+.markdown h2,
+.markdown h3 {
+  scroll-margin-top: 24px;
+}
+
+@media (max-width: 920px) {
+  .reading-tools {
+    grid-template-columns: 1fr;
+  }
 }
 
 .lesson-actions {

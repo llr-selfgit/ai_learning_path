@@ -1,67 +1,159 @@
-# Tool Calling and Structured Output
+# 工具调用与结构化输出
 
-## 本节总览
+## 今天你遇到的真实任务
 
-工具调用是把模型的“想做什么”变成机器能执行的契约；结构化输出是把模型的“要说什么”变成机器能解析的契约。二者都很重要，但都不能自动保证业务正确。
+会员券问题继续推进。业务同学给你一个脱敏表名 `coupon_bad`，说字段都在里面，让你直接判断活动是否有效。可靠系统不能马上估计，它要先检查表里有没有处理变量、结果变量、处理前协变量、样本量和重叠情况。
 
-这节课要解决的不是“记住一个名词”，而是让你在真实项目里知道该把这个能力放在哪一层、怎样写成接口、怎样验证它没有被误用。你学完后要能把它迁移到 Marketing Evaluation Agent，而不是只在题目里答对定义。
+这一节把“模型说要查数据”和“程序真的去查数据”之间的接口讲清楚。
 
-## 准确性与来源
+这门课会一直沿着同一条业务线走：公司发放会员券，目标是评估它是否提升了用户未来 90 天 GTV。你熟悉因果推断，所以课程不会假装你不会 PSM/DML/ITE；真正要训练的是，怎样把你的算法能力变成一个大模型可以安全使用、业务也能信任的系统。
 
-- 核验日期：2026-04-28
-- 稳定性：fast-changing
-- 主要来源：openai-tools-guide, openai-structured-outputs, deepseek-function-calling, xai-function-calling, glm-function-calling
-- 关键断言：claim-tool-schema-shape-not-semantics, claim-structured-output-json-not-business-truth, claim-glm-agent-function-calling
+## 先把新词讲清楚
 
-本节包含快速变化项目、模型或 API。学习时按当前课程理解架构动机，具体版本和字段以后必须复核。
+- `工具`：模型不能直接读取本地表或运行 Python。工具就是你允许它请求调用的外部函数，比如 `inspect_dataset`。 在 Agent 里，它是模型接触现实世界的受控入口。
+- `schema`：接口说明书。它规定工具需要哪些参数、参数是什么类型、哪些必填。 在 Agent 里，它能拦住格式错误，但拦不住业务理解错误。
+- `结构化输出`：让模型按固定 JSON 形状回答，方便程序读取。 在 Agent 里，它适合最终报告、分析计划、诊断摘要。
+- `语义正确`：不仅格式对，而且字段、方法、结论在业务上也对。 在 Agent 里，这是 schema 不能自动保证的部分。
 
-## 为什么学
+先记住一个朴素判断：如果一个词不能帮你决定“程序下一步做什么、凭什么做、做错了怎么发现”，它就还没有真正进入工程理解。
 
-你的业务里最危险的不是 JSON 格式错，而是 JSON 很漂亮但语义错：把 treatment 填成了 coupon_amount，把 outcome 填成了活动期内 GMV，把 PSM 误用于没有 common support 的样本。schema 能拦住缺字段和类型错，但拦不住错误方法选择，所以工具必须返回 diagnostics 和 warnings，Agent 还必须做前置检查。
+## 完整故事线：会员券 90 天 GTV
 
-## 核心机制
+你让系统先检查 `coupon_bad`。它发现只有 `received_coupon` 和 `gtv_90d`，缺少 `pre_30d_gtv`、`pre_30d_frequency` 这类处理前特征；样本只有 80 行；领券和未领券用户差异很大。此时 JSON 格式再漂亮也不能写“会员券有效”。你要训练 Agent 的第一条职业伦理就是：格式正确不等于结论可信。
 
-tool schema 通常包括 name、description、parameters 和 required 字段。模型看到 schema 后生成 tool_call，runner 负责解析参数、校验参数、执行函数、把 tool result 作为 tool message 返回。structured output 则让模型最终输出符合 JSON schema 的对象。它们共同形成闭环：工具调用负责拿证据，结构化输出负责交付可读可评测的结论。
+这个故事会不断复用。后面每节课只是把故事推进一小步：先让系统听懂问题，再让它检查字段，再让它选择方法，再让它调用因果工具，再让它写报告，最后让它接受评测和坏案例挑战。你不需要一次记住所有名词，你只要每次问：这一步让系统多了哪种可靠能力？
 
-```text
-user/task
-  -> context packet
-  -> model decision
-  -> tool/action or final
-  -> observation + trace
-  -> next decision or stop
+## 把这节课拆开看：四层理解法
+
+### 业务层
+
+业务层的问题从来不是“这个名词是什么意思”，而是“我能不能给出一个负责任的判断”。会员券 90 天 GTV 的问题表面上是在问效果，实际上至少包含四个隐含问题：处理对象是谁，处理发生在什么时候，结果窗口怎么算，活动前有哪些差异需要控制。只要其中一个问题没说清，系统就不应该装作已经理解了业务。
+
+### 系统层
+
+系统层要回答：这一步应该由谁负责。模型适合理解自然语言、解释诊断、生成报告草稿；程序适合保存状态、执行工具、校验参数、控制权限、记录过程。你学习每一节都要把责任分开：哪些交给模型，哪些必须写成代码，哪些必须由工具返回，哪些必须等待人工确认。
+
+### 代码层
+
+代码层要回答：这个机制最后会变成哪个对象、哪个字段、哪个函数或哪个文件。不要满足于“我知道它重要”。如果它重要，就应该能在代码里找到位置：可能是 `ToolSpec`，可能是 `diagnostics.warnings`，可能是 `causal_claim_allowed`，也可能是一条 eval case。找不到落点，就说明还只是概念。
+
+### 风险层
+
+风险层要回答：如果没有这一步，系统会怎么错。会员券评估里最危险的错误不是程序崩溃，而是系统写出一段流畅但不该相信的结论。比如缺少处理前特征还说“活动有效”，common support 很差还展示一个漂亮 ATT，或者用户催促时把不确定性删掉。每节课都要能指出它防住了哪类错误。
+
+## 代码双线：它在 mini_agent 里长什么样
+
+`inspect_dataset` 工具在 `mini_agent.py` 里接收 `dataset` 和 `required_columns`。如果字段缺失，它不会抛给用户一段技术异常，而是返回 `missing_columns`、`warnings`、`causal_claim_allowed:false`。这就是专业算法能力产品化：不仅给数字，还给限制。
+
+你现在看到的 `mini_agent` 不是最终产品，而是显微镜。真实 Agent 可能接 OpenAI、Claude、DeepSeek、Kimi 或 GLM，也可能用 LangGraph、Qwen-Agent、DeerFlow 或 Hermes；但显微镜下的核心动作相似：接收任务、决定下一步、调用受控工具、记录过程、根据证据停止或继续。
+
+## 如何读本节输出
+
+读 Agent 输出时不要从最后一句自然语言开始，而要按证据链倒着看：
+
+1. 先看 `stopped_reason`。如果是 `final`，说明系统认为可以停止；如果是 `max_steps`，说明它没有稳定完成，需要排查循环设计。
+2. 再看 `trace[0].model_action`。这里记录模型提出的下一步。你要判断它是不是合理动作，而不是只看措辞像不像。
+3. 再看 `tool_result` 或 `diagnostics`。这是外部证据。字段缺失、样本不足、common support 差、warning 都应该在这里出现。
+4. 最后看 `final`。最终回答必须被前面的证据支持。如果前面说 `causal_claim_allowed:false`，最后却写“活动显著提升”，这就是严重错误。
+
+这套读法以后会反复出现。你不是在学某个 JSON 字段，而是在训练一种工程习惯：任何业务结论都要能沿着输出、工具、状态和规则追溯回去。
+
+## 如果把它做成产品，用户会看到什么
+
+你最终不是把 JSON 原样丢给营销同学，而是把证据翻译成业务可理解的界面或报告。一个好的页面会同时展示三层信息：第一层是业务结论，比如“当前不能给出可信因果结论”；第二层是原因摘要，比如“缺少处理前消费特征、样本量不足、common support 差”；第三层是可行动建议，比如“补充活动前 30 天 GTV、活跃频次、会员等级，或先降级为描述性分析”。
+
+这也是为什么课程一直要求你看 `diagnostics` 和 `trace`。业务用户不需要读完整过程，但产品必须能从过程生成可信解释。没有过程，解释就会变成漂亮话；有过程，解释才能对应到字段、工具和规则。
+
+## 本节结束前的自测
+
+请不要只问“我看懂了吗”。改问下面四个更具体的问题：
+
+1. 我能不能用一句话告诉业务方，这节课让系统多了哪种可靠能力？
+2. 我能不能指出这节课在代码或 JSON 里对应哪个位置？
+3. 我能不能说出没有这节课时，会员券 Agent 会犯哪类错误？
+4. 我能不能把这节课的机制迁移到另一个场景，比如投放预算诊断、会员分层运营或 BI 问数？
+
+如果四个问题有任何一个答不上来，就不要急着进入下一节。真正的学习进度不是页面读到了哪里，而是你能不能把机制讲给另一个工程师，并让对方照着实现。
+
+## 手把手实验
+
+### 前置条件
+
+1. 进入项目目录：
+
+```bash
+cd /Users/lingruiluo/codex_workspace/ai_learning_path_remote/agent_learning_coach
 ```
 
-## 业务例子
+2. 确认 Python 能运行本地模块：
 
-一个 `estimate_psm` 工具不能只要求 `data_path,treatment,outcome,covariates`。它还应接受 `estimand`、`business_goal`、`min_sample_size`，返回 `effect`、`uncertainty`、`smd_before_after`、`common_support`、`warnings`、`causal_claim_allowed`。这样 Agent 不会只拿一个 ATT 数字就写“活动显著有效”。
+```bash
+python3 -m projects.mini_agent.cli --scenario calculator --json
+```
 
-## 你要怎么做
+如果这一步不通，先不要继续学概念，先把运行环境修通。Agent 工程一定要能从命令和输出开始验证。
 
-把工具当产品接口设计：先写“什么时候不允许调用”，再写参数 schema，最后写返回 schema。返回值必须包括成功态和失败态。失败态不要只返回 exception，要返回可行动诊断，例如 `missing_columns:['pre_30d_gtv']` 或 `common_support:'poor'`。
+### 本节操作
 
-## 常见误区：错在哪里，正确理解是什么
+1. 运行 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`。
+2. 找到 `diagnostics.missing_columns`，确认缺少哪些字段。
+3. 找到 `diagnostics.causal_claim_allowed`，确认它是 `false`。
+4. 写一句业务话术：为什么现在不能直接说会员券提升了 GTV。
 
-错误理解：只要开启 strict JSON schema，模型输出就是可靠结论。
+### 运行命令
 
-正确理解：strict schema 只提升可解析性，不能替你判断字段选择、因果假设、样本质量和业务解释是否成立。
+```bash
+python3 -m projects.mini_agent.cli --scenario coupon_bad --json
+```
 
-真正的 gap：格式约束解决“机器能不能读”；业务语义解决“这个东西该不该信”。高质量 Agent 必须同时做参数校验、工具前置检查、输出诊断和评测。
+### 预期输出
+
+你不需要逐字一样，但应该能看到同类字段：
+
+```json
+{
+  "scenario": "coupon_bad",
+  "diagnostics": {
+    "missing_columns": ["pre_30d_frequency", "pre_30d_gtv"],
+    "warnings": ["missing_required_columns", "sample_too_small", "poor_common_support"],
+    "causal_claim_allowed": false,
+    "recommended_next_step": "downgrade_or_request_more_data"
+  }
+}
+```
+
+### 为什么要这样做
+
+因为“看懂概念”和“看到系统输出”是两种不同的理解。你要训练的是第二种：当一个 Agent 说“不能做因果结论”时，你能顺着输出找到字段缺失、样本不足、诊断警告和最终措辞之间的因果链条。
+
+### 常见报错
+
+如果你只看 `final` 而忽略 `diagnostics`，就会错过真正的学习点。本节要看的不是自然语言回答，而是工具返回的结构化证据。
+
+## 误区拆解
+
+错误理解：误区是“JSON 能解析就可靠”。错在 JSON 只能证明机器读得懂，不能证明字段选对、方法选对、因果假设成立。正确做法是把语义风险显式写进返回值。
+
+为什么错：它把一个应该改变系统行为的机制，降格成了一个可以背诵的术语。术语本身不会让 Agent 更可靠；只有当它落到输入、状态、工具、权限、输出或测试里，才会改变行为。
+
+正确理解：学这一节时，你要能指出它在会员券 Agent 里对应哪个文件、哪个 JSON 字段、哪条规则、哪段 trace 或哪份产品文档。
+
+自查问题：如果我删掉本节机制，Agent 会在哪个具体场景里犯错？
 
 ## 工业案例与可迁移经验
 
-OpenAI、DeepSeek、xAI、Z.AI 都把 function calling 描述为模型请求外部函数、由应用本地执行再回传结果的流程。不同平台字段细节会变，但“模型提议、应用执行、结果回传”的责任边界是稳定的。
+OpenAI、DeepSeek、xAI、Z.AI 的 function calling 文档都把外部函数执行放在应用侧，而不是模型内部。这个边界很重要：模型提出请求，程序验证参数和权限，工具返回证据。
 
-注意：如果这里出现公司、框架、模型或产品能力，均以本节准确性面板绑定来源为准。对未核验的营销口径、社区热帖和传闻，不写成事实。
+本节来源已绑定到准确性面板。快速变化项目只作为当前架构参考，不把模型版本、仓库能力或产品宣传写成永久事实。
 
-## 操作检查点
+## 学习产物
 
-完成本节前，请留下一个可复核产物：
+完成本节后，在督导台提交三段内容：
 
-- 解释：用 5-8 句话说明本节机制如何服务 Marketing Evaluation Agent。
-- 实操：完成课程预览区的 practice task，并写明产物路径或设计文本。
-- 迁移：说明同一机制还能迁移到哪个 Agent 场景。
+- 我用自己的话解释本节机制：不少于 8 句，必须提到会员券主线。
+- 我运行了什么命令：贴出命令和关键输出字段。
+- 我怎么迁移：说明这个机制未来在 Marketing Evaluation Agent 的哪个模块继续发挥作用。
 
 ## 本节最容易过期的内容
 
-各家 API 的字段、strict schema 支持范围、tool_choice 行为会快速变化；schema 不能保证语义正确这个边界相对稳定。
+具体模型、框架、SDK、仓库功能和 API 字段会变化。更稳定的是这一层工程判断：任务要有边界，工具要有契约，输出要有证据，失败要能降级，过程要能复盘。

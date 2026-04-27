@@ -1,6 +1,6 @@
 {
   "lessonId": "lesson-003-agent-loop-from-scratch",
-  "title": "Agent Loop From Scratch 测验",
+  "title": "从零手写 Agent 循环 测验",
   "questions": [
     {
       "id": "q1",
@@ -69,8 +69,8 @@
     }
   ],
   "practice": {
-    "title": "Agent Loop From Scratch 实操",
-    "prompt": "本仓库会生成 `projects/mini_agent/mini_agent.py`。你要读懂 `MiniAgent.run()`：它如何验证工具、如何把工具错误作为 observation、如何在 max_steps 后停止。然后你要加一个 `mock_dataset_inspector` 工具，让它能返回字段缺失、样本不足和 common support 风险。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "从零手写 Agent 循环 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }

@@ -68,8 +68,8 @@
     }
   ],
   "practice": {
-    "title": "Tool Registry and Guardrails 实操",
-    "prompt": "在 mini-agent 里增加 `ToolSpec(risk, required, handler)`。先写单测再改代码：未知工具应返回 `tool_error:unknown_tool`；缺参数应返回 `bad_args`；handler 抛异常应记录失败但允许模型下一轮降级。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "Tool Registry and Guardrails 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }

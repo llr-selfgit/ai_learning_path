@@ -14,6 +14,14 @@ Run tests:
 python3 -m unittest discover -s projects/mini_agent/tests -p 'test_*.py'
 ```
 
+Run learning scenarios:
+
+```bash
+python3 -m projects.mini_agent.cli --scenario calculator --json
+python3 -m projects.mini_agent.cli --scenario coupon_good --json
+python3 -m projects.mini_agent.cli --scenario coupon_bad --json
+```
+
 The code covers:
 
 - happy path tool execution

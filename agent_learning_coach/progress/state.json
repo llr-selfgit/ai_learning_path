@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "learner": {
     "name": "lingrui",
     "weekdayHours": "1-2",
@@ -97,11 +97,18 @@
       "reviewDue": null
     }
   },
-  "events": [],
+  "events": [
+    {
+      "type": "lesson_phase_changed",
+      "lessonId": "lesson-001-llm-runtime-mental-model",
+      "phase": "learning",
+      "at": "2026-04-27T17:59:45.976Z"
+    }
+  ],
   "lessonProgress": {
     "lesson-001-llm-runtime-mental-model": {
-      "phase": "preview",
-      "startedAt": null,
+      "phase": "learning",
+      "startedAt": "2026-04-27T17:59:45.976Z",
       "completedReadingAt": null,
       "quizUnlocked": false,
       "quizScore": null,

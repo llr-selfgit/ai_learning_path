@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const verifiedAt = "2026-04-28";
+const writeLessonMarkdown = process.argv.includes("--write-lessons") || process.env.WRITE_LESSONS === "1";
 
 const knowledgeAreas = [
   ["system_prompt", "System Prompt", "定义模型角色、边界、工具规则、输出格式和安全策略。"],
@@ -193,7 +194,7 @@ const lessonDefs = [
   lesson({
     n: 1,
     id: "lesson-001-llm-runtime-mental-model",
-    title: "LLM Runtime Mental Model",
+    title: "LLM 应用从一次调用开始",
     week: 1,
     durationMinutes: 80,
     tags: ["context_engineering", "tool_calling", "agent_loop"],
@@ -220,7 +221,7 @@ const lessonDefs = [
   lesson({
     n: 2,
     id: "lesson-002-tool-calling-and-structured-output",
-    title: "Tool Calling and Structured Output",
+    title: "工具调用与结构化输出",
     week: 1,
     durationMinutes: 85,
     tags: ["tool_calling", "context_engineering"],
@@ -246,7 +247,7 @@ const lessonDefs = [
   lesson({
     n: 3,
     id: "lesson-003-agent-loop-from-scratch",
-    title: "Agent Loop From Scratch",
+    title: "从零手写 Agent 循环",
     week: 1,
     durationMinutes: 120,
     tags: ["agent_loop", "harness_engineering", "tool_calling"],
@@ -1018,6 +1019,7 @@ function buildPlan() {
     knowledgeTags: def.tags,
     lessonFile: lessonFileName(def.id),
     questionFile: questionFileName(def.id),
+    contentMode: "chapter_mode",
     contentStatus: def.contentStatus,
     verifiedAt: def.verifiedAt,
     sourceIds: def.sourceIds,
@@ -1036,8 +1038,9 @@ function buildPlan() {
   }));
 
   return {
-    version: "0.2.0",
-    title: "AI Agent / LLM Application Engineer Learning Path v2",
+    version: "0.3.0",
+    title: "AI Agent / LLM Application Engineer Learning Path v3",
+    contentMode: "chapter_mode",
     timezone: "Asia/Shanghai",
     pace: {
       weekdayHours: "1-2",
@@ -1082,7 +1085,7 @@ function buildProgress() {
     }
   ]));
   return {
-    version: "0.2.0",
+    version: "0.3.0",
     learner: {
       name: "lingrui",
       weekdayHours: "1-2",
@@ -1144,16 +1147,16 @@ function cleanDir(relativePath) {
 }
 
 function rebuild() {
-  cleanDir("lessons");
   cleanDir("questions");
+  if (writeLessonMarkdown) cleanDir("lessons");
   for (const def of lessonDefs) {
-    write(lessonFileName(def.id), renderLesson(def));
+    if (writeLessonMarkdown) write(lessonFileName(def.id), renderLesson(def));
     writeJson(questionFileName(def.id), renderQuestions(def));
   }
   writeJson("curriculum/plan.json", buildPlan());
   writeJson("progress/state.json", buildProgress());
   writeJson("sources/source_registry.json", sourceRegistry);
-  writeJson("sources/claims.json", { version: "0.2.0", lastUpdated: verifiedAt, claims });
+  writeJson("sources/claims.json", { version: "0.3.0", lastUpdated: verifiedAt, claims });
   writeJson("sources/radar.json", buildRadar());
   write("sources/staleness_report.md", `# Staleness Report
 
@@ -1179,4 +1182,7 @@ If a source is past refresh date, the lesson accuracy panel must show that it ne
 }
 
 rebuild();
-console.log(`Rebuilt v2 curriculum: ${lessonDefs.length} lessons, ${sourceRegistry.sources.length} sources, ${claims.length} claims.`);
+console.log(
+  `Rebuilt v3 curriculum metadata: ${lessonDefs.length} lessons, ${sourceRegistry.sources.length} sources, ${claims.length} claims.` +
+    (writeLessonMarkdown ? " Lesson markdown was overwritten by explicit request." : " Lesson markdown was preserved.")
+);

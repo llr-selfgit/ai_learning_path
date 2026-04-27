@@ -1,6 +1,6 @@
 {
-  "version": "0.2.0",
-  "title": "AI Agent / LLM Application Engineer Learning Path v2",
+  "version": "0.3.0",
+  "title": "AI Agent / LLM Application Engineer Learning Path v3",
   "timezone": "Asia/Shanghai",
   "pace": {
     "weekdayHours": "1-2",
@@ -154,7 +154,7 @@
   "lessons": [
     {
       "id": "lesson-001-llm-runtime-mental-model",
-      "title": "LLM Runtime Mental Model",
+      "title": "LLM 应用从一次调用开始",
       "week": 1,
       "durationMinutes": 80,
       "status": "available",
@@ -186,20 +186,21 @@
         "能把营销活动评估需求映射到 Agent 的状态、工具和评测证据。"
       ],
       "practiceTask": {
-        "title": "LLM Runtime Mental Model 实操",
-        "prompt": "今天的操作是画出一个最小运行时：输入 user request；模型只允许输出两类结构：final 或 tool_call；tool_call 进入工具注册表；工具结果写入 trace；超过 max_steps 必须停止。你不需要接真实模型，先用 mock model，因为你要学的是控制流，不是 API 调用语法。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "LLM 应用从一次调用开始 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario calculator --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「LLM Runtime Mental Model」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：会调 Chat Completions 或 Responses API 就等于会做 Agent。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-002-tool-calling-and-structured-output",
-      "title": "Tool Calling and Structured Output",
+      "title": "工具调用与结构化输出",
       "week": 1,
       "durationMinutes": 85,
       "status": "locked",
@@ -232,20 +233,21 @@
         "能为营销评估工具设计参数、返回值、错误和诊断字段。"
       ],
       "practiceTask": {
-        "title": "Tool Calling and Structured Output 实操",
-        "prompt": "把工具当产品接口设计：先写“什么时候不允许调用”，再写参数 schema，最后写返回 schema。返回值必须包括成功态和失败态。失败态不要只返回 exception，要返回可行动诊断，例如 `missing_columns:['pre_30d_gtv']` 或 `common_support:'poor'`。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "工具调用与结构化输出 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Tool Calling and Structured Output」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：只要开启 strict JSON schema，模型输出就是可靠结论。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-003-agent-loop-from-scratch",
-      "title": "Agent Loop From Scratch",
+      "title": "从零手写 Agent 循环",
       "week": 1,
       "durationMinutes": 120,
       "status": "locked",
@@ -277,16 +279,17 @@
         "能解释为什么先用 mock model 更适合理解 loop。"
       ],
       "practiceTask": {
-        "title": "Agent Loop From Scratch 实操",
-        "prompt": "本仓库会生成 `projects/mini_agent/mini_agent.py`。你要读懂 `MiniAgent.run()`：它如何验证工具、如何把工具错误作为 observation、如何在 max_steps 后停止。然后你要加一个 `mock_dataset_inspector` 工具，让它能返回字段缺失、样本不足和 common support 风险。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "从零手写 Agent 循环 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Agent Loop From Scratch」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：Agent loop 就是 ReAct prompt 里写几行 Thought/Action/Observation。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-004-system-prompt-and-policy-boundary",
@@ -321,16 +324,17 @@
         "能解释 prompt injection 为什么不能只靠一句“不要被注入”。"
       ],
       "practiceTask": {
-        "title": "System Prompt and Policy Boundary 实操",
-        "prompt": "写一版 prompt 时不要先追求文采，先写拒绝条件：缺 treatment/outcome、样本不足、活动同时叠加、common support 差、协变量严重不平衡、用户要求证明有效。每个拒绝条件都要对应一个降级输出模板。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "System Prompt and Policy Boundary 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「System Prompt and Policy Boundary」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：system prompt 越长越安全。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-005-tool-registry-and-guardrails",
@@ -365,16 +369,17 @@
         "能判断哪些工具需要 human confirmation。"
       ],
       "practiceTask": {
-        "title": "Tool Registry and Guardrails 实操",
-        "prompt": "在 mini-agent 里增加 `ToolSpec(risk, required, handler)`。先写单测再改代码：未知工具应返回 `tool_error:unknown_tool`；缺参数应返回 `bad_args`；handler 抛异常应记录失败但允许模型下一轮降级。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Tool Registry and Guardrails 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Tool Registry and Guardrails」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：工具越多，Agent 越强。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-006-context-packet-engineering",
@@ -411,16 +416,17 @@
         "能识别上下文噪声、优先级冲突和过期状态。"
       ],
       "practiceTask": {
-        "title": "Context Packet Engineering 实操",
-        "prompt": "为 mini-agent 写 `build_context_packet(task, policy, data_state, tool_state, trace)`，输出固定 JSON。然后拿同一个用户问题做对比：一个版本塞长历史，一个版本用 packet，观察模型或 mock model 的决策是否更稳定。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Context Packet Engineering 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Context Packet Engineering」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：模型上下文窗口变长后，RAG 和上下文工程就不重要了。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-007-rag-long-context-memory",
@@ -456,16 +462,17 @@
         "能解释 memory 为什么必须可审计和可遗忘。"
       ],
       "practiceTask": {
-        "title": "RAG, Long Context, and Memory 实操",
-        "prompt": "为 Marketing Evaluation Agent 写一张知识路由表：信息类型、来源、生命周期、进入方式、更新机制、误用风险。把“活动规则”“数据字典”“上次评估结论”“用户偏好”“bad case”分别放进去。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "RAG, Long Context, and Memory 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「RAG, Long Context, and Memory」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：RAG 只是给模型加资料，越多越好。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-008-workflow-vs-agent",
@@ -498,16 +505,17 @@
         "能为营销评估任务画出混合 workflow/agent 架构。"
       ],
       "practiceTask": {
-        "title": "Workflow vs Agent 实操",
-        "prompt": "画一张两列图：左列是 deterministic workflow，右列是 model decision。把每一步标注为什么固定或为什么交给模型，并写一条失败时的 fallback。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Workflow vs Agent 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Workflow vs Agent」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：越 autonomous 越高级。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-009-marketing-eval-agent-v0",
@@ -541,16 +549,17 @@
         "能把业务语言转成数据和因果工具需求。"
       ],
       "practiceTask": {
-        "title": "Marketing Evaluation Agent v0 实操",
-        "prompt": "把 mini-agent 接一个 mock dataset inspector。输入自然语言需求，输出 JSON：`task_goal, required_fields, missing_fields, candidate_methods, refusal_or_next_step, report_outline`。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Marketing Evaluation Agent v0 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Marketing Evaluation Agent v0」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：v0 必须能跑出估计值才有价值。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-010-causal-method-router",
@@ -583,16 +592,17 @@
         "能构造诱导 Agent 过度归因的 bad case。"
       ],
       "practiceTask": {
-        "title": "Causal Method Router 实操",
-        "prompt": "写 `select_method(task_goal, data_diagnostics)` 的路由表。返回 `method, reason, required_checks, causal_claim_allowed, downgrade_path`。至少覆盖五个拒绝条件。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Causal Method Router 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Causal Method Router」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：Agent 只要知道 PSM/DML/ITE 的定义，就能自动选对方法。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-011-causal-tools-as-agent-tools",
@@ -625,16 +635,17 @@
         "能解释工具输出如何限制最终报告措辞。"
       ],
       "practiceTask": {
-        "title": "Causal Tools as Agent Tools 实操",
-        "prompt": "阅读现有 `projects/marketing_eval_agent/causal_tools`。补一层统一 wrapper：所有工具都返回同一个外层 schema。注意这不是工业级完整库，而是 Agent 工具契约练习。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Causal Tools as Agent Tools 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Causal Tools as Agent Tools」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：工具输出越简洁，Agent 越容易用。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-012-marketing-eval-agent-mvp",
@@ -669,16 +680,17 @@
         "能在工具警告时自动降级结论。"
       ],
       "practiceTask": {
-        "title": "Marketing Evaluation Agent MVP 实操",
-        "prompt": "用 mock 数据跑一条完整链路。提交时给三样东西：最终报告、trace JSON、工具输出 JSON。没有 trace 的报告不算完成。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Marketing Evaluation Agent MVP 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Marketing Evaluation Agent MVP」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：MVP 只要能回答一个 happy path 就够。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-013-agent-evals-result-and-trajectory",
@@ -712,16 +724,17 @@
         "能解释为什么只评最终答案会漏掉关键错误。"
       ],
       "practiceTask": {
-        "title": "Agent Evals: Result and Trajectory 实操",
-        "prompt": "写 10 个 eval cases：3 个 happy path、4 个 bad data、2 个 prompt injection、1 个工具失败。每个 case 写 expected_trace 和 expected_report_policy。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Agent Evals: Result and Trajectory 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Agent Evals: Result and Trajectory」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：让另一个 LLM 给报告打分就等于 Agent eval。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-014-trace-debugging",
@@ -756,16 +769,17 @@
         "能把一次失败转化成 regression case。"
       ],
       "practiceTask": {
-        "title": "Trace Debugging 实操",
-        "prompt": "拿一个故意失败的 case，写五行复盘：symptom、first_bad_step、root_cause、fix、new_regression_case。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Trace Debugging 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Trace Debugging」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：trace 只是调试日志，等上线稳定后可以关掉。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-015-bad-case-library",
@@ -799,16 +813,17 @@
         "能从 bad case 反推工具 schema、prompt 和 guardrail 的改动。"
       ],
       "practiceTask": {
-        "title": "Bad Case Library 实操",
-        "prompt": "建立 `bad_cases.yaml` 初版 15 条。每条都写 expected_method、expected_refusal_or_downgrade 和 forbidden_claim。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Bad Case Library 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Bad Case Library」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：bad case 是测试同学的事情，课程项目先做功能就行。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-016-harness-engineering",
@@ -844,16 +859,17 @@
         "能判断什么时候需要 durable execution。"
       ],
       "practiceTask": {
-        "title": "Harness Engineering 实操",
-        "prompt": "为 Marketing Evaluation Agent 画 runtime 草图：Runner、StateStore、ToolExecutor、TraceStore、HumanApproval、EvalRunner。每个模块写输入输出。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Harness Engineering 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Harness Engineering」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：harness engineering 是框架作者才需要懂的底层细节。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-017-sandbox-mcp-and-permissions",
@@ -892,16 +908,17 @@
         "能判断哪些工具必须隔离运行。"
       ],
       "practiceTask": {
-        "title": "Sandbox, MCP, and Permissions 实操",
-        "prompt": "为本项目写一个权限表：dataset inspector、psm estimator、dml estimator、uplift estimator、report writer、publish dashboard、bash、filesystem、browser。标注是否允许自动执行。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Sandbox, MCP, and Permissions 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Sandbox, MCP, and Permissions」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：本地运行就安全。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-018-tool-security-and-openclaw-risk",
@@ -939,16 +956,17 @@
         "能为自己的 Agent 写最小安全 checklist。"
       ],
       "practiceTask": {
-        "title": "Tool Security and OpenClaw Risk 实操",
-        "prompt": "写一份 `agent_security_checklist.md`：输入认证、工具最小权限、secret 不进上下文、插件审计、沙箱、网络暴露、human approval、日志脱敏、更新策略。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Tool Security and OpenClaw Risk 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Tool Security and OpenClaw Risk」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：只要模型足够聪明，就能识别所有恶意指令。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-019-claude-code-and-coding-agents",
@@ -984,16 +1002,17 @@
         "能把 coding-agent 思路迁移到算法工具和报告生成。"
       ],
       "practiceTask": {
-        "title": "Claude Code and Coding Agents 实操",
-        "prompt": "写一张迁移表：coding agent 的 file search、edit、bash、test、diff、PR review 分别对应 Marketing Agent 的 dataset inspect、method route、estimate、diagnostics、report diff、human review。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Claude Code and Coding Agents 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Claude Code and Coding Agents」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：coding agent 的经验只适用于写代码。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-020-deerflow-superagent-architecture",
@@ -1027,16 +1046,17 @@
         "能判断哪些设计可迁移到自己的项目，哪些暂时不需要。"
       ],
       "practiceTask": {
-        "title": "DeerFlow SuperAgent Architecture 实操",
-        "prompt": "画一张 DeerFlow 与你的项目的对照图：哪些部件现在已有，哪些是未来增强，哪些不适合引入。写出“不引入 sub-agent 的理由”和“未来引入的触发条件”。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "DeerFlow SuperAgent Architecture 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「DeerFlow SuperAgent Architecture」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：工业级开源框架越复杂，越应该直接作为起点。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-021-hermes-skills-memory-cron",
@@ -1070,16 +1090,17 @@
         "能为自己的学习系统设计记忆和复习机制。"
       ],
       "practiceTask": {
-        "title": "Hermes Skills, Memory, and Cron 实操",
-        "prompt": "为学习督导台写 memory policy：可记忆什么、不可记忆什么、何时过期、如何查看和删除、哪些技能可自动创建、哪些必须人工确认。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Hermes Skills, Memory, and Cron 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Hermes Skills, Memory, and Cron」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：Agent 自己学会新技能一定是好事。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-022-model-and-framework-selection",
@@ -1121,16 +1142,17 @@
         "能说明国产模型生态中 tool calling 和 agentic 能力的迁移注意点。"
       ],
       "practiceTask": {
-        "title": "Model and Framework Selection 实操",
-        "prompt": "写一张选择矩阵：候选模型/框架、工具调用支持、上下文、部署、成本、可观测性、安全、生态、适合本项目程度、验证计划。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Model and Framework Selection 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Model and Framework Selection」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：排行榜第一的模型就是 Agent 最佳模型。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-023-agent-productization",
@@ -1166,16 +1188,17 @@
         "能定义上线前验收指标和灰度策略。"
       ],
       "practiceTask": {
-        "title": "Agent Productization 实操",
-        "prompt": "写一份 Marketing Evaluation Agent PRD v1：目标、非目标、核心路径、权限矩阵、评测指标、bad case、上线计划、风险清单。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Agent Productization 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Agent Productization」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：技术效果好，产品自然好用。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     },
     {
       "id": "lesson-024-final-defense",
@@ -1212,16 +1235,18 @@
         "能把课程知识迁移到另一个 Agent 场景。"
       ],
       "practiceTask": {
-        "title": "Final Defense 实操",
-        "prompt": "准备一次 15 分钟答辩：5 分钟 demo，5 分钟架构和 trace，3 分钟 eval/bad case，2 分钟风险和路线。提交源码路径和答辩稿。",
-        "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+        "title": "Final Defense 手把手实验",
+        "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+        "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
       },
       "transferTask": "把「Final Defense」迁移到另一个数据/算法/营销 Agent 场景，并说明哪些部分保持不变、哪些要重写。",
       "commonPitfalls": [
         "误区：最终项目只要能跑通一次就算完成。",
         "只会复述定义，但没有产出可运行代码、schema、trace、eval 或产品方案。",
         "忽略准确性面板，把快速变化产品能力当作永久事实。"
-      ]
+      ],
+      "contentMode": "chapter_mode"
     }
-  ]
+  ],
+  "contentMode": "chapter_mode"
 }

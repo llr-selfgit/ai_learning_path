@@ -149,15 +149,16 @@ function renderAccuracyPanel(accuracy) {
 }
 
 function markdownToHtml(markdown) {
+  let headingCount = 0;
   const escaped = markdown
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
   return escaped
     .replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`)
-    .replace(/^# (.*)$/gm, "<h1>$1</h1>")
-    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+    .replace(/^# (.*)$/gm, (_, text) => `<h1 id="${headingId(text, headingCount++)}">${text}</h1>`)
+    .replace(/^## (.*)$/gm, (_, text) => `<h2 id="${headingId(text, headingCount++)}">${text}</h2>`)
+    .replace(/^### (.*)$/gm, (_, text) => `<h3 id="${headingId(text, headingCount++)}">${text}</h3>`)
     .replace(/^- (.*)$/gm, "<li>$1</li>")
     .replace(/(<li>.*<\/li>)/gs, "<ul>$1</ul>")
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -171,6 +172,60 @@ function markdownToHtml(markdown) {
     .replace(/<\/ul><\/p>/g, "</ul>")
     .replace(/<p><pre>/g, "<pre>")
     .replace(/<\/pre><\/p>/g, "</pre>");
+}
+
+function headingId(text, index = 0) {
+  const slug = String(text)
+    .trim()
+    .replace(/<[^>]+>/g, "")
+    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+  return slug || `section-${index}`;
+}
+
+function extractLessonToc(markdown) {
+  const items = [];
+  const pattern = /^(##|###) (.+)$/gm;
+  let match;
+  while ((match = pattern.exec(markdown)) && items.length < 14) {
+    const level = match[1] === "##" ? 2 : 3;
+    const text = match[2].trim();
+    items.push({ level, text, id: headingId(text) });
+  }
+  return items;
+}
+
+function extractTermCards(markdown) {
+  const start = markdown.indexOf("## 先把新词讲清楚");
+  if (start < 0) return [];
+  const next = markdown.indexOf("\n## ", start + 4);
+  const block = markdown.slice(start, next > 0 ? next : undefined);
+  return [...block.matchAll(/^- `([^`]+)`：(.+)$/gm)].slice(0, 8).map((match) => ({
+    term: match[1],
+    text: match[2]
+  }));
+}
+
+function renderReadingTools(markdown) {
+  const toc = extractLessonToc(markdown);
+  const terms = extractTermCards(markdown);
+  return `
+    <section class="panel reading-tools">
+      <div class="lesson-toc">
+        <p class="eyebrow">本节目录</p>
+        ${toc.map((item) => `<a class="toc-level-${item.level}" href="#${item.id}">${item.text}</a>`).join("")}
+      </div>
+      <div class="term-quick">
+        <p class="eyebrow">术语速查</p>
+        ${
+          terms.length
+            ? terms.map((item) => `<p><strong>${item.term}</strong><span>${item.text}</span></p>`).join("")
+            : `<p class="muted">本节没有抽取到术语卡片。</p>`
+        }
+      </div>
+    </section>
+  `;
 }
 
 function phaseLabel(phase) {
@@ -264,7 +319,7 @@ function renderPreview(lesson, accuracy, options = {}) {
 
 function renderLearning(lessonResponse, showComplete = true) {
   return `
-    ${renderAccuracyPanel(lessonResponse.accuracy)}
+    ${renderReadingTools(lessonResponse.markdown)}
     <section class="panel markdown lesson-reading">
       ${markdownToHtml(lessonResponse.markdown)}
       ${
@@ -275,6 +330,7 @@ function renderLearning(lessonResponse, showComplete = true) {
           : ""
       }
     </section>
+    ${renderAccuracyPanel(lessonResponse.accuracy)}
   `;
 }
 

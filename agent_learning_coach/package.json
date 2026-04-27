@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "node app/server.mjs",
     "validate:accuracy": "node scripts/validate_accuracy.mjs",
+    "validate:content-depth": "node scripts/validate_content_depth.mjs",
     "rebuild:v2": "node scripts/rebuild_v2_curriculum.mjs",
+    "rebuild:metadata": "node scripts/rebuild_v2_curriculum.mjs",
+    "write:v3-lessons": "node scripts/write_v3_chapter_lessons.mjs",
     "test:mini-agent": "python3 -m unittest discover -s projects/mini_agent/tests -p 'test_*.py'",
     "test:causal": "python3 -m unittest discover -s projects/marketing_eval_agent/tests -p 'test_*.py'",
     "test:causal:bundle": "/Users/lingruiluo/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m unittest discover -s projects/marketing_eval_agent/tests -p 'test_*.py'",
-    "test:all": "npm run validate:accuracy && npm run test:mini-agent && npm run test:causal:bundle"
+    "test:all": "npm run validate:accuracy && npm run validate:content-depth && npm run test:mini-agent && npm run test:causal:bundle"
   },
   "engines": {
     "node": ">=20"

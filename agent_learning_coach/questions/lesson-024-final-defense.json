@@ -70,8 +70,8 @@
     }
   ],
   "practice": {
-    "title": "Final Defense 实操",
-    "prompt": "准备一次 15 分钟答辩：5 分钟 demo，5 分钟架构和 trace，3 分钟 eval/bad case，2 分钟风险和路线。提交源码路径和答辩稿。",
-    "expectedEvidence": "提交一段说明、schema、代码路径、trace、eval case、权限表或产品文档，让 Codex 能追问并评分。"
+    "title": "Final Defense 手把手实验",
+    "prompt": "完成正文里的手把手实验，至少运行一次 `python3 -m projects.mini_agent.cli --scenario coupon_bad --json`，并提交关键输出、你的解释和迁移说明。",
+    "expectedEvidence": "命令、关键 JSON 输出、你对输出的解释，以及它如何迁移到 Marketing Evaluation Agent。"
   }
 }
