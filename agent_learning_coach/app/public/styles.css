@@ -1,17 +1,19 @@
 :root {
   color-scheme: light;
-  --bg: #f6f7f9;
+  --bg: #f7f8f5;
+  --paper: #fffefa;
   --panel: #ffffff;
-  --panel-2: #f0f4f8;
-  --text: #1b2430;
+  --panel-2: #eef5f2;
+  --text: #1f252d;
   --muted: #667085;
-  --line: #d9e0e8;
-  --accent: #176b87;
-  --accent-2: #2f8f6f;
-  --warn: #b7791f;
+  --line: #d7ddd7;
+  --line-strong: #aeb9b0;
+  --accent: #2f6f64;
+  --accent-2: #426b8a;
+  --warn: #9a6a15;
   --danger: #b42318;
-  --ok: #1f7a4d;
-  --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+  --ok: #23724f;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 16px 44px rgba(16, 24, 40, 0.06);
 }
 
 * {
@@ -21,6 +23,10 @@
 body {
   margin: 0;
   background: var(--bg);
+  background-image:
+    linear-gradient(rgba(31, 37, 45, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 37, 45, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -33,19 +39,21 @@ textarea {
 #app {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 248px minmax(0, 1fr);
 }
 
 .sidebar {
-  background: #10232f;
-  color: #f8fbfc;
-  padding: 22px;
+  background: rgba(255, 254, 250, 0.92);
+  color: var(--text);
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 22px;
   position: sticky;
   top: 0;
   height: 100vh;
+  border-right: 1px solid var(--line);
+  backdrop-filter: blur(10px);
 }
 
 .brand {
@@ -60,9 +68,12 @@ textarea {
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: #8bd3dd;
-  color: #10232f;
+  background: #f4fbf7;
+  border: 2px solid #223128;
+  color: #223128;
   font-weight: 800;
+  transform: rotate(-2deg);
+  box-shadow: 3px 3px 0 #d9ebe3;
 }
 
 .brand h1 {
@@ -72,7 +83,7 @@ textarea {
 
 .brand p {
   margin: 2px 0 0;
-  color: #b7c6cf;
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -93,28 +104,29 @@ textarea {
 .nav-button {
   text-align: left;
   padding: 12px 14px;
-  color: #dce8ee;
+  color: var(--muted);
   background: transparent;
 }
 
 .nav-button.active,
 .nav-button:hover {
-  background: rgba(139, 211, 221, 0.18);
-  color: #ffffff;
+  background: #edf6f2;
+  color: var(--text);
 }
 
 .sync-card {
   margin-top: auto;
   padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px dashed var(--line-strong);
   border-radius: 8px;
-  color: #cfe0e7;
+  color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
+  background: #fbfbf7;
 }
 
 .main {
-  padding: 26px 30px 46px;
+  padding: 24px clamp(20px, 3vw, 42px) 46px;
   min-width: 0;
 }
 
@@ -135,12 +147,14 @@ textarea {
 
 h2 {
   margin: 0;
-  font-size: 30px;
+  font-size: 28px;
+  letter-spacing: 0;
 }
 
 .secondary-button {
-  background: #dde8ef;
-  color: #143241;
+  background: #eef3ef;
+  color: #24332b;
+  border: 1px solid var(--line);
   padding: 10px 14px;
 }
 
@@ -148,6 +162,7 @@ h2 {
   background: var(--accent);
   color: white;
   padding: 10px 14px;
+  box-shadow: 2px 2px 0 #b8d6ca;
 }
 
 .ghost-button {
@@ -253,31 +268,118 @@ h2 {
 
 .lesson-shell {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 22px;
   align-items: start;
+  max-width: 1360px;
 }
 
 .lesson-index {
   display: grid;
-  gap: 16px;
+  gap: 18px;
   max-height: calc(100vh - 120px);
   overflow: auto;
-  padding-right: 4px;
+  padding-right: 6px;
+  position: sticky;
+  top: 20px;
+}
+
+.week-group {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.week-group h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.week-group .muted {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.lesson-row {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.lesson-row:hover,
+.lesson-row.active {
+  background: #ffffff;
+  border-color: var(--line);
+}
+
+.lesson-row.active {
+  box-shadow: inset 3px 0 0 var(--accent), 0 8px 22px rgba(31, 37, 45, 0.06);
+}
+
+.lesson-number {
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 13px;
+  padding-top: 2px;
+}
+
+.lesson-row-main {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.lesson-row-main strong {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.lesson-row-main small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.lesson-row .status {
+  grid-column: 2;
+  margin-top: 2px;
 }
 
 .lesson-workbench {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-items: start;
+}
+
+.lesson-detail,
+.lesson-main {
+  min-width: 0;
+}
+
+.lesson-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .lesson-stepper {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .lesson-stepper span {
@@ -296,18 +398,36 @@ h2 {
 }
 
 .lesson-stepper span.current {
-  background: #e9f5f7;
-  color: #134e5e;
+  background: #e9f4ef;
+  color: #1e5547;
+  box-shadow: 2px 2px 0 #cfe5da;
 }
 
 .lesson-hero {
   position: relative;
   overflow: hidden;
+  background: linear-gradient(180deg, #ffffff, #fbfdfb);
 }
 
 .lesson-hero h2 {
   margin: 8px 0 12px;
-  font-size: 28px;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.15;
+}
+
+.lesson-hero::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  top: 20px;
+  width: 86px;
+  height: 44px;
+  border: 2px solid rgba(47, 111, 100, 0.28);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  pointer-events: none;
 }
 
 .sketch-flow {
@@ -353,6 +473,31 @@ h2 {
   margin-bottom: 18px;
 }
 
+.markdown h1 {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: 0;
+  margin: 10px 0 28px;
+}
+
+.markdown h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: 0;
+  margin: 32px 0 12px;
+}
+
+.markdown h3 {
+  font-size: 18px;
+  line-height: 1.35;
+  margin: 24px 0 8px;
+}
+
+.markdown p,
+.markdown li {
+  font-size: 16px;
+}
+
 .lesson-actions {
   border-top: 1px solid var(--line);
   margin-top: 22px;
@@ -365,8 +510,16 @@ h2 {
 }
 
 .lesson-side {
-  position: sticky;
-  top: 18px;
+  position: static;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.review-box {
+  display: grid;
+  gap: 10px;
 }
 
 .mastery-evidence {
@@ -558,6 +711,7 @@ textarea {
   .lesson-layout,
   .lesson-shell,
   .lesson-workbench,
+  .lesson-side,
   .grid.two,
   .grid.three {
     grid-template-columns: 1fr;

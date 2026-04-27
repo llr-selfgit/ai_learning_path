@@ -3,7 +3,8 @@ const state = {
   progress: null,
   sources: null,
   view: "today",
-  selectedLessonId: null
+  selectedLessonId: null,
+  forcePreviewLessonId: null
 };
 
 const content = document.querySelector("#content");
@@ -234,8 +235,9 @@ function renderMasteryChecklist(lesson, lessonProgress) {
   `;
 }
 
-function renderPreview(lesson, accuracy) {
+function renderPreview(lesson, accuracy, options = {}) {
   const locked = lesson.status === "locked";
+  const actionLabel = options.actionLabel || "开始学习";
   return `
     <section class="panel lesson-hero">
       <span class="status ${lesson.status}">${statusLabel(lesson.status)}</span>
@@ -253,7 +255,7 @@ function renderPreview(lesson, accuracy) {
       ${
         locked
           ? `<p class="result">这节课还未解锁。你可以先看目标，但建议按当前路径推进。</p>`
-          : `<button class="primary-button" id="startLesson">开始学习</button>`
+          : `<button class="primary-button" id="startLesson">${actionLabel}</button>`
       }
     </section>
     ${renderAccuracyPanel(accuracy)}
@@ -332,20 +334,22 @@ function renderLessons() {
         .filter(Boolean)
         .map((lesson) => {
           const status = effectiveLessonStatus(lesson);
+          const lessonIndex = state.plan.lessons.findIndex((item) => item.id === lesson.id) + 1;
+          const active = state.selectedLessonId === lesson.id;
           return `
-            <article class="lesson-card">
+            <button type="button" class="lesson-row ${active ? "active" : ""}" data-lesson-id="${lesson.id}">
+              <span class="lesson-number">${String(lessonIndex).padStart(2, "0")}</span>
+              <span class="lesson-row-main">
+                <strong>${lesson.title}</strong>
+                <small>${lesson.knowledgeTags.slice(0, 2).join(" / ")}</small>
+              </span>
               <span class="status ${status}">${statusLabel(status)}</span>
-              <h3>${lesson.title}</h3>
-              <p class="muted">知识点：${lesson.knowledgeTags.join(" / ")}</p>
-              <button class="${status === "locked" ? "secondary-button" : "primary-button"}" data-lesson-id="${lesson.id}">
-                ${status === "locked" ? "查看目标" : "开始学习"}
-              </button>
-            </article>
+            </button>
           `;
         })
         .join("");
       return `
-        <section class="panel">
+        <section class="week-group">
           <p class="eyebrow">第 ${week.week} 周</p>
           <h3>${week.theme}</h3>
           <p class="muted">${week.goal}</p>
@@ -355,25 +359,36 @@ function renderLessons() {
     })
     .join("");
 
-  content.innerHTML = `<div class="lesson-shell"><div class="lesson-index">${grouped}</div><div id="lessonDetail"></div></div>`;
+  content.innerHTML = `<div class="lesson-shell"><aside class="lesson-index">${grouped}</aside><div id="lessonDetail" class="lesson-detail"></div></div>`;
   content.querySelectorAll("[data-lesson-id]").forEach((button) => {
-    button.addEventListener("click", () => openLesson(button.dataset.lessonId));
+    button.addEventListener("click", () => {
+      state.forcePreviewLessonId = null;
+      openLesson(button.dataset.lessonId);
+    });
   });
   openLesson(state.selectedLessonId || state.progress.currentLessonId);
 }
 
 async function openLesson(lessonId) {
   state.selectedLessonId = lessonId;
+  content.querySelectorAll("[data-lesson-id]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.lessonId === lessonId);
+  });
   const lessonResponse = await api(`/api/lesson/${encodeURIComponent(lessonId)}`);
   const questionSet = await api(`/api/questions/${encodeURIComponent(lessonId)}`);
   const status = effectiveLessonStatus(lessonResponse.lesson);
   const lessonProgress = lessonResponse.lessonProgress || { phase: "preview", quizUnlocked: false };
   const phase = status === "locked" ? "preview" : lessonProgress.phase || "preview";
+  const forcePreview = state.forcePreviewLessonId === lessonId;
   const detail = document.querySelector("#lessonDetail");
   const mainContent = status === "locked"
     ? renderPreview({ ...lessonResponse.lesson, status }, lessonResponse.accuracy)
-    : phase === "preview"
-      ? renderPreview({ ...lessonResponse.lesson, status }, lessonResponse.accuracy)
+    : phase === "preview" || forcePreview
+      ? renderPreview(
+          { ...lessonResponse.lesson, status },
+          lessonResponse.accuracy,
+          { actionLabel: phase === "preview" ? "开始学习" : "继续当前阶段" }
+        )
       : phase === "learning"
         ? renderLearning(lessonResponse)
         : `
@@ -391,24 +406,42 @@ async function openLesson(lessonId) {
         `;
   detail.innerHTML = `
     <div class="lesson-workbench">
-      <section>
-        ${renderLessonStepper(phase)}
+      <section class="lesson-main">
+        <div class="lesson-topline">
+          ${renderLessonStepper(forcePreview ? "preview" : phase)}
+          ${
+            phase !== "preview"
+              ? `<button type="button" class="ghost-button" id="showLessonPreview">${forcePreview ? "继续当前阶段" : "查看本课目标"}</button>`
+              : ""
+          }
+        </div>
         ${mainContent}
       </section>
       <aside class="panel lesson-side">
         ${renderMasteryChecklist(lessonResponse.lesson, lessonProgress)}
-        <h3>给 Codex 的深度提交</h3>
-        <p class="muted">如果你想让我追问、评分或讲解卡点，把答案保存在这里，再贴给我。</p>
-        <textarea id="submissionText" placeholder="写下你的解释、疑问、设计、代码路径或复盘..."></textarea>
-        <button class="secondary-button" id="saveSubmission">保存深度提交</button>
-        <div id="submissionResult"></div>
+        <div class="review-box">
+          <h3>给 Codex 的深度提交</h3>
+          <p class="muted">如果你想让我追问、评分或讲解卡点，把答案保存在这里，再贴给我。</p>
+          <textarea id="submissionText" placeholder="写下你的解释、疑问、设计、代码路径或复盘..."></textarea>
+          <button class="secondary-button" id="saveSubmission">保存深度提交</button>
+          <div id="submissionResult"></div>
+        </div>
       </aside>
     </div>
   `;
-  if (phase !== "preview" && phase !== "learning") {
+  if (!forcePreview && phase !== "preview" && phase !== "learning") {
     renderQuiz(questionSet);
   }
+  document.querySelector("#showLessonPreview")?.addEventListener("click", () => {
+    state.forcePreviewLessonId = forcePreview ? null : lessonId;
+    openLesson(lessonId);
+  });
   document.querySelector("#startLesson")?.addEventListener("click", async () => {
+    state.forcePreviewLessonId = null;
+    if (lessonProgress.phase && lessonProgress.phase !== "preview") {
+      openLesson(lessonId);
+      return;
+    }
     await api("/api/lesson/start", {
       method: "POST",
       body: JSON.stringify({ lessonId })

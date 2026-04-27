@@ -79,11 +79,18 @@
       "reviewDue": null
     }
   },
-  "events": [],
+  "events": [
+    {
+      "type": "lesson_phase_changed",
+      "lessonId": "lesson-001-llm-mental-model",
+      "phase": "learning",
+      "at": "2026-04-27T15:31:27.502Z"
+    }
+  ],
   "lessonProgress": {
     "lesson-001-llm-mental-model": {
-      "phase": "preview",
-      "startedAt": null,
+      "phase": "learning",
+      "startedAt": "2026-04-27T15:31:27.502Z",
       "completedReadingAt": null,
       "quizUnlocked": false,
       "quizScore": null,
