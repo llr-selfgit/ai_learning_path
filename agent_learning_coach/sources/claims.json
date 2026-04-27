@@ -1,0 +1,144 @@
+{
+  "version": "0.1.0",
+  "lastUpdated": "2026-04-27",
+  "claims": [
+    {
+      "id": "claim-agent-product-needs-context-tools-evals",
+      "statement": "A production-grade Agent product is more than an LLM call; it needs context design, tools, runtime control, observability, and evaluation loops.",
+      "sourceIds": [
+        "openai-agents-sdk-tracing",
+        "openai-agent-evals",
+        "anthropic-building-effective-agents",
+        "google-adk-overview"
+      ],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "stable",
+      "scope": "best_practice",
+      "notes": "This is a synthesis across official documentation and engineering guidance, not a single vendor quote."
+    },
+    {
+      "id": "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
+      "statement": "OpenAI Agents SDK tracing records agent runs with spans for model generations, function tool calls, guardrails, handoffs, and related workflow events.",
+      "sourceIds": ["openai-agents-sdk-tracing"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "fact",
+      "notes": "SDK behavior can change; refresh against official docs before teaching SDK-specific APIs."
+    },
+    {
+      "id": "claim-openai-guardrails-input-output-tool",
+      "statement": "OpenAI Agents SDK documents input guardrails, output guardrails, and tool guardrails as validation or blocking mechanisms around agent workflows and function-tool calls.",
+      "sourceIds": ["openai-agents-sdk-guardrails"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "fact",
+      "notes": "Hosted and built-in tools may have different guardrail behavior; avoid overgeneralizing."
+    },
+    {
+      "id": "claim-openai-tools-extend-model-capabilities",
+      "statement": "OpenAI's tools guide describes built-in tools, function calling, tool search, and remote MCP servers as ways to extend model capabilities beyond text generation.",
+      "sourceIds": ["openai-tools-guide"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Model availability and specific tool support are fast-changing and must be refreshed."
+    },
+    {
+      "id": "claim-anthropic-workflows-vs-agents",
+      "statement": "Anthropic distinguishes workflows, where LLMs and tools follow predefined code paths, from agents, where LLMs dynamically direct their process and tool use.",
+      "sourceIds": ["anthropic-building-effective-agents"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "stable",
+      "scope": "fact",
+      "notes": "Useful as an architectural lens, not a universal industry definition."
+    },
+    {
+      "id": "claim-anthropic-recommends-simplest-solution-first",
+      "statement": "Anthropic recommends starting with the simplest solution that works and increasing agentic complexity only when the performance tradeoff justifies it.",
+      "sourceIds": ["anthropic-building-effective-agents"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "stable",
+      "scope": "best_practice",
+      "notes": "This is a practical recommendation, not a law; high-uncertainty tasks may justify more autonomy."
+    },
+    {
+      "id": "claim-anthropic-prompting-clear-context-role-examples",
+      "statement": "Anthropic's prompting guidance emphasizes clear direct instructions, adding context, using examples, structuring prompts, and giving Claude a role.",
+      "sourceIds": ["anthropic-prompting-best-practices"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "best_practice",
+      "notes": "Prompting advice is model-sensitive; refresh for model-family-specific guidance."
+    },
+    {
+      "id": "claim-google-adk-core-primitives",
+      "statement": "Google ADK presents agents, tools, callbacks, sessions/state, memory, artifacts, events, runner, planning, evaluation, and deployment as part of its agent development environment.",
+      "sourceIds": ["google-adk-overview"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "changing",
+      "scope": "fact",
+      "notes": "ADK has active releases; refresh API and feature claims regularly."
+    },
+    {
+      "id": "claim-mcp-standardizes-context-tools",
+      "statement": "MCP is an open protocol that standardizes how LLM applications connect to external context, resources, prompts, and tools using client-server architecture and JSON-RPC messages.",
+      "sourceIds": ["mcp-specification"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "The specification is draft; mark implementation details as fast-changing."
+    },
+    {
+      "id": "claim-mcp-security-consent-tool-safety",
+      "statement": "The MCP specification highlights user consent, data privacy, and tool safety as key security and trust principles because tools can expose data access or code execution paths.",
+      "sourceIds": ["mcp-specification"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Security principles are durable, but protocol details may evolve."
+    },
+    {
+      "id": "claim-a2a-agent-interoperability",
+      "statement": "A2A is an open protocol intended to enable communication and interoperability between independent agent systems through concepts such as agent cards, tasks, messages, artifacts, JSON-RPC, and streaming.",
+      "sourceIds": ["a2a-specification"],
+      "confidence": "high",
+      "verifiedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "scope": "fact",
+      "notes": "Protocol version and field details may change."
+    },
+    {
+      "id": "claim-system-prompt-as-policy-is-analogy",
+      "statement": "Calling a system prompt a product's 'operating constitution' is a teaching analogy: it helps explain priority and behavioral boundaries, but it is not a formal guarantee of model behavior.",
+      "sourceIds": ["anthropic-prompting-best-practices", "openai-agents-sdk-guardrails"],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-27",
+      "stability": "stable",
+      "scope": "teaching_analogy",
+      "notes": "Always pair this analogy with concrete guardrails, evals, and tool policies."
+    },
+    {
+      "id": "claim-marketing-causal-agent-must-not-overclaim",
+      "statement": "A marketing evaluation Agent should not make strong causal claims when identification assumptions, required fields, sample quality, or diagnostics are insufficient.",
+      "sourceIds": [
+        "anthropic-building-effective-agents",
+        "openai-agent-evals"
+      ],
+      "confidence": "medium",
+      "verifiedAt": "2026-04-27",
+      "stability": "stable",
+      "scope": "inference",
+      "notes": "This is an application-specific engineering inference grounded in agent reliability principles and causal inference practice."
+    }
+  ]
+}

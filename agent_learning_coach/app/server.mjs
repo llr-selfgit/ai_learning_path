@@ -34,6 +34,14 @@ async function readJson(relativePath) {
   return JSON.parse(raw);
 }
 
+async function readJsonIfExists(relativePath, fallback) {
+  try {
+    return await readJson(relativePath);
+  } catch {
+    return fallback;
+  }
+}
+
 async function writeJson(relativePath, value) {
   const fullPath = safePath(relativePath);
   await mkdir(path.dirname(fullPath), { recursive: true });
@@ -67,6 +75,57 @@ function masteryState(score) {
   if (score >= 60) return "可解释";
   if (score >= 40) return "初学";
   return "未掌握";
+}
+
+function byId(items = []) {
+  return new Map(items.map((item) => [item.id, item]));
+}
+
+function isPastDate(value) {
+  if (!value) return false;
+  const today = new Date().toISOString().slice(0, 10);
+  return value < today;
+}
+
+function buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry) {
+  const sourcesById = byId(sourceRegistry.sources || []);
+  const claimsById = byId(claimsRegistry.claims || []);
+  const sourceIds = lesson.sourceIds || [];
+  const claimIds = lesson.claimIds || [];
+  const sources = sourceIds.map((id) => sourcesById.get(id)).filter(Boolean);
+  const claims = claimIds.map((id) => claimsById.get(id)).filter(Boolean);
+  const missingSourceIds = sourceIds.filter((id) => !sourcesById.has(id));
+  const missingClaimIds = claimIds.filter((id) => !claimsById.has(id));
+  const claimMissingSourceIds = claims.flatMap((claim) =>
+    (claim.sourceIds || []).filter((id) => !sourcesById.has(id)).map((id) => ({ claimId: claim.id, sourceId: id }))
+  );
+  const expiredSourceIds = sources.filter((source) => isPastDate(source.refreshAfter)).map((source) => source.id);
+  const lessonRefreshExpired = isPastDate(lesson.needsRefreshAfter);
+  const status = missingSourceIds.length || missingClaimIds.length || claimMissingSourceIds.length
+    ? "source_missing"
+    : lesson.contentStatus === "verified" && !lessonRefreshExpired && expiredSourceIds.length === 0
+      ? "verified"
+      : lesson.contentStatus === "verified"
+        ? "needs_refresh"
+        : "draft";
+
+  return {
+    contentStatus: lesson.contentStatus || "draft",
+    status,
+    verifiedAt: lesson.verifiedAt || null,
+    stability: lesson.stability || "changing",
+    needsRefreshAfter: lesson.needsRefreshAfter || null,
+    lessonRefreshExpired,
+    sourceIds,
+    claimIds,
+    sources,
+    claims,
+    missingSourceIds,
+    missingClaimIds,
+    claimMissingSourceIds,
+    expiredSourceIds,
+    unverifiedNotes: lesson.unverifiedNotes || []
+  };
 }
 
 function normalizeAnswer(answer) {
@@ -247,14 +306,36 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, await readJson("progress/state.json"));
   }
   if (req.method === "GET" && url.pathname === "/api/sources") {
-    return sendJson(res, 200, await readJson("sources/radar.json"));
+    const radar = await readJson("sources/radar.json");
+    const sourceRegistry = await readJsonIfExists("sources/source_registry.json", { sources: [], tiers: [] });
+    const claimsRegistry = await readJsonIfExists("sources/claims.json", { claims: [] });
+    return sendJson(res, 200, { radar, sourceRegistry, claimsRegistry });
   }
   if (req.method === "GET" && url.pathname.startsWith("/api/lesson/")) {
     const lessonId = decodeURIComponent(url.pathname.split("/").pop());
     const plan = await readJson("curriculum/plan.json");
     const lesson = plan.lessons.find((item) => item.id === lessonId);
     if (!lesson) return sendJson(res, 404, { error: "lesson_not_found" });
-    return sendJson(res, 200, { lesson, markdown: await readText(lesson.lessonFile) });
+    const sourceRegistry = await readJsonIfExists("sources/source_registry.json", { sources: [], tiers: [] });
+    const claimsRegistry = await readJsonIfExists("sources/claims.json", { claims: [] });
+    return sendJson(res, 200, {
+      lesson,
+      markdown: await readText(lesson.lessonFile),
+      accuracy: buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry)
+    });
+  }
+  if (req.method === "GET" && url.pathname === "/api/accuracy") {
+    const plan = await readJson("curriculum/plan.json");
+    const sourceRegistry = await readJsonIfExists("sources/source_registry.json", { sources: [], tiers: [] });
+    const claimsRegistry = await readJsonIfExists("sources/claims.json", { claims: [] });
+    return sendJson(res, 200, {
+      generatedAt: new Date().toISOString(),
+      lessons: plan.lessons.map((lesson) => ({
+        id: lesson.id,
+        title: lesson.title,
+        accuracy: buildLessonAccuracy(lesson, sourceRegistry, claimsRegistry)
+      }))
+    });
   }
   if (req.method === "GET" && url.pathname.startsWith("/api/questions/")) {
     const lessonId = decodeURIComponent(url.pathname.split("/").pop());

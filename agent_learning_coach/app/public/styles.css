@@ -300,6 +300,79 @@ h2 {
   color: var(--danger);
 }
 
+.accuracy-panel {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 10px 0 18px;
+  background: #fbfcfd;
+}
+
+.accuracy-panel.verified {
+  border-left-color: var(--ok);
+}
+
+.accuracy-panel.draft,
+.accuracy-panel.source_missing,
+.accuracy-panel.needs_refresh {
+  border-left-color: var(--warn);
+}
+
+.accuracy-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.accuracy-head h3 {
+  margin: 0;
+}
+
+.accuracy-warning {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  color: #9a3412;
+  padding: 10px 12px;
+  margin: 10px 0;
+}
+
+.accuracy-warning p,
+.accuracy-ok {
+  margin: 4px 0;
+}
+
+.accuracy-ok {
+  color: var(--ok);
+}
+
+.source-mini-list,
+.claim-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.source-mini,
+.claim-card {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.source-mini span,
+.claim-card span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 textarea {
   width: 100%;
   min-height: 160px;

@@ -27,6 +27,23 @@ The first version writes local files. When this folder is inside the GitHub repo
 
 The future Vercel version should keep the same file schema but use the GitHub Contents API / Git Data API through a `GitHubRepoStorage` adapter instead of writing to the server filesystem.
 
+## Accuracy Gate
+
+Course content that teaches factual claims must be source-backed.
+
+```bash
+npm run validate:accuracy
+```
+
+The source and claim system lives in:
+
+- `sources/source_registry.json`
+- `sources/claims.json`
+- `sources/fact_check_policy.md`
+- `sources/staleness_report.md`
+
+Lessons marked `verified` must link to registered sources and claims. Draft lessons are visible as learning objectives, but the app marks them as not yet verified.
+
 ## Privacy Rule
 
 All learning records are desensitized by default. Do not save real company table names, campaign names, user identifiers, internal metric values, or raw business data.

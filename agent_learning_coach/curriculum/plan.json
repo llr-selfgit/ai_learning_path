@@ -158,9 +158,32 @@
       "week": 1,
       "durationMinutes": 75,
       "status": "available",
-      "knowledgeTags": ["context_engineering", "tool_calling"],
+      "knowledgeTags": [
+        "context_engineering",
+        "tool_calling"
+      ],
       "lessonFile": "lessons/lesson-001-llm-mental-model.md",
-      "questionFile": "questions/lesson-001-llm-mental-model.json"
+      "questionFile": "questions/lesson-001-llm-mental-model.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "openai-agents-sdk-tracing",
+        "openai-agents-sdk-guardrails",
+        "openai-agent-evals",
+        "anthropic-building-effective-agents",
+        "google-adk-overview"
+      ],
+      "claimIds": [
+        "claim-agent-product-needs-context-tools-evals",
+        "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
+        "claim-openai-guardrails-input-output-tool",
+        "claim-anthropic-workflows-vs-agents",
+        "claim-anthropic-recommends-simplest-solution-first",
+        "claim-google-adk-core-primitives"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-27",
+      "unverifiedNotes": []
     },
     {
       "id": "lesson-002-system-prompt",
@@ -168,9 +191,29 @@
       "week": 1,
       "durationMinutes": 90,
       "status": "available",
-      "knowledgeTags": ["system_prompt", "context_engineering"],
+      "knowledgeTags": [
+        "system_prompt",
+        "context_engineering"
+      ],
       "lessonFile": "lessons/lesson-002-system-prompt.md",
-      "questionFile": "questions/lesson-002-system-prompt.json"
+      "questionFile": "questions/lesson-002-system-prompt.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "anthropic-prompting-best-practices",
+        "openai-agents-sdk-guardrails",
+        "openai-tools-guide"
+      ],
+      "claimIds": [
+        "claim-anthropic-prompting-clear-context-role-examples",
+        "claim-system-prompt-as-policy-is-analogy",
+        "claim-openai-guardrails-input-output-tool",
+        "claim-openai-tools-extend-model-capabilities",
+        "claim-marketing-causal-agent-must-not-overclaim"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-27",
+      "unverifiedNotes": []
     },
     {
       "id": "lesson-003-structured-output",
@@ -178,9 +221,25 @@
       "week": 1,
       "durationMinutes": 75,
       "status": "locked",
-      "knowledgeTags": ["tool_calling", "context_engineering"],
+      "knowledgeTags": [
+        "tool_calling",
+        "context_engineering"
+      ],
       "lessonFile": "lessons/lesson-003-structured-output.md",
-      "questionFile": "questions/lesson-003-structured-output.json"
+      "questionFile": "questions/lesson-003-structured-output.json",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [
+        "openai-tools-guide"
+      ],
+      "claimIds": [
+        "claim-openai-tools-extend-model-capabilities"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-27",
+      "unverifiedNotes": [
+        "The lesson text is a scaffold; exact API behavior must be refreshed against official docs before marking verified."
+      ]
     },
     {
       "id": "lesson-004-context-engineering",
@@ -188,8 +247,20 @@
       "week": 2,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["context_engineering", "system_prompt"],
-      "lessonFile": "lessons/lesson-004-context-engineering.md"
+      "knowledgeTags": [
+        "context_engineering",
+        "system_prompt"
+      ],
+      "lessonFile": "lessons/lesson-004-context-engineering.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-005-rag-vs-long-context",
@@ -197,8 +268,20 @@
       "week": 2,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["rag", "context_engineering"],
-      "lessonFile": "lessons/lesson-005-rag-vs-long-context.md"
+      "knowledgeTags": [
+        "rag",
+        "context_engineering"
+      ],
+      "lessonFile": "lessons/lesson-005-rag-vs-long-context.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-006-tool-schema-design",
@@ -206,8 +289,20 @@
       "week": 2,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["tool_calling", "context_engineering"],
-      "lessonFile": "lessons/lesson-006-tool-schema-design.md"
+      "knowledgeTags": [
+        "tool_calling",
+        "context_engineering"
+      ],
+      "lessonFile": "lessons/lesson-006-tool-schema-design.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-007-agent-loop",
@@ -215,8 +310,20 @@
       "week": 3,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["agent_loop", "tool_calling"],
-      "lessonFile": "lessons/lesson-007-agent-loop.md"
+      "knowledgeTags": [
+        "agent_loop",
+        "tool_calling"
+      ],
+      "lessonFile": "lessons/lesson-007-agent-loop.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-008-workflow-vs-agent",
@@ -224,8 +331,20 @@
       "week": 3,
       "durationMinutes": 75,
       "status": "locked",
-      "knowledgeTags": ["agent_loop", "harness_engineering"],
-      "lessonFile": "lessons/lesson-008-workflow-vs-agent.md"
+      "knowledgeTags": [
+        "agent_loop",
+        "harness_engineering"
+      ],
+      "lessonFile": "lessons/lesson-008-workflow-vs-agent.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-009-marketing-agent-v0",
@@ -233,8 +352,20 @@
       "week": 3,
       "durationMinutes": 150,
       "status": "locked",
-      "knowledgeTags": ["marketing_eval_product", "agent_loop"],
-      "lessonFile": "lessons/lesson-009-marketing-agent-v0.md"
+      "knowledgeTags": [
+        "marketing_eval_product",
+        "agent_loop"
+      ],
+      "lessonFile": "lessons/lesson-009-marketing-agent-v0.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-010-causal-tooling-position",
@@ -242,9 +373,26 @@
       "week": 4,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["causal_tooling", "marketing_eval_product", "tool_calling"],
+      "knowledgeTags": [
+        "causal_tooling",
+        "marketing_eval_product",
+        "tool_calling"
+      ],
       "lessonFile": "lessons/lesson-010-causal-tooling-position.md",
-      "questionFile": "questions/lesson-010-causal-tooling-position.json"
+      "questionFile": "questions/lesson-010-causal-tooling-position.json",
+      "contentStatus": "verified",
+      "verifiedAt": "2026-04-27",
+      "sourceIds": [
+        "anthropic-building-effective-agents",
+        "openai-agent-evals"
+      ],
+      "claimIds": [
+        "claim-agent-product-needs-context-tools-evals",
+        "claim-marketing-causal-agent-must-not-overclaim"
+      ],
+      "stability": "stable",
+      "needsRefreshAfter": "2026-10-27",
+      "unverifiedNotes": []
     },
     {
       "id": "lesson-011-psm-tool-wrapper",
@@ -252,9 +400,21 @@
       "week": 4,
       "durationMinutes": 120,
       "status": "locked",
-      "knowledgeTags": ["causal_tooling", "evals"],
+      "knowledgeTags": [
+        "causal_tooling",
+        "evals"
+      ],
       "lessonFile": "lessons/lesson-011-psm-tool-wrapper.md",
-      "questionFile": "questions/lesson-011-psm-tool-wrapper.json"
+      "questionFile": "questions/lesson-011-psm-tool-wrapper.json",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-012-marketing-eval-agent-mvp",
@@ -262,8 +422,21 @@
       "week": 4,
       "durationMinutes": 180,
       "status": "locked",
-      "knowledgeTags": ["marketing_eval_product", "causal_tooling", "agent_loop"],
-      "lessonFile": "lessons/lesson-012-marketing-eval-agent-mvp.md"
+      "knowledgeTags": [
+        "marketing_eval_product",
+        "causal_tooling",
+        "agent_loop"
+      ],
+      "lessonFile": "lessons/lesson-012-marketing-eval-agent-mvp.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-013-agent-evals",
@@ -271,8 +444,20 @@
       "week": 5,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["evals", "tool_calling"],
-      "lessonFile": "lessons/lesson-013-agent-evals.md"
+      "knowledgeTags": [
+        "evals",
+        "tool_calling"
+      ],
+      "lessonFile": "lessons/lesson-013-agent-evals.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-014-trace-debugging",
@@ -280,8 +465,20 @@
       "week": 5,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["evals", "harness_engineering"],
-      "lessonFile": "lessons/lesson-014-trace-debugging.md"
+      "knowledgeTags": [
+        "evals",
+        "harness_engineering"
+      ],
+      "lessonFile": "lessons/lesson-014-trace-debugging.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-015-bad-case-library",
@@ -289,8 +486,20 @@
       "week": 5,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["evals", "marketing_eval_product"],
-      "lessonFile": "lessons/lesson-015-bad-case-library.md"
+      "knowledgeTags": [
+        "evals",
+        "marketing_eval_product"
+      ],
+      "lessonFile": "lessons/lesson-015-bad-case-library.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-016-harness-engineering",
@@ -298,8 +507,28 @@
       "week": 6,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["harness_engineering", "agent_loop"],
-      "lessonFile": "lessons/lesson-016-harness-engineering.md"
+      "knowledgeTags": [
+        "harness_engineering",
+        "agent_loop"
+      ],
+      "lessonFile": "lessons/lesson-016-harness-engineering.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [
+        "openai-agents-sdk-tracing",
+        "openai-agent-evals",
+        "google-adk-overview"
+      ],
+      "claimIds": [
+        "claim-agent-product-needs-context-tools-evals",
+        "claim-openai-tracing-covers-tool-calls-guardrails-handoffs",
+        "claim-google-adk-core-primitives"
+      ],
+      "stability": "changing",
+      "needsRefreshAfter": "2026-07-27",
+      "unverifiedNotes": [
+        "Scaffold only; exact framework capabilities require refresh before publishing."
+      ]
     },
     {
       "id": "lesson-017-mcp-a2a-skills",
@@ -307,8 +536,27 @@
       "week": 6,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["harness_engineering", "tool_calling"],
-      "lessonFile": "lessons/lesson-017-mcp-a2a-skills.md"
+      "knowledgeTags": [
+        "harness_engineering",
+        "tool_calling"
+      ],
+      "lessonFile": "lessons/lesson-017-mcp-a2a-skills.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [
+        "mcp-specification",
+        "a2a-specification"
+      ],
+      "claimIds": [
+        "claim-mcp-standardizes-context-tools",
+        "claim-mcp-security-consent-tool-safety",
+        "claim-a2a-agent-interoperability"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-27",
+      "unverifiedNotes": [
+        "Protocol details are fast-changing. Refresh before marking verified."
+      ]
     },
     {
       "id": "lesson-018-tool-security",
@@ -316,8 +564,26 @@
       "week": 6,
       "durationMinutes": 90,
       "status": "locked",
-      "knowledgeTags": ["harness_engineering", "system_prompt"],
-      "lessonFile": "lessons/lesson-018-tool-security.md"
+      "knowledgeTags": [
+        "harness_engineering",
+        "system_prompt"
+      ],
+      "lessonFile": "lessons/lesson-018-tool-security.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [
+        "mcp-specification",
+        "openai-agents-sdk-guardrails"
+      ],
+      "claimIds": [
+        "claim-mcp-security-consent-tool-safety",
+        "claim-openai-guardrails-input-output-tool"
+      ],
+      "stability": "fast-changing",
+      "needsRefreshAfter": "2026-06-27",
+      "unverifiedNotes": [
+        "Scaffold only; security guidance must be verified against current docs before publishing."
+      ]
     },
     {
       "id": "lesson-019-model-optimization-map",
@@ -325,8 +591,20 @@
       "week": 7,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["model_optimization", "evals"],
-      "lessonFile": "lessons/lesson-019-model-optimization-map.md"
+      "knowledgeTags": [
+        "model_optimization",
+        "evals"
+      ],
+      "lessonFile": "lessons/lesson-019-model-optimization-map.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-020-finetuning-vs-rag",
@@ -334,8 +612,20 @@
       "week": 7,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["model_optimization", "rag"],
-      "lessonFile": "lessons/lesson-020-finetuning-vs-rag.md"
+      "knowledgeTags": [
+        "model_optimization",
+        "rag"
+      ],
+      "lessonFile": "lessons/lesson-020-finetuning-vs-rag.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-021-method-selection-eval",
@@ -343,8 +633,21 @@
       "week": 7,
       "durationMinutes": 150,
       "status": "locked",
-      "knowledgeTags": ["model_optimization", "causal_tooling", "evals"],
-      "lessonFile": "lessons/lesson-021-method-selection-eval.md"
+      "knowledgeTags": [
+        "model_optimization",
+        "causal_tooling",
+        "evals"
+      ],
+      "lessonFile": "lessons/lesson-021-method-selection-eval.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-022-industrial-patterns",
@@ -352,8 +655,20 @@
       "week": 8,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["harness_engineering", "model_optimization"],
-      "lessonFile": "lessons/lesson-022-industrial-patterns.md"
+      "knowledgeTags": [
+        "harness_engineering",
+        "model_optimization"
+      ],
+      "lessonFile": "lessons/lesson-022-industrial-patterns.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-023-productization",
@@ -361,8 +676,20 @@
       "week": 8,
       "durationMinutes": 100,
       "status": "locked",
-      "knowledgeTags": ["marketing_eval_product", "harness_engineering"],
-      "lessonFile": "lessons/lesson-023-productization.md"
+      "knowledgeTags": [
+        "marketing_eval_product",
+        "harness_engineering"
+      ],
+      "lessonFile": "lessons/lesson-023-productization.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     },
     {
       "id": "lesson-024-final-defense",
@@ -370,8 +697,22 @@
       "week": 8,
       "durationMinutes": 180,
       "status": "locked",
-      "knowledgeTags": ["marketing_eval_product", "evals", "harness_engineering", "model_optimization"],
-      "lessonFile": "lessons/lesson-024-final-defense.md"
+      "knowledgeTags": [
+        "marketing_eval_product",
+        "evals",
+        "harness_engineering",
+        "model_optimization"
+      ],
+      "lessonFile": "lessons/lesson-024-final-defense.md",
+      "contentStatus": "draft",
+      "verifiedAt": null,
+      "sourceIds": [],
+      "claimIds": [],
+      "stability": "changing",
+      "needsRefreshAfter": null,
+      "unverifiedNotes": [
+        "This lesson is currently a scaffold. Treat it as a learning objective, not a verified course text."
+      ]
     }
   ]
 }

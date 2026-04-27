@@ -1,0 +1,148 @@
+{
+  "version": "0.1.0",
+  "lastUpdated": "2026-04-27",
+  "tiers": [
+    {
+      "tier": "A",
+      "name": "Official docs, company engineering blogs, papers, technical reports",
+      "allowedUse": "Can support core factual claims when current and directly relevant."
+    },
+    {
+      "tier": "B",
+      "name": "High-quality open source projects, courseware, and implementation guides",
+      "allowedUse": "Can support engineering practice claims; should not be sole support for vendor/product claims."
+    },
+    {
+      "tier": "C",
+      "name": "Universities, research labs, lectures, and peer-reviewed or widely cited papers",
+      "allowedUse": "Can support theory and durable conceptual framing."
+    },
+    {
+      "tier": "D",
+      "name": "Community posts, social media, blogs, Zhihu, CSDN, X, video platforms",
+      "allowedUse": "Trend discovery only. Core learning claims require A/B/C verification."
+    }
+  ],
+  "sources": [
+    {
+      "id": "openai-agents-sdk-tracing",
+      "title": "OpenAI Agents SDK - Tracing",
+      "url": "https://openai.github.io/openai-agents-python/tracing/",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official OpenAI Agents SDK documentation for tracing behavior and trace spans.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "openai-agents-sdk-guardrails",
+      "title": "OpenAI Agents SDK - Guardrails",
+      "url": "https://openai.github.io/openai-agents-python/guardrails/",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official OpenAI Agents SDK documentation describing input, output, and tool guardrails.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "openai-tools-guide",
+      "title": "OpenAI API - Using tools",
+      "url": "https://developers.openai.com/api/docs/guides/tools",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "whyTrusted": "Official OpenAI API guide for built-in tools, function calling, tool search, and remote MCP.",
+      "refreshAfter": "2026-06-27"
+    },
+    {
+      "id": "openai-agent-evals",
+      "title": "OpenAI API - Agent evals",
+      "url": "https://developers.openai.com/api/docs/guides/agent-evals",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "OpenAI",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official OpenAI platform guide describing reproducible agent evaluation and trace grading.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "anthropic-building-effective-agents",
+      "title": "Building effective agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "tier": "A",
+      "type": "company_engineering_blog",
+      "publisher": "Anthropic",
+      "checkedAt": "2026-04-27",
+      "stability": "stable",
+      "whyTrusted": "Anthropic engineering guidance based on customer and internal agent-building experience.",
+      "refreshAfter": "2026-10-27"
+    },
+    {
+      "id": "anthropic-prompting-best-practices",
+      "title": "Claude prompting best practices",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "Anthropic",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official Anthropic prompting guidance covering clear instructions, context, examples, roles, and long-context prompting.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "google-adk-overview",
+      "title": "Google Agent Development Kit - Technical Overview",
+      "url": "https://adk.dev/get-started/about/",
+      "tier": "A",
+      "type": "official_documentation",
+      "publisher": "Google",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Official ADK overview describing agents, tools, workflow agents, sessions, memory, events, runner, evaluation, and deployment.",
+      "refreshAfter": "2026-07-27"
+    },
+    {
+      "id": "mcp-specification",
+      "title": "Model Context Protocol Specification",
+      "url": "https://modelcontextprotocol.io/specification/draft",
+      "tier": "A",
+      "type": "protocol_specification",
+      "publisher": "Model Context Protocol",
+      "checkedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "whyTrusted": "Authoritative MCP draft specification describing protocol architecture, server features, tools, resources, prompts, and security principles.",
+      "refreshAfter": "2026-06-27"
+    },
+    {
+      "id": "a2a-specification",
+      "title": "Agent2Agent Protocol Specification",
+      "url": "https://google-a2a.github.io/A2A/specification/",
+      "tier": "A",
+      "type": "protocol_specification",
+      "publisher": "Google / A2A project",
+      "checkedAt": "2026-04-27",
+      "stability": "fast-changing",
+      "whyTrusted": "A2A protocol specification describing agent cards, JSON-RPC transport, task lifecycle, streaming, and enterprise security considerations.",
+      "refreshAfter": "2026-06-27"
+    },
+    {
+      "id": "huggingface-agents-course",
+      "title": "Hugging Face Agents Course",
+      "url": "https://huggingface.co/learn/agents-course/",
+      "tier": "B",
+      "type": "course",
+      "publisher": "Hugging Face",
+      "checkedAt": "2026-04-27",
+      "stability": "changing",
+      "whyTrusted": "Widely used course material for practical agent concepts and open-source examples.",
+      "refreshAfter": "2026-10-27"
+    }
+  ]
+}

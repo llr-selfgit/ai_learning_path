@@ -62,6 +62,91 @@ function effectiveLessonStatus(lesson) {
   return state.progress.lessonStatuses[lesson.id] || lesson.status || "locked";
 }
 
+function accuracyLabel(status) {
+  return {
+    verified: "已核验",
+    draft: "草稿/待验证",
+    needs_refresh: "需要复核",
+    source_missing: "来源缺失"
+  }[status] || status;
+}
+
+function stabilityLabel(stability) {
+  return {
+    stable: "稳定知识",
+    changing: "变化中",
+    "fast-changing": "快速变化"
+  }[stability] || stability || "未标注";
+}
+
+function renderAccuracyPanel(accuracy) {
+  if (!accuracy) {
+    return `<section class="accuracy-panel warning"><h3>准确性</h3><p>没有准确性元数据。本节不能作为正式学习结论。</p></section>`;
+  }
+  const warnings = [
+    ...(accuracy.missingSourceIds || []).map((id) => `缺失来源：${id}`),
+    ...(accuracy.missingClaimIds || []).map((id) => `缺失 claim：${id}`),
+    ...(accuracy.expiredSourceIds || []).map((id) => `来源需要复核：${id}`),
+    ...(accuracy.lessonRefreshExpired ? ["本课已过建议复核日期"] : []),
+    ...(accuracy.unverifiedNotes || [])
+  ];
+  return `
+    <section class="accuracy-panel ${accuracy.status}">
+      <div class="accuracy-head">
+        <div>
+          <p class="eyebrow">准确性面板</p>
+          <h3>${accuracyLabel(accuracy.status)}</h3>
+        </div>
+        <span class="status ${accuracy.status === "verified" ? "passed" : accuracy.status === "draft" ? "locked" : "review"}">
+          ${stabilityLabel(accuracy.stability)}
+        </span>
+      </div>
+      <p class="muted">核验日期：${accuracy.verifiedAt || "未核验"} · 建议复核：${accuracy.needsRefreshAfter || "未设置"}</p>
+      ${
+        warnings.length
+          ? `<div class="accuracy-warning">${warnings.map((item) => `<p>${item}</p>`).join("")}</div>`
+          : `<p class="accuracy-ok">本课关键断言已绑定来源和 claim。仍需按复核日期更新快速变化内容。</p>`
+      }
+      <details>
+        <summary>查看来源与断言</summary>
+        <div class="source-mini-list">
+          ${
+            accuracy.sources?.length
+              ? accuracy.sources
+                  .map(
+                    (source) => `
+                      <a class="source-mini" href="${source.url}" target="_blank" rel="noreferrer">
+                        <strong>${source.tier} · ${source.title}</strong>
+                        <span>${source.publisher} · checked ${source.checkedAt} · refresh ${source.refreshAfter}</span>
+                      </a>
+                    `
+                  )
+                  .join("")
+              : `<p class="muted">暂无来源。</p>`
+          }
+        </div>
+        <div class="claim-list">
+          ${
+            accuracy.claims?.length
+              ? accuracy.claims
+                  .map(
+                    (claim) => `
+                      <article class="claim-card">
+                        <strong>${claim.scope} · ${claim.confidence}</strong>
+                        <p>${claim.statement}</p>
+                        <span>${stabilityLabel(claim.stability)} · verified ${claim.verifiedAt}</span>
+                      </article>
+                    `
+                  )
+                  .join("")
+              : `<p class="muted">暂无 claim。</p>`
+          }
+        </div>
+      </details>
+    </section>
+  `;
+}
+
 function markdownToHtml(markdown) {
   const escaped = markdown
     .replace(/&/g, "&amp;")
@@ -169,6 +254,7 @@ async function openLesson(lessonId) {
     <div class="lesson-layout">
       <section class="panel markdown">
         <span class="status ${status}">${statusLabel(status)}</span>
+        ${renderAccuracyPanel(lessonResponse.accuracy)}
         ${status === "locked" ? `<h2>${lessonResponse.lesson.title}</h2><p class="muted">这节课还未解锁。你可以先看目标，但建议按当前路径推进。</p>` : markdownToHtml(lessonResponse.markdown)}
       </section>
       <aside class="panel">
@@ -294,13 +380,51 @@ function renderMastery() {
 
 function renderSources() {
   pageTitle.textContent = "案例雷达";
+  const radar = state.sources.radar || state.sources;
+  const sourceRegistry = state.sources.sourceRegistry || { tiers: [], sources: [] };
+  const claimsRegistry = state.sources.claimsRegistry || { claims: [] };
   content.innerHTML = `
     <section class="panel">
       <h3>可信度分层</h3>
-      ${state.sources.tiers.map((tier) => `<p><strong>${tier.tier} 类：${tier.name}</strong><br><span class="muted">${tier.usage}</span></p>`).join("")}
+      ${sourceRegistry.tiers.map((tier) => `<p><strong>${tier.tier} 类：${tier.name}</strong><br><span class="muted">${tier.allowedUse}</span></p>`).join("")}
+    </section>
+    <section class="panel">
+      <h3>来源注册表</h3>
+      <div class="grid two">
+        ${sourceRegistry.sources
+          .map(
+            (source) => `
+              <article class="source-card">
+                <span class="status">${source.tier} 类 · ${stabilityLabel(source.stability)}</span>
+                <h3>${source.title}</h3>
+                <p class="muted">${source.publisher} · ${source.type}</p>
+                <p>${source.whyTrusted}</p>
+                <p class="muted">Checked: ${source.checkedAt} · Refresh: ${source.refreshAfter}</p>
+                <a href="${source.url}" target="_blank" rel="noreferrer">打开来源</a>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+    <section class="panel">
+      <h3>关键断言</h3>
+      <div class="claim-list">
+        ${claimsRegistry.claims
+          .map(
+            (claim) => `
+              <article class="claim-card">
+                <strong>${claim.scope} · ${claim.confidence} · ${stabilityLabel(claim.stability)}</strong>
+                <p>${claim.statement}</p>
+                <span>verified ${claim.verifiedAt} · sources: ${claim.sourceIds.join(", ")}</span>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
     </section>
     <div class="grid two">
-      ${state.sources.items
+      ${radar.items
         .map(
           (item) => `
             <article class="source-card">
